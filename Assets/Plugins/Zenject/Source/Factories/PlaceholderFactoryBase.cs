@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ModestTree;
+using UnityEngine;
 
 namespace Zenject
 {
@@ -42,6 +43,7 @@ namespace Zenject
             }
             catch (Exception e)
             {
+                Debug.LogError(e);
                 throw new ZenjectException(
                     "Error during construction of type '{0}' via {1}.Create method!".Fmt(typeof(TValue), GetType()), e);
             }
