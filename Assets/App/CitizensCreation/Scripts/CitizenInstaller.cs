@@ -10,7 +10,10 @@ namespace TheCity
 
         public override void InstallBindings()
         {
-            Container.Bind<CitizenInbornData>().FromInstance(CreationData.CitizenInbornData);
+            Container.Bind<CitizenData>().FromInstance(CreationData.CitizenData).AsSingle().NonLazy();
+            Container.Bind<CitizenInbornData>().FromInstance(CreationData.CitizenData.CitizenInbornData)
+                .AsSingle().NonLazy();
+
 
             BindComponentsFromHierarchy();
         }

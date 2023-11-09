@@ -2,11 +2,11 @@ namespace TheCity
 {
     public class CitizenCreationData
     {
-        public CitizenInbornData CitizenInbornData { get; }
+        public CitizenData CitizenData { get; }
 
-        public CitizenCreationData(CitizenInbornData citizenInbornData)
+        public CitizenCreationData(CitizenData citizenData)
         {
-            CitizenInbornData = citizenInbornData;
+            CitizenData = citizenData;
         }
     }
 }
