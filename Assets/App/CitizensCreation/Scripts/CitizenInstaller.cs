@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using UnityEngine.AI;
 using Zenject;
 
 namespace TheCity
@@ -21,6 +22,7 @@ namespace TheCity
         private void BindComponentsFromHierarchy()
         {
             Container.Bind<Citizen>().FromComponentInHierarchy().AsSingle().NonLazy();
+            Container.Bind<NavMeshAgent>().FromComponentInHierarchy().AsSingle().NonLazy();
         }
     }
 }

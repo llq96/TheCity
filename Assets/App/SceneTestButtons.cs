@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -8,8 +9,17 @@ namespace TheCity
         [Inject] private CityDataGenerator CityDataGenerator { get; }
         [Inject] private CityCreator CityCreator { get; }
 
-
+        [SerializeField] private bool _isTestOnStart = true;
         [SerializeField] private GameObject _roomPrefab;
+
+
+        private void Start()
+        {
+            if (_isTestOnStart)
+            {
+                CreateNewCity();
+            }
+        }
 
         [ContextMenu(nameof(CreateNewCity))]
         private void CreateNewCity()
