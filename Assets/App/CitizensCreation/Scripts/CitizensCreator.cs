@@ -9,9 +9,9 @@ namespace TheCity
     {
         [Inject] private CitizenFactory CitizenFactory { get; }
 
-        public Citizen Create(CitizenCreationData creationData)
+        public Citizen Create(City city, CitizenCreationData creationData)
         {
-            var citizen = CitizenFactory.Create(creationData);
+            var citizen = CitizenFactory.Create(city, creationData);
             var inbornData = creationData.CitizenData.CitizenInbornData;
 
             citizen.gameObject.name = $"{inbornData.Name.FullName}";

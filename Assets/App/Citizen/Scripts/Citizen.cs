@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,28 +10,43 @@ namespace TheCity
     {
         [Inject] private CitizenInbornData InbornData { get; }
         [Inject] private NavMeshAgent NavMeshAgent { get; }
+        [Inject] private Room HomeRoom { get; }
+        [Inject] private Company Company { get; }
 
         private void Start()
         {
-            TestTryMove().Forget();
+            Debug.Log(HomeRoom);
+            var destinations = new List<Vector3>()
+            {
+                HomeRoom.transform.position,
+                Company.Room.transform.position
+            };
+            TestTryMove(destinations).Forget();
         }
 
-        private async UniTask TestTryMove()
+        private async UniTask TestTryMove(List<Vector3> destinations)
         {
             while (true)
             {
-                await UniTask.Yield();
+                foreach (var destination in destinations)
+                {
+                    while (true)
+                    {
+                        await UniTask.Yield();
 
-                if (!NavMeshAgent) return;
-                if (!NavMeshAgent.gameObject.activeInHierarchy) continue;
-                if (!NavMeshAgent.isOnNavMesh) continue;
-                if (!NavMeshAgent.enabled) continue;
+                        if (!NavMeshAgent) return;
+                        if (!NavMeshAgent.gameObject.activeInHierarchy) continue;
+                        if (!NavMeshAgent.isOnNavMesh) continue;
+                        if (!NavMeshAgent.enabled) continue;
 
-                var destination = new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(-10f, 10f));
-                NavMeshAgent.SetDestination(destination);
-                NavMeshAgent.isStopped = false;
-                Debug.Log($"Set Destination {destination}");
-                return;
+                        NavMeshAgent.SetDestination(destination);
+                        NavMeshAgent.isStopped = false;
+                        Debug.Log($"Set Destination {destination}");
+                        break;
+                    }
+
+                    await UniTask.Delay(7 * 1000);
+                }
             }
         }
     }

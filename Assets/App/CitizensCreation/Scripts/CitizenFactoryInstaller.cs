@@ -17,20 +17,21 @@ namespace TheCity
 
         private void InstallFactory()
         {
-            Container.BindFactory<CitizenCreationData, Citizen, CitizenFactory>()
+            Container.BindFactory<City, CitizenCreationData, Citizen, CitizenFactory>()
                 .FromSubContainerResolve()
                 .ByNewPrefabMethod(_citizenPrefab, InstallCitizen);
         }
 
-        private void InstallCitizen(DiContainer subContainer, CitizenCreationData creationData)
+        private void InstallCitizen(DiContainer subContainer, City city, CitizenCreationData creationData)
         {
+            subContainer.Bind<City>().FromInstance(city);
             subContainer.Bind<CitizenCreationData>().FromInstance(creationData);
             CitizenInstaller.Install(subContainer);
         }
     }
 
     [UsedImplicitly]
-    public class CitizenFactory : PlaceholderFactory<CitizenCreationData, Citizen>
+    public class CitizenFactory : PlaceholderFactory<City, CitizenCreationData, Citizen>
     {
     }
 }

@@ -10,8 +10,6 @@ namespace TheCity
 
         public override void InstallBindings()
         {
-            Container.Bind<CityData>().FromInstance(CityData).AsSingle().NonLazy();
-
             BindComponentsFromHierarchy();
         }
 

@@ -1,5 +1,4 @@
 using JetBrains.Annotations;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -10,6 +9,7 @@ namespace TheCity
     {
         [Inject] private CityFactory CityFactory { get; }
         [Inject] private CitizensCreator CitizensCreator { get; }
+        [Inject] private CompaniesCreator CompaniesCreator { get; }
 
         public void Create(CityData cityData)
         {
@@ -19,16 +19,18 @@ namespace TheCity
             city.transform.SetParent(null);
             SceneManager.MoveGameObjectToScene(city.gameObject, SceneManager.GetActiveScene());
 
+            foreach (var companyData in cityData.CompaniesDataList)
+            {
+                var company = CompaniesCreator.Create(city, companyData);
+                company.transform.parent = city.CompaniesParent;
+                city.Companies.Add(company);
+            }
 
             foreach (var citizenData in cityData.CitizensDataList)
             {
-                var citizen = CitizensCreator.Create(new CitizenCreationData(citizenData));
+                var citizen = CitizensCreator.Create(city, new CitizenCreationData(citizenData));
                 citizen.transform.parent = city.CitizensParent;
-            }
-
-            foreach (var companyData in cityData.CompaniesDataList)
-            {
-                Debug.Log(companyData.CompanyName.FullName);
+                city.Citizens.Add(citizen);
             }
         }
     }
