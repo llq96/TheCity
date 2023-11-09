@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -23,6 +24,11 @@ namespace TheCity
             {
                 var citizen = CitizensCreator.Create(new CitizenCreationData(citizenData));
                 citizen.transform.parent = city.CitizensParent;
+            }
+
+            foreach (var companyData in cityData.CompaniesDataList)
+            {
+                Debug.Log(companyData.CompanyName.FullName);
             }
         }
     }

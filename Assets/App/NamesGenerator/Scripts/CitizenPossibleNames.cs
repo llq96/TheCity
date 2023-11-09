@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace TheCity
 {
-    [CreateAssetMenu(fileName = "NamesLists", menuName = "TheCity/NamesLists", order = 1)]
-    public class NamesLists : ScriptableObject
+    [CreateAssetMenu(fileName = "CitizenPossibleNames", menuName = "TheCity/CitizenPossibleNames", order = 1)]
+    public class CitizenPossibleNames : ScriptableObject
     {
         [SerializeField] private List<string> _firstNames;
         [SerializeField] private List<string> _secondNames;

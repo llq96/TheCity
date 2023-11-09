@@ -12,12 +12,10 @@ namespace TheCity
 
         private void Start()
         {
-            Debug.Log($"{InbornData.FirstName} {InbornData.SecondName}");
-
-            TryMove().Forget();
+            TestTryMove().Forget();
         }
 
-        private async UniTask TryMove()
+        private async UniTask TestTryMove()
         {
             while (true)
             {

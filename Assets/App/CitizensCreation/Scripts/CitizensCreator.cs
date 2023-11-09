@@ -14,7 +14,7 @@ namespace TheCity
             var citizen = CitizenFactory.Create(creationData);
             var inbornData = creationData.CitizenData.CitizenInbornData;
 
-            citizen.gameObject.name = $"{inbornData.FirstName} {inbornData.SecondName}";
+            citizen.gameObject.name = $"{inbornData.Name.FullName}";
             citizen.transform.SetParent(null);
             SceneManager.MoveGameObjectToScene(citizen.gameObject, SceneManager.GetActiveScene());
 

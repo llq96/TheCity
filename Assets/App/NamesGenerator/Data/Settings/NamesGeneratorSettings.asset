@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28107b7fab7e8d74abb29ed8fc98ff8d, type: 3}
   m_Name: NamesGeneratorSettings
   m_EditorClassIdentifier: 
-  _namesLists: {fileID: 11400000, guid: 69bf6cb2e19b764498340c9edbcdae4a, type: 2}
+  _citizenPossibleNames: {fileID: 11400000, guid: 179c85a00e9098d4a8e177125cb1faa8, type: 2}
+  _streetPossibleNames: {fileID: 11400000, guid: 7851dc507801f0b4c94c55b819d7b06d, type: 2}
+  _companyPossibleNames: {fileID: 11400000, guid: 7f0267b0834380443bd335e058d57e5c, type: 2}
