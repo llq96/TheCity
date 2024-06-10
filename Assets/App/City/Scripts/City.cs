@@ -30,5 +30,14 @@ namespace TheCity
             _navMeshSurface.AddData();
             _navMeshSurface.UpdateNavMesh(_navMeshSurface.navMeshData);
         }
+
+        [Inject]
+        private void Construct()
+        {
+            for (int i = 0; i < Rooms.Count; i++)
+            {
+                Rooms[i].Construct(CityData.AddressesDataList[i]);
+            }
+        }
     }
 }

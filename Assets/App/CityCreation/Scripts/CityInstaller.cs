@@ -16,11 +16,6 @@ namespace TheCity
         private void BindComponentsFromHierarchy()
         {
             Container.Bind<City>().FromComponentInHierarchy().AsSingle().NonLazy();
-            var city = Container.Resolve<City>();
-            for (int i = 0; i < city.Rooms.Count; i++)
-            {
-                city.Rooms[i].Construct(CityData.AddressesDataList[i]);
-            }
         }
     }
 }

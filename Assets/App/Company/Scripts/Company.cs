@@ -7,7 +7,7 @@ namespace TheCity
 {
     public class Company : MonoBehaviour
     {
-        [Inject] private CompanyData CompanyData { get; }
+        [Inject] public CompanyData CompanyData { get; }
         [Inject] public Room Room { get; }
         [Inject] public List<JobPost> JobPosts { get; }
 

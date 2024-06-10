@@ -2,16 +2,18 @@ namespace TheCity
 {
     public class CitizenInbornData
     {
-        public CitizenInbornData(CitizenName name, int addressIndex, int companyIndex)
+        public CitizenInbornData(CitizenName name, int addressIndex, int companyIndex, int jobPostIndex)
         {
             Name = name;
             AddressIndex = addressIndex;
             CompanyIndex = companyIndex;
+            JobPostIndex = jobPostIndex;
         }
 
         public CitizenName Name { get; }
         public int AddressIndex { get; }
         public int CompanyIndex { get; }
+        public int JobPostIndex { get; }
     }
 
     public struct CitizenName

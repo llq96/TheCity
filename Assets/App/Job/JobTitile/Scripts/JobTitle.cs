@@ -6,5 +6,7 @@ namespace TheCity
     public class JobTitle : ScriptableObject
     {
         [SerializeField] private string _jobName;
+
+        public override string ToString() => _jobName;
     }
 }

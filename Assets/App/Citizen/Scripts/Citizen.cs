@@ -13,12 +13,13 @@ namespace TheCity
         [Inject] private NavMeshAgent NavMeshAgent { get; }
         [Inject] private Room HomeRoom { get; }
         [Inject] private Company Company { get; }
+        [Inject] private JobPost JobPost { get; }
 
         private void Start()
         {
             Debug.Log($"I live in {HomeRoom}");
             Debug.Log($"I work in {Company}");
-            // Debug.Log($"I work as ");
+            Debug.Log($"I work as {JobPost.JobTitle}");
             var destinations = new List<Vector3>()
             {
                 HomeRoom.transform.position,
