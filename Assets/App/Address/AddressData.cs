@@ -14,5 +14,10 @@ namespace TheCity
             RoomNumber = roomNumber;
             GlobalRoomIndex = globalRoomIndex;
         }
+
+        public override string ToString()
+        {
+            return $"{StreetName}, {HouseNumber}, {RoomNumber}";
+        }
     }
 }

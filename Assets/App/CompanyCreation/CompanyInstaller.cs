@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using Zenject;
 
@@ -15,6 +16,7 @@ namespace TheCity
             var room = City.Rooms[CompanyData.AddressIndex];
             Container.Bind<Room>().FromInstance(room).AsSingle().NonLazy();
             Container.Bind<Company>().FromComponentInHierarchy().AsSingle().NonLazy();
+            Container.Bind<List<JobPost>>().FromInstance(CompanyData.JobPosts).AsSingle().NonLazy();
         }
     }
 }

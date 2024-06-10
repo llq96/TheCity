@@ -9,13 +9,16 @@ namespace TheCity
     public class Citizen : MonoBehaviour
     {
         [Inject] private CitizenInbornData InbornData { get; }
+        [Inject] private CitizenData CitizenData { get; }
         [Inject] private NavMeshAgent NavMeshAgent { get; }
         [Inject] private Room HomeRoom { get; }
         [Inject] private Company Company { get; }
 
         private void Start()
         {
-            Debug.Log(HomeRoom);
+            Debug.Log($"I live in {HomeRoom}");
+            Debug.Log($"I work in {Company}");
+            // Debug.Log($"I work as ");
             var destinations = new List<Vector3>()
             {
                 HomeRoom.transform.position,
@@ -41,7 +44,7 @@ namespace TheCity
 
                         NavMeshAgent.SetDestination(destination);
                         NavMeshAgent.isStopped = false;
-                        Debug.Log($"Set Destination {destination}");
+                        // Debug.Log($"Set Destination {destination}");
                         break;
                     }
 

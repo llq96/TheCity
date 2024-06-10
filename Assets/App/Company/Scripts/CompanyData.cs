@@ -1,15 +1,21 @@
+using System.Collections.Generic;
+
 namespace TheCity
 {
     public class CompanyData
     {
         public CompanyName CompanyName { get; }
         public int AddressIndex { get; }
+        public List<JobPost> JobPosts { get; }
 
-        public CompanyData(CompanyName companyName, int addressIndex)
+        public CompanyData(CompanyName companyName, int addressIndex, List<JobPost> jobPosts)
         {
             CompanyName = companyName;
             AddressIndex = addressIndex;
+            JobPosts = jobPosts;
         }
+
+        public override string ToString() => CompanyName.ToString();
     }
 
     public struct CompanyName
@@ -25,5 +31,7 @@ namespace TheCity
 
             FullName = $"{name} {type}";
         }
+
+        public override string ToString() => FullName;
     }
 }

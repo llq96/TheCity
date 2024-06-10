@@ -84,5 +84,7 @@ namespace TheCity
             Name = name;
             FullName = $"{name} St.";
         }
+
+        public override string ToString() => FullName;
     }
 }

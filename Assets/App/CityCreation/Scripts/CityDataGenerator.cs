@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
@@ -9,8 +10,7 @@ namespace TheCity
     {
         private const int CitizenPerAddress = 2;
         [Inject] private NamesGenerator NamesGenerator { get; }
-
-        private int _currentAddressIndex;
+        [Inject] private PossibleJobTitles PossibleJobTitles { get; }
 
         public CityData GenerateCityData(CityGenerationSettings generationSettings = null)
         {
@@ -20,10 +20,9 @@ namespace TheCity
             NamesGenerator.ClearGeneratedLists();
 
             GenerateAddresses(generationSettings, cityData);
-            _currentAddressIndex = 0;
-            GenerateCitizens(generationSettings, cityData, _currentAddressIndex);
-            _currentAddressIndex = Mathf.CeilToInt(generationSettings.CountCitizens / (float)CitizenPerAddress);
-            GenerateCompanies(generationSettings, cityData, _currentAddressIndex);
+            var _currentAddressIndex = 0;
+            GenerateCompanies(generationSettings, cityData, ref _currentAddressIndex);
+            GenerateCitizens(generationSettings, cityData, ref _currentAddressIndex);
 
             return cityData;
         }
@@ -45,15 +44,19 @@ namespace TheCity
         #region Citizens
 
         private void GenerateCitizens(CityGenerationSettings generationSettings, CityData cityData,
-            int startAddressIndex)
+            ref int addressIndex)
         {
+            var citizensWithCurrentAddress = 0;
             for (int i = 0; i < generationSettings.CountCitizens; i++)
             {
-                var newCitizenData =
-                    GenerateNewCitizenData(
-                        startAddressIndex + i / CitizenPerAddress,
-                        i % generationSettings.CountCompanies);
+                var newCitizenData = GenerateNewCitizenData(addressIndex, i % generationSettings.CountCompanies);
                 cityData.CitizensDataList.Add(newCitizenData);
+
+                citizensWithCurrentAddress++;
+                if (citizensWithCurrentAddress >= CitizenPerAddress)
+                {
+                    addressIndex++;
+                }
             }
         }
 
@@ -70,19 +73,29 @@ namespace TheCity
         #region Companies
 
         private void GenerateCompanies(CityGenerationSettings generationSettings, CityData cityData,
-            int startAddressIndex)
+            ref int addressIndex)
         {
             for (int i = 0; i < generationSettings.CountCompanies; i++)
             {
-                var newCompanyData = GenerateNewCompanyData(startAddressIndex + i);
+                var newCompanyData = GenerateNewCompanyData(addressIndex);
                 cityData.CompaniesDataList.Add(newCompanyData);
+                addressIndex++;
             }
         }
 
         private CompanyData GenerateNewCompanyData(int addressIndex)
         {
             var randomCompanyName = NamesGenerator.GenerateRandomCompanyName();
-            var companyData = new CompanyData(randomCompanyName, addressIndex);
+            var countJobPosts = Random.Range(1, 3); //TODO
+            var jobPosts = new List<JobPost>();
+            for (int i = 0; i < countJobPosts; i++)
+            {
+                var jobTitle = PossibleJobTitles.JobTitles.GetRandomElement();
+                var jobPost = new JobPost(jobTitle);
+                jobPosts.Add(jobPost);
+            }
+
+            var companyData = new CompanyData(randomCompanyName, addressIndex, jobPosts);
             return companyData;
         }
 

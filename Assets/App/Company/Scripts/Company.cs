@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -7,10 +9,8 @@ namespace TheCity
     {
         [Inject] private CompanyData CompanyData { get; }
         [Inject] public Room Room { get; }
+        [Inject] public List<JobPost> JobPosts { get; }
 
-        private void Start()
-        {
-            Debug.Log(Room);
-        }
+        public override string ToString() => CompanyData.ToString();
     }
 }

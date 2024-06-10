@@ -10,7 +10,7 @@ namespace TheCity.InGameTime
     {
         public DateTime GameDateTime { get; private set; }
 
-        private GameTimeInitialSettings _initialSettings;
+        private readonly GameTimeInitialSettings _initialSettings;
 
         [Inject]
         public GameTime(GameTimeInitialSettings gameTimeInitialSettings)
