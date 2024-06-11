@@ -13,6 +13,10 @@ namespace TheCity
     {
     }
 
+    public class Activity_GoToHome : Activity
+    {
+    }
+    
     public class Activity_FillSchedule : Activity
     {
     }

@@ -28,7 +28,8 @@ namespace TheCity
 
             foreach (var citizenData in cityData.CitizensDataList)
             {
-                var citizen = CitizensCreator.Create(city, new CitizenCreationData(citizenData));
+                var companyData = cityData.CompaniesDataList[citizenData.CitizenInbornData.CompanyIndex];
+                var citizen = CitizensCreator.Create(city, new CitizenCreationData(citizenData, companyData));
                 citizen.transform.parent = city.CitizensParent;
                 city.Citizens.Add(citizen);
             }

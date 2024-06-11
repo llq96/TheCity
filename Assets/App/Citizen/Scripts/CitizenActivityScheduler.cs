@@ -15,25 +15,32 @@ namespace TheCity
         [Inject] private JobPost JobPost { get; }
         [Inject] private GameTime GameTime { get; }
         [Inject] private CitizenActivityRunner CitizenActivityRunner { get; }
+        [Inject] private ScheduleCollection ScheduleActivities { get; }
 
-        public IList<ScheduleActivity> ScheduleActivities => _scheduleActivities.AsReadOnlyList();
-
-        //TODO Очередь не нравится, хочется Insert или сортировку при добавлении.
-        private readonly Queue<ScheduleActivity> _scheduleActivities = new();
-        private ScheduleActivity _nearestActivity;
-        private ScheduleActivity _lastActivity;
+        public IList<ScheduleActivity> ReadOnlyScheduleActivities => ScheduleActivities.AsReadOnlyList();
 
         public void Initialize()
         {
             FillScheduler();
+
+            this.PrintFormattedInfo();
         }
 
         public void FillScheduler()
         {
+            AddActivityToHead(new Activity_GoToHome());
             FillWithWorkSchedule();
-            AddFillScheduleActivity();
+            AddActivityToTail(new Activity_FillSchedule());
+        }
 
-            this.PrintFormattedInfo();
+        public void AddActivityToHead(Activity activity)
+        {
+            ScheduleActivities.AddToHead(activity);
+        }
+
+        public void AddActivityToTail(Activity activity)
+        {
+            ScheduleActivities.AddToTail(activity);
         }
 
         private void FillWithWorkSchedule()
@@ -50,43 +57,28 @@ namespace TheCity
                     var activity = scheduleItem.Activity;
                     var time = scheduleItem.Time;
                     var dateTime = new DateTime(gameTime.Year, gameTime.Month, gameTime.Day, time.Hour, time.Minute, 0);
+
+                    if (dateTime < GameTime.GameDateTime) continue;
+
                     var scheduleActivity = new ScheduleActivity(dateTime, activity);
-                    _scheduleActivities.Enqueue(scheduleActivity);
+                    ScheduleActivities.Add(scheduleActivity);
 
                     // Debug.Log($"Add Activity {activity}, date: {dateTime.ToString()}");
                 }
             }
         }
 
-        private void AddFillScheduleActivity()
-        {
-            var lastActivity = _scheduleActivities.Last();
-            var dateTime = lastActivity.DateTime.AddMinutes(1);
-            var activity = new Activity_FillSchedule();
-            var scheduleActivity = new ScheduleActivity(dateTime, activity);
-            _scheduleActivities.Enqueue(scheduleActivity);
-        }
-
         public void Tick()
         {
-            if (_nearestActivity == null)
-            {
-                _scheduleActivities.TryDequeue(out _nearestActivity);
-            }
+            var _nearestActivity = ScheduleActivities.FirstOrDefault();
 
             if (_nearestActivity == null) return;
 
             if (_nearestActivity.DateTime < GameTime.GameDateTime)
             {
-                DoNearestActivity();
+                CitizenActivityRunner.DoActivity(_nearestActivity.Activity);
+                ScheduleActivities.Remove(_nearestActivity);
             }
-        }
-
-        private void DoNearestActivity()
-        {
-            CitizenActivityRunner.DoActivity(_nearestActivity.Activity);
-            _lastActivity = _nearestActivity;
-            _nearestActivity = null;
         }
     }
 }

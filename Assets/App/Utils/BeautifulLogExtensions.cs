@@ -27,7 +27,7 @@ namespace TheCity
             int dateIndent = 1;
             int activityIndent = 2;
 
-            var groupByDate = scheduler.ScheduleActivities.GroupBy(x => x.DateTime.Date);
+            var groupByDate = scheduler.ReadOnlyScheduleActivities.GroupBy(x => x.DateTime.Date);
             foreach (var group in groupByDate)
             {
                 sb.AppendLineWithIndent($"Date {group.Key.ToShortDateString()}:", dateIndent);

@@ -10,30 +10,39 @@ namespace TheCity
         [Inject] private City City { get; }
         [Inject] private CitizenCreationData CreationData { get; }
 
+        private CitizenData CitizenData => CreationData.CitizenData;
+        private CitizenInbornData CitizenInbornData => CitizenData.CitizenInbornData;
+
+        private CompanyData CompanyData => CreationData.CompanyData;
+
         public override void InstallBindings()
         {
-            //TODO Можно разбить по другому на методы
             BindBaseCitizenData();
+            BindFromCity();
+            BindJobPost();
             BindComponentsFromHierarchy();
             BindNewComponents();
-            BindOther();
+            BindActivity();
         }
 
         private void BindBaseCitizenData()
         {
-            var citizenData = CreationData.CitizenData;
-            Container.Bind<CitizenData>().FromInstance(citizenData).AsSingle().NonLazy();
+            Container.Bind<CitizenData>().FromInstance(CitizenData).AsSingle().NonLazy();
+            Container.Bind<CitizenInbornData>().FromInstance(CitizenInbornData).AsSingle().NonLazy();
+        }
 
-            var citizenInbornData = citizenData.CitizenInbornData;
-            Container.Bind<CitizenInbornData>().FromInstance(citizenInbornData).AsSingle().NonLazy();
+        private void BindFromCity()
+        {
+            var _homeRoom = City.Rooms[CitizenInbornData.AddressIndex];
+            Container.Bind<Room>().FromInstance(_homeRoom).AsSingle().NonLazy();
 
-            var room = City.Rooms[citizenInbornData.AddressIndex];
-            Container.Bind<Room>().FromInstance(room).AsSingle().NonLazy();
+            var _company = City.Companies[CitizenInbornData.CompanyIndex];
+            Container.Bind<Company>().FromInstance(_company).AsSingle().NonLazy();
+        }
 
-            var company = City.Companies[citizenInbornData.CompanyIndex];
-            Container.Bind<Company>().FromInstance(company).AsSingle().NonLazy();
-
-            var jobPost = company.JobPosts[citizenInbornData.JobPostIndex];
+        private void BindJobPost()
+        {
+            var jobPost = CompanyData.JobPosts[CitizenInbornData.JobPostIndex];
             Container.Bind<JobPost>().FromInstance(jobPost).AsSingle().NonLazy();
         }
 
@@ -48,8 +57,9 @@ namespace TheCity
             Container.Bind<CitizenMover>().FromNewComponentOnRoot().AsSingle().NonLazy();
         }
 
-        private void BindOther()
+        private void BindActivity()
         {
+            Container.BindInterfacesAndSelfTo<ScheduleCollection>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<CitizenActivityScheduler>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<CitizenActivityRunner>().AsSingle().NonLazy();
         }

@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using UnityEngine;
 using Zenject;
 
 namespace TheCity
@@ -14,12 +15,19 @@ namespace TheCity
 
         public void DoActivity(Activity activity)
         {
+            Debug.Log($"{Citizen} Start Do Activity {activity}");
             if (activity is Activity_StartWork)
             {
                 CitizenMover.MoveTo(Company.Room.transform.position);
             }
 
             if (activity is Activity_EndWork)
+            {
+                // CitizenMover.MoveTo(HomeRoom.transform.position);
+                CitizenActivityScheduler.AddActivityToHead(new Activity_GoToHome());
+            }
+
+            if (activity is Activity_GoToHome)
             {
                 CitizenMover.MoveTo(HomeRoom.transform.position);
             }

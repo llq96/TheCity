@@ -17,6 +17,8 @@ namespace TheCity
             company.transform.SetParent(null);
             SceneManager.MoveGameObjectToScene(company.gameObject, SceneManager.GetActiveScene());
 
+            company.transform.position = company.Room.transform.position;
+
             return company;
         }
     }
