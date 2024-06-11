@@ -30,6 +30,7 @@ namespace TheCity
         private void CreatePlayer()
         {
             var player = PlayerCreator.Create(_playerSpawnPoint);
+            Destroy(_playerSpawnPoint.gameObject);
         }
     }
 }

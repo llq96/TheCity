@@ -20,4 +20,4 @@ MonoBehaviour:
     _minute: 0
     _second: 0
     _millisecond: 0
-  _timeSpeedMultiplier: 10000
+  _timeSpeedMultiplier: 6011
