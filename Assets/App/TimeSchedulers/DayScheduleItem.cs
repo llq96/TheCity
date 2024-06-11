@@ -10,5 +10,7 @@ namespace TheCity
             Time = time;
             Activity = activity;
         }
+
+        public override string ToString() => $"{Time} - {Activity}";
     }
 }

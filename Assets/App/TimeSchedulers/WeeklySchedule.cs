@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace TheCity
 {
@@ -27,5 +28,16 @@ namespace TheCity
         public DaySchedule this[DayOfWeek dayOfWeek] => _schedules[(int)dayOfWeek];
 
         public DaySchedule GetDaySchedule(DayOfWeek dayOfWeek) => this[dayOfWeek];
+
+        public override string ToString()
+        {
+            StringBuilder sb = new();
+            foreach (DayOfWeek dayOfWeek in Enum.GetValues(typeof(DayOfWeek)))
+            {
+                sb.AppendLine($"{dayOfWeek}:");
+                sb.AppendLineWithIndent(this[dayOfWeek],1);
+            }
+            return sb.ToString();
+        }
     }
 }

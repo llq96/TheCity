@@ -1,21 +1,22 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using JetBrains.Annotations;
 using TheCity.InGameTime;
-using UnityEngine;
+using Unity.VisualScripting;
 using Zenject;
 
 namespace TheCity
 {
     [UsedImplicitly]
-    public class CitizenActivityScheduler : ITickable, IInitializable
+    public class CitizenActivityScheduler : ITickable, Zenject.IInitializable
     {
         [Inject] public Citizen Citizen { get; }
         [Inject] private JobPost JobPost { get; }
         [Inject] private GameTime GameTime { get; }
         [Inject] private CitizenActivityRunner CitizenActivityRunner { get; }
+
+        public IList<ScheduleActivity> ScheduleActivities => _scheduleActivities.AsReadOnlyList();
 
         //TODO Очередь не нравится, хочется Insert или сортировку при добавлении.
         private readonly Queue<ScheduleActivity> _scheduleActivities = new();
@@ -32,7 +33,7 @@ namespace TheCity
             FillWithWorkSchedule();
             AddFillScheduleActivity();
 
-            Debug.Log(GetActivitiesLog());
+            this.PrintFormattedInfo();
         }
 
         private void FillWithWorkSchedule()
@@ -86,18 +87,6 @@ namespace TheCity
             CitizenActivityRunner.DoActivity(_nearestActivity.Activity);
             _lastActivity = _nearestActivity;
             _nearestActivity = null;
-        }
-
-        private string GetActivitiesLog()
-        {
-            StringBuilder sb = new();
-            foreach (var scheduleActivity in _scheduleActivities)
-            {
-                sb.Append(scheduleActivity);
-                sb.AppendLine();
-            }
-
-            return sb.ToString();
         }
     }
 }

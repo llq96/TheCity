@@ -1,5 +1,3 @@
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using Zenject;
 
@@ -7,13 +5,13 @@ namespace TheCity
 {
     public class Citizen : MonoBehaviour
     {
-        [Inject] private CitizenData CitizenData { get; }
-        [Inject] private CitizenInbornData InbornData { get; }
+        [Inject] public CitizenData CitizenData { get; }
+        [Inject] public CitizenInbornData InbornData { get; }
 
-        [Inject] private Room HomeRoom { get; }
+        [Inject] public Room HomeRoom { get; }
 
-        [Inject] private Company Company { get; }
-        [Inject] private JobPost JobPost { get; }
+        [Inject] public Company Company { get; }
+        [Inject] public JobPost JobPost { get; }
 
         [Inject] private CitizenActivityScheduler CitizenActivityScheduler { get; }
 
@@ -21,25 +19,9 @@ namespace TheCity
 
         private void Start()
         {
-            Debug.Log(this);
+            this.PrintFormattedInfo();
         }
 
-        public override string ToString()
-        {
-            StringBuilder sb = new();
-            sb.Append($"I am {InbornData.Name}");
-            sb.AppendLine();
-            sb.Append($"I live in {HomeRoom}");
-            sb.AppendLine();
-            sb.Append($"I work in {Company}");
-            sb.AppendLine();
-            sb.Append($"I work as {JobPost.JobTitle}");
-            sb.AppendLine();
-            sb.Append($"From {JobPost.WorkSchedule.MondaySchedule.ScheduleItems.First().Time}"); //TODO
-            sb.AppendLine();
-            sb.Append($"To {JobPost.WorkSchedule.MondaySchedule.ScheduleItems.Last().Time}");
-            sb.AppendLine();
-            return sb.ToString();
-        }
+        public override string ToString() => InbornData.Name.ToString();
     }
 }

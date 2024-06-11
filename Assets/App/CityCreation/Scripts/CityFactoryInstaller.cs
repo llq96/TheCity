@@ -12,7 +12,7 @@ namespace TheCity
         {
             InstallFactory();
 
-            Container.Bind<CityDataGenerator>().AsSingle().Lazy(); //TODO
+            Container.Bind<CityDataGenerator>().AsSingle().NonLazy();
 
             Container.BindInterfacesAndSelfTo<CityCreator>().AsSingle().NonLazy();
         }
