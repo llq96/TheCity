@@ -19,7 +19,7 @@ namespace TheCity
 
         private void Start()
         {
-            this.PrintFormattedInfo();
+            // this.PrintFormattedInfo();
         }
 
         public override string ToString() => InbornData.Name.ToString();

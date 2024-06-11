@@ -23,7 +23,7 @@ namespace TheCity
         {
             FillScheduler();
 
-            this.PrintFormattedInfo();
+            // this.PrintFormattedInfo();
         }
 
         public void FillScheduler()

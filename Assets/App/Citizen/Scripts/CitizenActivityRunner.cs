@@ -15,7 +15,7 @@ namespace TheCity
 
         public void DoActivity(Activity activity)
         {
-            Debug.Log($"{Citizen} Start Do Activity {activity}");
+            // Debug.Log($"{Citizen} Start Do Activity {activity}");
             if (activity is Activity_StartWork)
             {
                 CitizenMover.MoveTo(Company.Room.transform.position);
