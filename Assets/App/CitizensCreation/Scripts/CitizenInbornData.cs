@@ -14,9 +14,11 @@ namespace TheCity
         public int AddressIndex { get; }
         public int CompanyIndex { get; }
         public int JobPostIndex { get; }
+
+        public override string ToString() => Name.ToString();
     }
 
-    public struct CitizenName
+    public readonly struct CitizenName
     {
         public string FirstName { get; }
         public string SecondName { get; }
@@ -29,5 +31,7 @@ namespace TheCity
 
             FullName = $"{firstName} {secondName}";
         }
+
+        public override string ToString() => FullName;
     }
 }

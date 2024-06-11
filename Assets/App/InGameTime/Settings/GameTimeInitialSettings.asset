@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startDateTime:
     _year: 2000
-    _month: 1
+    _month: 2
     _day: 1
     _hour: 9
     _minute: 0
     _second: 0
     _millisecond: 0
-  _timeSpeedMultiplier: 60
+  _timeSpeedMultiplier: 10000

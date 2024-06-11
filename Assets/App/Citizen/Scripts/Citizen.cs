@@ -1,57 +1,45 @@
-using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
+using System.Linq;
+using System.Text;
 using UnityEngine;
-using UnityEngine.AI;
 using Zenject;
 
 namespace TheCity
 {
     public class Citizen : MonoBehaviour
     {
-        [Inject] private CitizenInbornData InbornData { get; }
         [Inject] private CitizenData CitizenData { get; }
-        [Inject] private NavMeshAgent NavMeshAgent { get; }
+        [Inject] private CitizenInbornData InbornData { get; }
+
         [Inject] private Room HomeRoom { get; }
+
         [Inject] private Company Company { get; }
         [Inject] private JobPost JobPost { get; }
 
+        [Inject] private CitizenActivityScheduler CitizenActivityScheduler { get; }
+
+        [Inject] private CitizenMover CitizenMover { get; }
+
         private void Start()
         {
-            Debug.Log($"I live in {HomeRoom}");
-            Debug.Log($"I work in {Company}");
-            Debug.Log($"I work as {JobPost.JobTitle}");
-            var destinations = new List<Vector3>()
-            {
-                HomeRoom.transform.position,
-                Company.Room.transform.position
-            };
-            TestTryMove(destinations).Forget();
+            Debug.Log(this);
         }
 
-        private async UniTask TestTryMove(List<Vector3> destinations)
+        public override string ToString()
         {
-            while (true)
-            {
-                foreach (var destination in destinations)
-                {
-                    while (true)
-                    {
-                        await UniTask.Yield();
-
-                        if (!NavMeshAgent) return;
-                        if (!NavMeshAgent.gameObject.activeInHierarchy) continue;
-                        if (!NavMeshAgent.isOnNavMesh) continue;
-                        if (!NavMeshAgent.enabled) continue;
-
-                        NavMeshAgent.SetDestination(destination);
-                        NavMeshAgent.isStopped = false;
-                        // Debug.Log($"Set Destination {destination}");
-                        break;
-                    }
-
-                    await UniTask.Delay(7 * 1000);
-                }
-            }
+            StringBuilder sb = new();
+            sb.Append($"I am {InbornData.Name}");
+            sb.AppendLine();
+            sb.Append($"I live in {HomeRoom}");
+            sb.AppendLine();
+            sb.Append($"I work in {Company}");
+            sb.AppendLine();
+            sb.Append($"I work as {JobPost.JobTitle}");
+            sb.AppendLine();
+            sb.Append($"From {JobPost.WorkSchedule.MondaySchedule.ScheduleItems.First().Time}"); //TODO
+            sb.AppendLine();
+            sb.Append($"To {JobPost.WorkSchedule.MondaySchedule.ScheduleItems.Last().Time}");
+            sb.AppendLine();
+            return sb.ToString();
         }
     }
 }

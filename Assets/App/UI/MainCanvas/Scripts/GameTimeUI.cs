@@ -20,7 +20,7 @@ namespace TheCity
 
         private void UpdateTexts_Custom()
         {
-            _tmp_date.text = GameTime.GameDateTime.ToString("dd.MM.yyyy");
+            _tmp_date.text = GameTime.GameDateTime.ToString("dd.MM.yyyy ddd");
             _tmp_time.text = GameTime.GameDateTime.ToString("HH:mm");
         }
 
