@@ -29,5 +29,17 @@ namespace TheCity
             _second = dateTime.Second;
             _millisecond = dateTime.Millisecond;
         }
+
+        #region Private Serializable Field Names
+
+        public const string Name_Of_Year = nameof(_year);
+        public const string Name_Of_Month = nameof(_month);
+        public const string Name_Of_Day = nameof(_day);
+        public const string Name_Of_Hour = nameof(_hour);
+        public const string Name_Of_Minute = nameof(_minute);
+        public const string Name_Of_Second = nameof(_second);
+        public const string Name_Of_Millisecond = nameof(_millisecond);
+
+        #endregion
     }
 }

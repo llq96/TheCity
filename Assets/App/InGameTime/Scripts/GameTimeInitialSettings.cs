@@ -11,5 +11,13 @@ namespace TheCity
 
         public DateTime StartDateTime => _startDateTime.GetDateTime();
         public float TimeSpeedMultiplier => _timeSpeedMultiplier;
+
+
+        #region Private Serializable Field Names
+
+        public const string Name_Of_StartDateTime = nameof(_startDateTime);
+        public const string Name_Of_TimeSpeedMultiplier = nameof(_timeSpeedMultiplier);
+
+        #endregion
     }
 }

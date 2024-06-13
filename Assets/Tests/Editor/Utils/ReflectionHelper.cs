@@ -61,5 +61,27 @@ namespace TheCity.Tests.Utils
             emptyFieldTuple = null;
             return false;
         }
+
+        public static void SetField(this object obj, string fieldName, object value)
+        {
+            var fieldInfo = obj.GetFieldAnyFlags(fieldName);
+            fieldInfo.SetValue(obj, value);
+        }
+
+        public static FieldInfo GetFieldAnyFlags(this object obj, string fieldName)
+        {
+            return obj.GetType().GetFieldAnyFlags(fieldName);
+        }
+
+        public static FieldInfo GetFieldAnyFlags(this Type type, string fieldName)
+        {
+            return type.GetField(fieldName, (BindingFlags)(-1));
+        }
+
+        public static T GetField<T>(this object obj, string fieldName)
+        {
+            var fieldInfo = obj.GetFieldAnyFlags(fieldName);
+            return (T)fieldInfo.GetValue(obj);
+        }
     }
 }
