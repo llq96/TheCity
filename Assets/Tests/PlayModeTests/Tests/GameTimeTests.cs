@@ -52,9 +52,7 @@ namespace TheCity.Tests
         public void GameTime_WrongYear(int wrongYear)
         {
             var initialSettings = GetCorrectInitialSettings();
-            initialSettings
-                .GetField<SerializableDateTime>(GameTimeInitialSettings.Name_Of_StartDateTime)
-                .SetField(SerializableDateTime.Name_Of_Year, wrongYear);
+            initialSettings.Internal_StartDateTime.Internal_Year = wrongYear;
 
             Assert.Catch(() => SetUp(initialSettings));
         }
@@ -63,9 +61,7 @@ namespace TheCity.Tests
         public void GameTime_WrongMonth(int wrongMonth)
         {
             var initialSettings = GetCorrectInitialSettings();
-            initialSettings
-                .GetField<SerializableDateTime>(GameTimeInitialSettings.Name_Of_StartDateTime)
-                .SetField(SerializableDateTime.Name_Of_Month, wrongMonth);
+            initialSettings.Internal_StartDateTime.Internal_Month = wrongMonth;
 
             Assert.Catch(() => SetUp(initialSettings));
         }
@@ -75,12 +71,12 @@ namespace TheCity.Tests
             var initialSettings = ScriptableObject.CreateInstance<GameTimeInitialSettings>();
 
             var serializableDateTime = new SerializableDateTime();
-            serializableDateTime.SetField(SerializableDateTime.Name_Of_Year, 2000);
-            serializableDateTime.SetField(SerializableDateTime.Name_Of_Month, 1);
-            serializableDateTime.SetField(SerializableDateTime.Name_Of_Day, 1);
+            serializableDateTime.Internal_Year = 2000;
+            serializableDateTime.Internal_Month = 1;
+            serializableDateTime.Internal_Day = 1;
 
-            initialSettings.SetField(GameTimeInitialSettings.Name_Of_StartDateTime, serializableDateTime);
-            initialSettings.SetField(GameTimeInitialSettings.Name_Of_TimeSpeedMultiplier, 1f);
+            initialSettings.Internal_StartDateTime = serializableDateTime;
+            initialSettings.Internal_TimeSpeedMultiplier = 60f;
 
             return initialSettings;
         }

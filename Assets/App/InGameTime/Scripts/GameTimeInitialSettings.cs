@@ -13,11 +13,18 @@ namespace TheCity
         public float TimeSpeedMultiplier => _timeSpeedMultiplier;
 
 
-        #region Private Serializable Field Names
+#if UNITY_INCLUDE_TESTS
+        public SerializableDateTime Internal_StartDateTime
+        {
+            get => _startDateTime;
+            set => _startDateTime = value;
+        }
 
-        public const string Name_Of_StartDateTime = nameof(_startDateTime);
-        public const string Name_Of_TimeSpeedMultiplier = nameof(_timeSpeedMultiplier);
-
-        #endregion
+        public float Internal_TimeSpeedMultiplier
+        {
+            get => _timeSpeedMultiplier;
+            set => _timeSpeedMultiplier = value;
+        }
+#endif
     }
 }

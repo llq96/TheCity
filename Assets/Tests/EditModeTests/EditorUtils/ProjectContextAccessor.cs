@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using Zenject;
 
-namespace TheCity.Tests.Utils
+namespace TheCity.Tests.EditorUtils
 {
     public static class ProjectContextAccessor
     {

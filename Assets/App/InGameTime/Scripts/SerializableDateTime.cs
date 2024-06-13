@@ -30,16 +30,49 @@ namespace TheCity
             _millisecond = dateTime.Millisecond;
         }
 
-        #region Private Serializable Field Names
 
-        public const string Name_Of_Year = nameof(_year);
-        public const string Name_Of_Month = nameof(_month);
-        public const string Name_Of_Day = nameof(_day);
-        public const string Name_Of_Hour = nameof(_hour);
-        public const string Name_Of_Minute = nameof(_minute);
-        public const string Name_Of_Second = nameof(_second);
-        public const string Name_Of_Millisecond = nameof(_millisecond);
+#if UNITY_INCLUDE_TESTS
+        public int Internal_Year
+        {
+            get => _year;
+            set => _year = value;
+        }
 
-        #endregion
+        public int Internal_Month
+        {
+            get => _month;
+            set => _month = value;
+        }
+
+        public int Internal_Day
+        {
+            get => _day;
+            set => _day = value;
+        }
+
+        public int Internal_Hour
+        {
+            get => _hour;
+            set => _hour = value;
+        }
+
+        public int Internal_Minute
+        {
+            get => _minute;
+            set => _minute = value;
+        }
+
+        public int Internal_Second
+        {
+            get => _second;
+            set => _second = value;
+        }
+
+        public int Internal_Millisecond
+        {
+            get => _millisecond;
+            set => _millisecond = value;
+        }
+#endif
     }
 }
