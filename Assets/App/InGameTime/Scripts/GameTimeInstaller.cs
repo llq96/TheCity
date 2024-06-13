@@ -7,14 +7,9 @@ namespace TheCity.InGameTime
     {
         [SerializeField] private GameTimeInitialSettings _gameTimeInitialSettings;
 
-
-#if UNITY_EDITOR
-        public GameTimeInitialSettings GameTimeInitialSettings => _gameTimeInitialSettings;
-#endif
-
         public override void InstallBindings()
         {
-            Container.Bind<GameTimeInitialSettings>().FromInstance(_gameTimeInitialSettings).AsSingle().NonLazy();
+            Container.Bind<IGameTimeInitialSettings>().FromInstance(_gameTimeInitialSettings).AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<GameTime>().AsSingle().NonLazy();
         }
     }

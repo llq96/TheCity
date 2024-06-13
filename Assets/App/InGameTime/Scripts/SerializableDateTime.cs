@@ -29,50 +29,5 @@ namespace TheCity
             _second = dateTime.Second;
             _millisecond = dateTime.Millisecond;
         }
-
-
-#if UNITY_INCLUDE_TESTS
-        public int Internal_Year
-        {
-            get => _year;
-            set => _year = value;
-        }
-
-        public int Internal_Month
-        {
-            get => _month;
-            set => _month = value;
-        }
-
-        public int Internal_Day
-        {
-            get => _day;
-            set => _day = value;
-        }
-
-        public int Internal_Hour
-        {
-            get => _hour;
-            set => _hour = value;
-        }
-
-        public int Internal_Minute
-        {
-            get => _minute;
-            set => _minute = value;
-        }
-
-        public int Internal_Second
-        {
-            get => _second;
-            set => _second = value;
-        }
-
-        public int Internal_Millisecond
-        {
-            get => _millisecond;
-            set => _millisecond = value;
-        }
-#endif
     }
 }

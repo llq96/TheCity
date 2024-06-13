@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
+using Moq;
 using Zenject;
 using NUnit.Framework;
 using TheCity.InGameTime;
-using TheCity.Tests.Utils;
 using UnityEngine;
 using UnityEngine.TestTools;
 
@@ -15,14 +16,14 @@ namespace TheCity.Tests
 
         private void CorrectSetUp()
         {
-            SetUp(GetCorrectInitialSettings());
+            SetUp(GetCorrectInitialSettingsMock().Object);
         }
 
-        private void SetUp(GameTimeInitialSettings gameTimeInitialSettings)
+        private void SetUp(IGameTimeInitialSettings gameTimeInitialSettings)
         {
             PreInstall();
 
-            Container.Bind<GameTimeInitialSettings>().FromInstance(gameTimeInitialSettings).AsSingle().NonLazy();
+            Container.Bind<IGameTimeInitialSettings>().FromInstance(gameTimeInitialSettings).AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<GameTime>().AsSingle().NonLazy();
 
             PostInstall();
@@ -36,7 +37,7 @@ namespace TheCity.Tests
         }
 
         [UnityTest]
-        public IEnumerator GameTimeRun()
+        public IEnumerator DateTimeIncreasingOverTime()
         {
             CorrectSetUp();
 
@@ -51,34 +52,27 @@ namespace TheCity.Tests
         [Test, TestCase(-1), TestCase(0), TestCase(10001)]
         public void GameTime_WrongYear(int wrongYear)
         {
-            var initialSettings = GetCorrectInitialSettings();
-            initialSettings.Internal_StartDateTime.Internal_Year = wrongYear;
+            var initialSettingsMock = GetCorrectInitialSettingsMock();
+            initialSettingsMock.Setup(x => x.StartDateTime).Returns(() => new DateTime(wrongYear, 1, 1));
 
-            Assert.Catch(() => SetUp(initialSettings));
+            Assert.Catch(() => SetUp(initialSettingsMock.Object));
         }
 
         [Test, TestCase(-1), TestCase(0), TestCase(13)]
         public void GameTime_WrongMonth(int wrongMonth)
         {
-            var initialSettings = GetCorrectInitialSettings();
-            initialSettings.Internal_StartDateTime.Internal_Month = wrongMonth;
+            var initialSettingsMock = GetCorrectInitialSettingsMock();
+            initialSettingsMock.Setup(x => x.StartDateTime).Returns(() => new DateTime(2000, wrongMonth, 1));
 
-            Assert.Catch(() => SetUp(initialSettings));
+            Assert.Catch(() => SetUp(initialSettingsMock.Object));
         }
 
-        private GameTimeInitialSettings GetCorrectInitialSettings()
+        private Mock<IGameTimeInitialSettings> GetCorrectInitialSettingsMock()
         {
-            var initialSettings = ScriptableObject.CreateInstance<GameTimeInitialSettings>();
-
-            var serializableDateTime = new SerializableDateTime();
-            serializableDateTime.Internal_Year = 2000;
-            serializableDateTime.Internal_Month = 1;
-            serializableDateTime.Internal_Day = 1;
-
-            initialSettings.Internal_StartDateTime = serializableDateTime;
-            initialSettings.Internal_TimeSpeedMultiplier = 60f;
-
-            return initialSettings;
+            var mock = new Mock<IGameTimeInitialSettings>();
+            mock.Setup(x => x.StartDateTime).Returns(new DateTime(2000, 1, 1, 0, 0, 0));
+            mock.Setup(x => x.TimeSpeedMultiplier).Returns(60f);
+            return mock;
         }
     }
 }
