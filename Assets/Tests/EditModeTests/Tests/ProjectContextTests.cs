@@ -13,21 +13,21 @@ namespace TheCity.Tests
         [Inject] private ProjectContext ProjectContext { get; }
 
         [SetUp]
-        public void CommonInstall()
+        public void SetUp()
         {
-            Container.Bind<ProjectContext>().FromInstance(ProjectContextAccessor.GetProjectContext())
-                .AsSingle().NonLazy();
+            var projectContextPrefab = ProjectContextAccessor.GetProjectContext();
+            Container.Bind<ProjectContext>().FromInstance(projectContextPrefab).AsSingle().NonLazy();
             Container.Inject(this);
         }
 
         [Test]
-        public void ProjectContextExistTest()
+        public void ProjectContext_ShouldExist()
         {
-            Assert.NotNull(ProjectContext);
+            Assert.NotNull(ProjectContext, "ProjectContext should exist at path Resources/ProjectContext");
         }
 
         [Test]
-        public void ProjectContextInstallersDontHaveEmptySerializableFieldsTest()
+        public void ProjectContext_Installers_ShouldNotHave_NullFields()
         {
             var components = ProjectContext.GetComponents<Component>().ToList();
             if (ReflectionHelper.IsHaveEmptySerializableFields(components, out var tuple))
