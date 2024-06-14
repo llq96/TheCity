@@ -21,7 +21,7 @@ namespace TheCity
             BindFromCity();
             BindJobPost();
             BindComponentsFromHierarchy();
-            BindNewComponents();
+            BindMover();
             BindActivity();
         }
 
@@ -52,9 +52,9 @@ namespace TheCity
             Container.Bind<NavMeshAgent>().FromComponentInHierarchy().AsSingle().NonLazy();
         }
 
-        private void BindNewComponents()
+        private void BindMover()
         {
-            Container.Bind<CitizenMover>().FromNewComponentOnRoot().AsSingle().NonLazy();
+            Container.Bind<CitizenMover>().AsSingle().NonLazy();
         }
 
         private void BindActivity()

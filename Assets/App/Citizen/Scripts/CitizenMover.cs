@@ -1,10 +1,12 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
 namespace TheCity
 {
-    public class CitizenMover : MonoBehaviour
+    [UsedImplicitly]
+    public class CitizenMover
     {
         [Inject] private NavMeshAgent NavMeshAgent { get; }
 
