@@ -5,7 +5,7 @@ namespace TheCity.Tests
     public class CitizenNameTests
     {
         [Test]
-        public void ReturnSameValue_AsConstructorArguments()
+        public void ReturnSameValues_AsConstructorArguments()
         {
             var firstName = "John";
             var secondName = "Smith";
@@ -17,7 +17,7 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void FullNameNotEmpty()
+        public void FullName_NotEmpty()
         {
             var firstName = "John";
             var secondName = "Smith";

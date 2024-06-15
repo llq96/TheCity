@@ -1,42 +1,33 @@
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace TheCity.Tests
 {
     [TestFixture]
-    public class CompanyNameTests
+    public class CompanyDataTests
     {
         [Test]
-        public void ReturnSameValue_AsConstructorArguments()
+        public void ReturnSameValues_AsConstructorArguments()
         {
-            var companyNameStr = "Google";
-            var companyType = "Inc";
+            var companyIndex = 1;
+            var companyName = CorrectThings.GetCorrectCompanyName();
+            var addressIndex = 2;
+            var jobPosts = new List<JobPost>();
 
-            var companyName = new CompanyName(companyNameStr, companyType);
+            var companyData = new CompanyData(companyIndex, companyName, addressIndex, jobPosts);
 
-            Assert.AreEqual(companyNameStr, companyName.Name);
-            Assert.AreEqual(companyType, companyName.Type);
+            Assert.AreEqual(companyIndex, companyData.CompanyIndex);
+            Assert.AreEqual(companyName, companyData.CompanyName);
+            Assert.AreEqual(addressIndex, companyData.AddressIndex);
+            Assert.AreEqual(jobPosts, companyData.JobPosts);
         }
 
         [Test]
         public void ToString_NotEmpty()
         {
-            var companyNameStr = "Google";
-            var companyType = "Inc";
+            var companyData = CorrectThings.GetCorrectCompanyData();
 
-            var companyName = new CompanyName(companyNameStr, companyType);
-
-            Assert.IsNotEmpty(companyName.ToString());
-        }
-
-        [Test]
-        public void FullName_NotEmpty()
-        {
-            var companyNameStr = "Google";
-            var companyType = "Inc";
-
-            var companyName = new CompanyName(companyNameStr, companyType);
-
-            Assert.IsNotEmpty(companyName.FullName);
+            Assert.IsNotEmpty(companyData.ToString());
         }
     }
 }

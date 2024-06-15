@@ -5,7 +5,7 @@ namespace TheCity.Tests
     public class AddressDataTests
     {
         [Test]
-        public void ReturnSameValue_AsConstructorArguments()
+        public void ReturnSameValues_AsConstructorArguments()
         {
             var street = new StreetName("Wall Street");
             var houseNumber = 1;
@@ -23,20 +23,10 @@ namespace TheCity.Tests
         [Test]
         public void ToString_NotEmpty()
         {
-            var addressData = GetCorrectAddressData();
+            var addressData = CorrectThings.GetCorrectAddressData();
             Assert.IsNotEmpty(addressData.ToString());
         }
 
-        private static AddressData GetCorrectAddressData()
-        {
-            var street = new StreetName("Wall Street");
-            var houseNumber = 1;
-            var roomNumber = 2;
-            var globalRoomIndex = 3;
 
-            var addressData = new AddressData(street, houseNumber, roomNumber, globalRoomIndex);
-
-            return addressData;
-        }
     }
 }

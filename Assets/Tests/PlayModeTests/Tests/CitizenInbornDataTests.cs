@@ -5,7 +5,7 @@ namespace TheCity.Tests
     public class CitizenInbornDataTests
     {
         [Test]
-        public void ReturnSameValue_AsConstructorArguments()
+        public void ReturnSameValues_AsConstructorArguments()
         {
             var citizenName = new CitizenName("John", "Smith");
             var addressIndex = 1;
@@ -21,22 +21,10 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void CorrectToString()
+        public void ToString_NotEmpty()
         {
-            var citizenInbornData = GetCorrectInbornData();
+            var citizenInbornData = CorrectThings.GetCorrectInbornData();
             Assert.IsNotEmpty(citizenInbornData.ToString());
-        }
-
-        private static CitizenInbornData GetCorrectInbornData()
-        {
-            var citizenName = new CitizenName("John", "Smith");
-            var addressIndex = 1;
-            var companyIndex = 2;
-            var jobPostIndex = 3;
-
-            var citizenInbornData = new CitizenInbornData(citizenName, addressIndex, companyIndex, jobPostIndex);
-
-            return citizenInbornData;
         }
     }
 }
