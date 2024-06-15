@@ -1,3 +1,5 @@
+using System;
+
 namespace TheCity
 {
     public readonly struct TimeOnly
@@ -7,6 +9,12 @@ namespace TheCity
 
         public TimeOnly(int hour, int minute)
         {
+            if (hour < 0 || hour >= 24)
+                throw new ArgumentException("Incorrect Hour");
+
+            if (minute < 0 || minute >= 60)
+                throw new ArgumentException("Incorrect Minute");
+
             Hour = hour;
             Minute = minute;
         }

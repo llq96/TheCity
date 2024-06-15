@@ -5,9 +5,9 @@ using UnityEngine.TestTools;
 
 namespace TheCity.Tests.SceneLoadingTests
 {
+    [ExcludeFromCoverage]
     public class LoadScenesWithoutErrorsTests : SceneTestFixture
     {
-        [UnityTest, ExcludeFromCoverage]
         public IEnumerator LoadScene_Main_WithoutErrors()
         {
             yield return LoadScene("Main");
