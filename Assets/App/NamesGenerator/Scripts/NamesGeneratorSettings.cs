@@ -10,14 +10,14 @@ namespace TheCity
         [SerializeField] private CompanyPossibleNames _companyPossibleNames;
 
         public ICitizenPossibleNames CitizenPossibleNames => _citizenPossibleNames;
-        public StreetPossibleNames StreetPossibleNames => _streetPossibleNames;
-        public CompanyPossibleNames CompanyPossibleNames => _companyPossibleNames;
+        public IStreetPossibleNames StreetPossibleNames => _streetPossibleNames;
+        public ICompanyPossibleNames CompanyPossibleNames => _companyPossibleNames;
     }
 
     public interface INamesGeneratorSettings
     {
         public ICitizenPossibleNames CitizenPossibleNames { get; }
-        public StreetPossibleNames StreetPossibleNames { get; }
-        public CompanyPossibleNames CompanyPossibleNames { get; }
+        public IStreetPossibleNames StreetPossibleNames { get; }
+        public ICompanyPossibleNames CompanyPossibleNames { get; }
     }
 }

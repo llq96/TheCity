@@ -8,7 +8,7 @@ using Zenject;
 namespace TheCity
 {
     [UsedImplicitly]
-    public class CitizensNamesGenerator
+    public class CitizenNamesGenerator
     {
         [Inject] private INamesGeneratorSettings Settings { get; }
 

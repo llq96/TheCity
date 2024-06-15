@@ -48,7 +48,7 @@ namespace TheCity.Utils
 
         public IEnumerator<Tuple<T1, T2>> GetEnumerator()
         {
-            return new ShuffledListIEnumerator<T1, T2>(_list1, _list2);
+            return new ShuffledListEnumerator<T1, T2>(_list1, _list2);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -57,7 +57,7 @@ namespace TheCity.Utils
         }
     }
 
-    public class ShuffledListIEnumerator<T1, T2> : IEnumerator<Tuple<T1, T2>>
+    public class ShuffledListEnumerator<T1, T2> : IEnumerator<Tuple<T1, T2>>
     {
         private readonly List<T1> _list1;
         private readonly List<T2> _list2;
@@ -70,11 +70,10 @@ namespace TheCity.Utils
 
         private int _index = -1;
 
-        public ShuffledListIEnumerator(IEnumerable<T1> enumerable, IEnumerable<T2> enumerable2)
+        public ShuffledListEnumerator(IEnumerable<T1> enumerable, IEnumerable<T2> enumerable2)
         {
             _list1 = enumerable.GetShuffledCopy();
             _list2 = enumerable2.GetShuffledCopy();
-
             _maxCombinations = _list1.Count * _list2.Count;
 
             _list1_count = _list1.Count;
@@ -90,15 +89,7 @@ namespace TheCity.Utils
 
             var index1 = _index % _list1_count;
 
-            int index2;
-            if (_isSameParity)
-            {
-                index2 = (_index + (_index / _list1_count)) % _list2_count;
-            }
-            else
-            {
-                index2 = _index % _list2_count;
-            }
+            var index2 = ((_index % _list1_count) + (_index / _list1_count)) % _list2_count;
 
             var element1 = _list1[index1];
             var element2 = _list2[index2];

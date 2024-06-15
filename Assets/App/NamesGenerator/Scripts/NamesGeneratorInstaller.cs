@@ -19,7 +19,9 @@ namespace TheCity
         {
             subContainer.Bind<INamesGeneratorSettings>().FromInstance(_namesGeneratorSettings).AsSingle().NonLazy();
 
-            subContainer.Bind<CitizensNamesGenerator>().AsSingle().NonLazy();
+            subContainer.Bind<CitizenNamesGenerator>().AsSingle().NonLazy();
+            subContainer.Bind<StreetNamesGenerator>().AsSingle().NonLazy();
+            subContainer.Bind<CompanyNamesGenerator>().AsSingle().NonLazy();
 
             subContainer.BindInterfacesAndSelfTo<NamesGenerator>().AsSingle().NonLazy();
         }

@@ -4,6 +4,12 @@ using UnityEngine;
 
 namespace TheCity
 {
+    public interface ICitizenPossibleNames
+    {
+        public ReadOnlyCollection<string> FirstNames { get; }
+        public ReadOnlyCollection<string> SecondNames { get; }
+    }
+
     [CreateAssetMenu(fileName = "CitizenPossibleNames", menuName = "TheCity/CitizenPossibleNames", order = 1)]
     public class CitizenPossibleNames : ScriptableObject, ICitizenPossibleNames
     {
@@ -12,11 +18,5 @@ namespace TheCity
 
         public ReadOnlyCollection<string> FirstNames => _firstNames.AsReadOnly();
         public ReadOnlyCollection<string> SecondNames => _secondNames.AsReadOnly();
-    }
-
-    public interface ICitizenPossibleNames
-    {
-        public ReadOnlyCollection<string> FirstNames { get; }
-        public ReadOnlyCollection<string> SecondNames { get; }
     }
 }
