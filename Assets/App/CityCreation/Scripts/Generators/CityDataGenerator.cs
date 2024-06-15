@@ -16,7 +16,7 @@ namespace TheCity.CityGeneration
             generationSettings ??= new();
             CityData cityData = new();
 
-            NamesGenerator.ClearGeneratedLists();
+            NamesGenerator.Reset();
 
             CityAddressesDataGenerator.GenerateAddresses(generationSettings, cityData);
             var _currentAddressIndex = 0;

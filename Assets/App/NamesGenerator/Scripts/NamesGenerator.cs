@@ -1,42 +1,31 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
-using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace TheCity
 {
     [UsedImplicitly]
     public class NamesGenerator
     {
-        [Inject] private NamesGeneratorSettings Settings { get; }
+        [Inject] private INamesGeneratorSettings Settings { get; }
+        [Inject] private CitizensNamesGenerator CitizensNamesGenerator { get; }
 
-        private readonly List<CitizenName> _citizenNames = new();
         private readonly List<CompanyName> _companyNames = new();
         private readonly List<StreetName> _streetNames = new();
 
-        public void ClearGeneratedLists()
+        public void Reset()
         {
-            _citizenNames.Clear();
+            CitizensNamesGenerator.Reset();
             _companyNames.Clear();
             _streetNames.Clear();
         }
 
         public CitizenName GenerateRandomCitizenName()
         {
-            var firstNames = Settings.CitizenPossibleNames.FirstNames;
-            var secondNames = Settings.CitizenPossibleNames.SecondNames;
-            string firstName;
-            string secondName;
-            do
-            {
-                firstName = firstNames[Random.Range(0, firstNames.Count)];
-                secondName = secondNames[Random.Range(0, secondNames.Count)];
-            } while (_citizenNames.Any(x => x.FirstName == firstName && x.SecondName == secondName));
-
-            var result = new CitizenName(firstName, secondName);
-            _citizenNames.Add(result);
-            return result;
+            return CitizensNamesGenerator.GetNextCitizenName();
         }
 
         public CompanyName GenerateRandomCompanyName()

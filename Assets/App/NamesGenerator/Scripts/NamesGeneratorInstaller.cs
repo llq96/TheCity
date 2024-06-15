@@ -10,17 +10,18 @@ namespace TheCity
 
         public override void InstallBindings()
         {
-            Container.Bind<NamesGeneratorSettings>().FromInstance(_namesGeneratorSettings).AsSingle().NonLazy();
-
-            Container.BindFactory<NamesGenerator, NamesGeneratorFactory>().FromSubContainerResolve().ByMethod(
-                InstallerMethod);
-            // Container.BindInterfacesAndSelfTo<NamesGenerator>().AsTransient().NonLazy();
+            Container.BindFactory<NamesGenerator, NamesGeneratorFactory>()
+                .FromSubContainerResolve()
+                .ByMethod(InstallerMethod);
         }
 
-        private void InstallerMethod(DiContainer container)
+        private void InstallerMethod(DiContainer subContainer)
         {
-            container.Bind<NamesGeneratorSettings>().FromInstance(_namesGeneratorSettings).AsSingle().NonLazy();
-            container.BindInterfacesAndSelfTo<NamesGenerator>().AsSingle().NonLazy();
+            subContainer.Bind<INamesGeneratorSettings>().FromInstance(_namesGeneratorSettings).AsSingle().NonLazy();
+
+            subContainer.Bind<CitizensNamesGenerator>().AsSingle().NonLazy();
+
+            subContainer.BindInterfacesAndSelfTo<NamesGenerator>().AsSingle().NonLazy();
         }
 
         [UsedImplicitly]
