@@ -1,7 +1,14 @@
+using System;
+
 namespace TheCity
 {
     public class CitizenInbornData
     {
+        public CitizenName Name { get; }
+        public int AddressIndex { get; }
+        public int CompanyIndex { get; }
+        public int JobPostIndex { get; }
+
         public CitizenInbornData(CitizenName name, int addressIndex, int companyIndex, int jobPostIndex)
         {
             Name = name;
@@ -9,11 +16,6 @@ namespace TheCity
             CompanyIndex = companyIndex;
             JobPostIndex = jobPostIndex;
         }
-
-        public CitizenName Name { get; }
-        public int AddressIndex { get; }
-        public int CompanyIndex { get; }
-        public int JobPostIndex { get; }
 
         public override string ToString() => Name.ToString();
     }
@@ -26,6 +28,12 @@ namespace TheCity
 
         public CitizenName(string firstName, string secondName)
         {
+            if (string.IsNullOrEmpty(firstName))
+                throw new ArgumentException($"Null Or Empty {nameof(firstName)}");
+
+            if (string.IsNullOrEmpty(secondName))
+                throw new ArgumentException($"Null Or Empty {nameof(secondName)}");
+
             FirstName = firstName;
             SecondName = secondName;
 
