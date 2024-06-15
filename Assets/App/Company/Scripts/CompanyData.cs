@@ -20,7 +20,7 @@ namespace TheCity
         public override string ToString() => CompanyName.ToString();
     }
 
-    public struct CompanyName
+    public readonly struct CompanyName
     {
         public string Name { get; }
         public string Type { get; }

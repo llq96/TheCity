@@ -1,4 +1,3 @@
-using System;
 using NUnit.Framework;
 
 namespace TheCity.Tests
@@ -8,20 +7,20 @@ namespace TheCity.Tests
         [Test]
         public void ReturnSameValue_AsConstructorArguments()
         {
-            var firstName = Guid.NewGuid().ToString();
-            var secondName = Guid.NewGuid().ToString();
+            var firstName = "John";
+            var secondName = "Smith";
 
             var citizenName = new CitizenName(firstName, secondName);
 
-            Assert.AreEqual(citizenName.FirstName, firstName);
-            Assert.AreEqual(citizenName.SecondName, secondName);
+            Assert.AreEqual(firstName, citizenName.FirstName);
+            Assert.AreEqual(secondName, citizenName.SecondName);
         }
 
         [Test]
         public void FullNameNotEmpty()
         {
-            var firstName = Guid.NewGuid().ToString();
-            var secondName = Guid.NewGuid().ToString();
+            var firstName = "John";
+            var secondName = "Smith";
 
             var citizenName = new CitizenName(firstName, secondName);
 
@@ -32,7 +31,7 @@ namespace TheCity.Tests
         public void ThrowWhen_FirstName_IsNull()
         {
             string firstName = null;
-            var secondName = Guid.NewGuid().ToString();
+            var secondName = "Smith";
 
             Assert.Catch(() =>
             {
@@ -44,7 +43,7 @@ namespace TheCity.Tests
         public void ThrowWhen_FirstName_IsEmpty()
         {
             var firstName = "";
-            var secondName = Guid.NewGuid().ToString();
+            var secondName = "Smith";
 
             Assert.Catch(() =>
             {
@@ -55,7 +54,7 @@ namespace TheCity.Tests
         [Test]
         public void ThrowWhen_SecondName_IsNull()
         {
-            var firstName = Guid.NewGuid().ToString();
+            var firstName = "John";
             string secondName = null;
 
             Assert.Catch(() =>
@@ -67,7 +66,7 @@ namespace TheCity.Tests
         [Test]
         public void ThrowWhen_SecondName_IsEmpty()
         {
-            var firstName = Guid.NewGuid().ToString();
+            var firstName = "John";
             var secondName = "";
 
             Assert.Catch(() =>

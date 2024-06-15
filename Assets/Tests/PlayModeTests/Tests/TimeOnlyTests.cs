@@ -27,7 +27,7 @@ namespace TheCity.Tests
         {
             var timeOnly = new TimeOnly(5, 5);
             var str = timeOnly.ToString();
-            Assert.AreEqual(str, "05:05");
+            Assert.AreEqual("05:05", str);
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace TheCity.Tests
         {
             var timeOnly = new TimeOnly(5, 11);
             var str = timeOnly.ToString();
-            Assert.AreEqual(str, "05:11");
+            Assert.AreEqual("05:11", str);
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace TheCity.Tests
         {
             var timeOnly = new TimeOnly(11, 5);
             var str = timeOnly.ToString();
-            Assert.AreEqual(str, "11:05");
+            Assert.AreEqual("11:05", str);
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace TheCity.Tests
         {
             var timeOnly = new TimeOnly(11, 11);
             var str = timeOnly.ToString();
-            Assert.AreEqual(str, "11:11");
+            Assert.AreEqual("11:11", str);
         }
 
         [Test, TestCaseSource(nameof(WrongHours))]

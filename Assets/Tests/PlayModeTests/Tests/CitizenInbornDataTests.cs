@@ -7,17 +7,17 @@ namespace TheCity.Tests
         [Test]
         public void ReturnSameValue_AsConstructorArguments()
         {
-            var citizenName = new CitizenName("FirstName", "SecondName");
-            var addressIndex = UnityEngine.Random.Range(1, 100);
-            var companyIndex = UnityEngine.Random.Range(1, 100);
-            var jobPostIndex = UnityEngine.Random.Range(1, 100);
+            var citizenName = new CitizenName("John", "Smith");
+            var addressIndex = 1;
+            var companyIndex = 2;
+            var jobPostIndex = 3;
 
             var citizenInbornData = new CitizenInbornData(citizenName, addressIndex, companyIndex, jobPostIndex);
 
-            Assert.AreEqual(citizenInbornData.Name, citizenName);
-            Assert.AreEqual(citizenInbornData.AddressIndex, addressIndex);
-            Assert.AreEqual(citizenInbornData.CompanyIndex, companyIndex);
-            Assert.AreEqual(citizenInbornData.JobPostIndex, jobPostIndex);
+            Assert.AreEqual(citizenName, citizenInbornData.Name);
+            Assert.AreEqual(addressIndex, citizenInbornData.AddressIndex);
+            Assert.AreEqual(companyIndex, citizenInbornData.CompanyIndex);
+            Assert.AreEqual(jobPostIndex, citizenInbornData.JobPostIndex);
         }
 
         [Test]
@@ -29,10 +29,10 @@ namespace TheCity.Tests
 
         private static CitizenInbornData GetCorrectInbornData()
         {
-            var citizenName = new CitizenName("FirstName", "SecondName");
-            var addressIndex = UnityEngine.Random.Range(1, 100);
-            var companyIndex = UnityEngine.Random.Range(1, 100);
-            var jobPostIndex = UnityEngine.Random.Range(1, 100);
+            var citizenName = new CitizenName("John", "Smith");
+            var addressIndex = 1;
+            var companyIndex = 2;
+            var jobPostIndex = 3;
 
             var citizenInbornData = new CitizenInbornData(citizenName, addressIndex, companyIndex, jobPostIndex);
 

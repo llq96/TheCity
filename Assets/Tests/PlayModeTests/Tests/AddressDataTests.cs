@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using Random = UnityEngine.Random;
 
 namespace TheCity.Tests
 {
@@ -8,21 +7,21 @@ namespace TheCity.Tests
         [Test]
         public void ReturnSameValue_AsConstructorArguments()
         {
-            var street = new StreetName("SomeName");
-            var houseNumber = Random.Range(1, 100);
-            var roomNumber = Random.Range(1, 100);
-            var globalRoomIndex = Random.Range(1, 100);
+            var street = new StreetName("Wall Street");
+            var houseNumber = 1;
+            var roomNumber = 2;
+            var globalRoomIndex = 3;
 
             var addressData = new AddressData(street, houseNumber, roomNumber, globalRoomIndex);
 
-            Assert.AreEqual(addressData.StreetName, street);
-            Assert.AreEqual(addressData.HouseNumber, houseNumber);
-            Assert.AreEqual(addressData.RoomNumber, roomNumber);
-            Assert.AreEqual(addressData.GlobalRoomIndex, globalRoomIndex);
+            Assert.AreEqual(street, addressData.StreetName);
+            Assert.AreEqual(houseNumber, addressData.HouseNumber);
+            Assert.AreEqual(roomNumber, addressData.RoomNumber);
+            Assert.AreEqual(globalRoomIndex, addressData.GlobalRoomIndex);
         }
 
         [Test]
-        public void CorrectToString()
+        public void ToString_NotEmpty()
         {
             var addressData = GetCorrectAddressData();
             Assert.IsNotEmpty(addressData.ToString());
@@ -30,10 +29,10 @@ namespace TheCity.Tests
 
         private static AddressData GetCorrectAddressData()
         {
-            var street = new StreetName("SomeName");
-            var houseNumber = Random.Range(1, 100);
-            var roomNumber = Random.Range(1, 100);
-            var globalRoomIndex = Random.Range(1, 100);
+            var street = new StreetName("Wall Street");
+            var houseNumber = 1;
+            var roomNumber = 2;
+            var globalRoomIndex = 3;
 
             var addressData = new AddressData(street, houseNumber, roomNumber, globalRoomIndex);
 

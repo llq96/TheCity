@@ -5,7 +5,7 @@ namespace TheCity.Tests
     public class ActivityTests
     {
         [Test]
-        public void CorrectToString()
+        public void ToString_NotEmpty()
         {
             var activity = new Activity();
             Assert.IsNotEmpty(activity.ToString());
