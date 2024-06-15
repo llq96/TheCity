@@ -3,10 +3,10 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace TheCity.Tests
+namespace TheCity.Tests.GameTimeTests
 {
     [TestFixture]
-    public class GameTimeTests : BaseGameTimeTests
+    public class DefaultGameTimeTests : BaseGameTimeTests
     {
         [Test]
         public void GameTime_ShouldExistAfterBind()
@@ -25,7 +25,7 @@ namespace TheCity.Tests
             var dateTimeAfterDelay = GameTime.GameDateTime;
             bool dateTimeIncreased = startDateTime < dateTimeAfterDelay;
 
-            Assert.That(dateTimeIncreased, $"DateTime was not increased after delay.");
+            Assert.That(dateTimeIncreased, "DateTime was not increased after delay.");
         }
     }
 }

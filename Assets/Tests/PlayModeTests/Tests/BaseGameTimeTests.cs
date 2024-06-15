@@ -3,7 +3,7 @@ using Moq;
 using Zenject;
 using TheCity.InGameTime;
 
-namespace TheCity.Tests
+namespace TheCity.Tests.GameTimeTests
 {
     public abstract class BaseGameTimeTests : ZenjectEmptyContextsUnitTestFixture
     {

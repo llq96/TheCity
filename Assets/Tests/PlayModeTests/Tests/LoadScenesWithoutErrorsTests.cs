@@ -3,12 +3,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace TheCity.Tests
+namespace TheCity.Tests.SceneLoadingTests
 {
     public class LoadScenesWithoutErrorsTests : SceneTestFixture
     {
-        [UnityTest]
-        public IEnumerator LoadMainSceneWithoutErrors()
+        [UnityTest, ExcludeFromCoverage]
+        public IEnumerator LoadScene_Main_WithoutErrors()
         {
             yield return LoadScene("Main");
 

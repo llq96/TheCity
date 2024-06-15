@@ -55,7 +55,8 @@ namespace Zenject
 
                 Log.Info("Loading scene '{0}' for testing", sceneName);
 
-                var loader = SceneManager.LoadSceneAsync(sceneName, i == 0 ? LoadSceneMode.Single : LoadSceneMode.Additive);
+                var loader =
+                    SceneManager.LoadSceneAsync(sceneName, i == 0 ? LoadSceneMode.Single : LoadSceneMode.Additive);
 
                 while (!loader.isDone)
                 {
@@ -65,7 +66,7 @@ namespace Zenject
                 SceneContext sceneContext = null;
 
                 if (ProjectContext.HasInstance)
-                // ProjectContext might be null if scene does not have a scene context
+                    // ProjectContext might be null if scene does not have a scene context
                 {
                     var scene = SceneManager.GetSceneByName(sceneName);
 
@@ -102,6 +103,7 @@ namespace Zenject
         public virtual void Teardown()
         {
             ZenjectTestUtil.DestroyEverythingExceptTestRunner(true);
+            ProjectContext.DestroyProjectContext();
             StaticContext.Clear();
             SetMemberDefaults();
         }

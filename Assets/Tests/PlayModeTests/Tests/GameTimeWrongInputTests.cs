@@ -1,7 +1,7 @@
 using System;
 using NUnit.Framework;
 
-namespace TheCity.Tests
+namespace TheCity.Tests.GameTimeTests
 {
     [TestFixture]
     public class GameTimeWrongInputTests : BaseGameTimeTests
