@@ -28,7 +28,7 @@ namespace TheCity.Tests.GameTimeTests
         protected static Mock<IGameTimeInitialSettings> GetCorrectInitialSettingsMock()
         {
             var mock = new Mock<IGameTimeInitialSettings>();
-            mock.Setup(x => x.StartDateTime).Returns(new DateTime(2000, 1, 1, 0, 0, 0));
+            mock.Setup(x => x.StartDateTime).Returns(CorrectThings.GetDateTime);
             mock.Setup(x => x.TimeSpeedMultiplier).Returns(60f);
             return mock;
         }

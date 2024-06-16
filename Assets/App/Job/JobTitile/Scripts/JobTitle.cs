@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.TestTools;
 
 namespace TheCity
 {
@@ -8,6 +9,7 @@ namespace TheCity
     }
 
     [CreateAssetMenu(fileName = "JobTitle", menuName = "TheCity/Jobs/JobTitle", order = 1)]
+    [ExcludeFromCoverage]
     public class JobTitle : ScriptableObject, IJobTitle
     {
         [SerializeField] private string _jobName;

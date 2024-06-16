@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Moq;
@@ -235,6 +236,20 @@ namespace TheCity.Tests
 
             var jobPost = new JobPost(jobPostIndex, jobTitle, companyData, workSchedule);
             return jobPost;
+        }
+
+        public static DateTime GetDateTime()
+        {
+            return new DateTime(2000, 1, 1, 0, 0, 0);
+        }
+
+        public static ScheduleActivity GetScheduleActivity()
+        {
+            var dateTime = GetDateTime();
+            var activity = GetActivity();
+
+            var scheduleActivity = new ScheduleActivity(dateTime, activity);
+            return scheduleActivity;
         }
     }
 }

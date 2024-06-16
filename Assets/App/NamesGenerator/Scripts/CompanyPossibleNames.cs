@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
+using UnityEngine.TestTools;
 
 namespace TheCity
 {
@@ -11,6 +12,7 @@ namespace TheCity
     }
 
     [CreateAssetMenu(fileName = "CompanyPossibleNames", menuName = "TheCity/CompanyPossibleNames", order = 1)]
+    [ExcludeFromCoverage]
     public class CompanyPossibleNames : ScriptableObject, ICompanyPossibleNames
     {
         [SerializeField] private List<string> _names;

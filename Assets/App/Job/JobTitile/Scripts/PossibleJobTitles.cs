@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.TestTools;
 
 namespace TheCity
 {
@@ -11,6 +12,7 @@ namespace TheCity
     }
 
     [CreateAssetMenu(fileName = "PossibleJobTitles", menuName = "TheCity/Jobs/PossibleJobTitles", order = 1)]
+    [ExcludeFromCoverage]
     public class PossibleJobTitles : ScriptableObject, IPossibleJobTitles
     {
         [SerializeField] private List<JobTitle> _jobTitles;

@@ -2,6 +2,7 @@ using System;
 
 namespace TheCity
 {
+    [TestsInfo("ScheduleActivityTests", 100)]
     public class ScheduleActivity
     {
         public DateTime DateTime { get; }
