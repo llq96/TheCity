@@ -23,7 +23,7 @@ namespace TheCity.Tests
         [Test]
         public void ToString_AfterConstructor_ReturnsNotEmpty()
         {
-            var addressData = CorrectThings.GetCorrectAddressData();
+            var addressData = CorrectThings.GetAddressData();
             Assert.IsNotEmpty(addressData.ToString());
         }
     }

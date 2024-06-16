@@ -7,7 +7,7 @@ namespace TheCity.Tests
 {
     public static class CorrectThings
     {
-        public static CitizenInbornData GetCorrectInbornData()
+        public static CitizenInbornData GetInbornData()
         {
             var citizenName = new CitizenName("John", "Smith");
             var addressIndex = 1;
@@ -19,7 +19,7 @@ namespace TheCity.Tests
             return citizenInbornData;
         }
 
-        public static AddressData GetCorrectAddressData()
+        public static AddressData GetAddressData()
         {
             var street = new StreetName("Wall Street");
             var houseNumber = 1;
@@ -31,14 +31,14 @@ namespace TheCity.Tests
             return addressData;
         }
 
-        public static CitizenData GetCorrectCitizenData()
+        public static CitizenData GetCitizenData()
         {
-            var inbornData = GetCorrectInbornData();
+            var inbornData = GetInbornData();
             var citizenData = new CitizenData(inbornData);
             return citizenData;
         }
 
-        public static CompanyName GetCorrectCompanyName()
+        public static CompanyName GetCompanyName()
         {
             var companyNameStr = "Google";
             var companyType = "Inc";
@@ -47,10 +47,10 @@ namespace TheCity.Tests
             return companyName;
         }
 
-        public static CompanyData GetCorrectCompanyData()
+        public static CompanyData GetCompanyData()
         {
             var companyIndex = 1;
-            var companyName = GetCorrectCompanyName();
+            var companyName = GetCompanyName();
             var addressIndex = 2;
             var jobPosts = new List<JobPost>();
 
@@ -60,9 +60,9 @@ namespace TheCity.Tests
 
         #region NamesGenerator
 
-        public static void BindCorrectNamesGenerator(DiContainer container, int countEachNames)
+        public static void BindNamesGenerator(DiContainer container, int countEachNames)
         {
-            var namesGeneratorSettings = GetCorrectINamesGeneratorSettings_WithCountEach(countEachNames);
+            var namesGeneratorSettings = GetINamesGeneratorSettings_WithCountEach(countEachNames);
             container.BindInterfacesAndSelfTo<INamesGeneratorSettings>().FromInstance(namesGeneratorSettings)
                 .AsSingle().NonLazy();
 
@@ -77,13 +77,13 @@ namespace TheCity.Tests
 
         #region NamesGeneratorSettings
 
-        public static INamesGeneratorSettings GetCorrectINamesGeneratorSettings_WithCountEach(int countEachNames)
+        public static INamesGeneratorSettings GetINamesGeneratorSettings_WithCountEach(int countEachNames)
         {
-            return GetCorrectINamesGeneratorSettings(countEachNames, countEachNames, countEachNames,
+            return GetINamesGeneratorSettings(countEachNames, countEachNames, countEachNames,
                 countEachNames, countEachNames);
         }
 
-        public static INamesGeneratorSettings GetCorrectINamesGeneratorSettings(
+        public static INamesGeneratorSettings GetINamesGeneratorSettings(
             int countFirstNames = 5, int countSecondNames = 5,
             int countStreets = 5,
             int countCompanyNames = 5, int countCompanyTypes = 5)
@@ -192,7 +192,7 @@ namespace TheCity.Tests
             return mock.Object;
         }
 
-        private static IJobTitle GetIJobTitle(string name)
+        public static IJobTitle GetIJobTitle(string name)
         {
             var mock = new Mock<IJobTitle>();
             mock.Setup(x => x.JobName)

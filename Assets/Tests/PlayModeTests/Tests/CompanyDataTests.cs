@@ -10,7 +10,7 @@ namespace TheCity.Tests
         public void Properties_WhenGetAfterConstructor_ReturnValuesSameAsWasArguments()
         {
             var companyIndex = 1;
-            var companyName = CorrectThings.GetCorrectCompanyName();
+            var companyName = CorrectThings.GetCompanyName();
             var addressIndex = 2;
             var jobPosts = new List<JobPost>();
 
@@ -25,7 +25,7 @@ namespace TheCity.Tests
         [Test]
         public void ToString_AfterConstructor_ReturnsNotEmpty()
         {
-            var companyData = CorrectThings.GetCorrectCompanyData();
+            var companyData = CorrectThings.GetCompanyData();
 
             Assert.IsNotEmpty(companyData.ToString());
         }

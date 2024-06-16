@@ -8,8 +8,8 @@ namespace TheCity.Tests
         [Test]
         public void Properties_WhenGetAfterConstructor_ReturnValuesSameAsWasArguments()
         {
-            var citizenData = CorrectThings.GetCorrectCitizenData();
-            var companyData = CorrectThings.GetCorrectCompanyData();
+            var citizenData = CorrectThings.GetCitizenData();
+            var companyData = CorrectThings.GetCompanyData();
 
             var citizenCreationData = new CitizenCreationData(citizenData, companyData);
 

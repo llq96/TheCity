@@ -8,7 +8,7 @@ namespace TheCity.Tests
         [Test]
         public void Properties_WhenGetAfterConstructor_ReturnValuesSameAsWasArguments()
         {
-            var inbornData = CorrectThings.GetCorrectInbornData();
+            var inbornData = CorrectThings.GetInbornData();
 
             var citizenData = new CitizenData(inbornData);
 

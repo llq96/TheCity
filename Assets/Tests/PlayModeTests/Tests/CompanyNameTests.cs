@@ -20,7 +20,7 @@ namespace TheCity.Tests
         [Test]
         public void ToString_AfterConstructor_ReturnsNotEmpty()
         {
-            var companyName = CorrectThings.GetCorrectCompanyName();
+            var companyName = CorrectThings.GetCompanyName();
 
             Assert.IsNotEmpty(companyName.ToString());
         }
@@ -28,7 +28,7 @@ namespace TheCity.Tests
         [Test]
         public void FullName_AfterConstructor_ReturnsNotEmpty()
         {
-            var companyName = CorrectThings.GetCorrectCompanyName();
+            var companyName = CorrectThings.GetCompanyName();
 
             Assert.IsNotEmpty(companyName.FullName);
         }

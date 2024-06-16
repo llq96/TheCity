@@ -23,7 +23,7 @@ namespace TheCity.Tests
         [Test]
         public void ToString_AfterConstructor_ReturnsNotEmpty()
         {
-            var citizenInbornData = CorrectThings.GetCorrectInbornData();
+            var citizenInbornData = CorrectThings.GetInbornData();
             Assert.IsNotEmpty(citizenInbornData.ToString());
         }
     }

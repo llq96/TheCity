@@ -15,7 +15,7 @@ namespace TheCity.Tests
         {
             PreInstall();
 
-            CorrectThings.BindCorrectNamesGenerator(Container, countEachNames);
+            CorrectThings.BindNamesGenerator(Container, countEachNames);
             Container.Bind<CityAddressesDataGenerator>().AsSingle().NonLazy();
 
             PostInstall();

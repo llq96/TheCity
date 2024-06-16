@@ -12,7 +12,7 @@ namespace TheCity.Tests
         {
             PreInstall();
 
-            CorrectThings.BindCorrectNamesGenerator(Container, countEachNames);
+            CorrectThings.BindNamesGenerator(Container, countEachNames);
 
             PostInstall();
         }
