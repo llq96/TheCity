@@ -22,7 +22,7 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void NamesGenerator_ShouldExistAfterBind()
+        public void CityAddressesDataGenerator_ShouldExistAfterBind()
         {
             CorrectSetUp(10);
 
@@ -48,7 +48,8 @@ namespace TheCity.Tests
 
             var generateCount = countAddressesNames;
             var addresses = CityAddressesDataGenerator.GenerateAddresses(generateCount);
-            var countDuplicates = addresses.Count(address => addresses.Count(x => x == address) > 1);
+            var countDuplicates = addresses.Count(
+                address => addresses.Count(x => x.GlobalRoomIndex == address.GlobalRoomIndex) > 1);
 
             Assert.Zero(countDuplicates, $"Addresses:\n{string.Join('\n', addresses)}");
         }

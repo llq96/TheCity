@@ -178,5 +178,26 @@ namespace TheCity.Tests
         }
 
         #endregion
+
+
+        public static IPossibleJobTitles GetIPossibleJobTitles(int countTitles)
+        {
+            var mock = new Mock<IPossibleJobTitles>();
+            mock.Setup(x => x.JobTitles)
+                .Returns(
+                    Enumerable.Range(0, countTitles)
+                        .Select(i => GetIJobTitle($"JobTitle{i}"))
+                        .ToList()
+                        .AsReadOnly());
+            return mock.Object;
+        }
+
+        private static IJobTitle GetIJobTitle(string name)
+        {
+            var mock = new Mock<IJobTitle>();
+            mock.Setup(x => x.JobName)
+                .Returns(name);
+            return mock.Object;
+        }
     }
 }

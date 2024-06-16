@@ -9,7 +9,7 @@ namespace TheCity
 
         public override void InstallBindings()
         {
-            Container.Bind<PossibleJobTitles>().FromInstance(_possibleJobTitles).AsSingle().NonLazy();
+            Container.Bind<IPossibleJobTitles>().FromInstance(_possibleJobTitles).AsSingle().NonLazy();
         }
     }
 }

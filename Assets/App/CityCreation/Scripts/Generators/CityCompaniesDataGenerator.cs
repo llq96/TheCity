@@ -10,7 +10,7 @@ namespace TheCity.CityGeneration
     public class CityCompaniesDataGenerator
     {
         [Inject] private NamesGenerator NamesGenerator { get; }
-        [Inject] private PossibleJobTitles PossibleJobTitles { get; }
+        [Inject] private IPossibleJobTitles PossibleJobTitles { get; }
 
         public List<CompanyData> GenerateCompanies(int countCompanies, ref int addressIndex)
         {

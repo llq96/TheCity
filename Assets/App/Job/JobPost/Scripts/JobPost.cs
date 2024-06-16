@@ -2,12 +2,12 @@ namespace TheCity
 {
     public class JobPost
     {
-        public JobTitle JobTitle { get; }
+        public IJobTitle JobTitle { get; }
         public int JobPostIndexInCompany { get; }
         public CompanyData CompanyData { get; }
         public WeeklySchedule WorkSchedule { get; }
 
-        public JobPost(int jobPostIndexInCompany, JobTitle jobTitle,
+        public JobPost(int jobPostIndexInCompany, IJobTitle jobTitle,
             CompanyData companyData, WeeklySchedule workSchedule)
         {
             JobPostIndexInCompany = jobPostIndexInCompany;
