@@ -1,5 +1,6 @@
 namespace TheCity
 {
+    [TestsInfo("CitizenCreationDataTests", 100)]
     public class CitizenCreationData
     {
         public CitizenData CitizenData { get; }

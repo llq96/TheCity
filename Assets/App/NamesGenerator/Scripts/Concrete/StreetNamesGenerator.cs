@@ -8,6 +8,7 @@ using Zenject;
 namespace TheCity
 {
     [UsedImplicitly]
+    [TestsInfo("StreetNamesGeneratorTests", 85)]
     public class StreetNamesGenerator
     {
         [Inject] private INamesGeneratorSettings Settings { get; }

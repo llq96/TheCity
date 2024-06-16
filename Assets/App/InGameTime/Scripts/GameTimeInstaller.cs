@@ -3,6 +3,7 @@ using Zenject;
 
 namespace TheCity.InGameTime
 {
+    [TestsInfo(100)]
     public class GameTimeInstaller : MonoInstaller
     {
         [SerializeField] private GameTimeInitialSettings _gameTimeInitialSettings;

@@ -6,6 +6,7 @@ using Zenject;
 namespace TheCity.InGameTime
 {
     [UsedImplicitly]
+    [TestsInfo("BaseGameTimeTests", 100)]
     public class GameTime : ITickable
     {
         public DateTime GameDateTime { get; private set; }

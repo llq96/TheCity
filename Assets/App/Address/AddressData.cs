@@ -1,5 +1,6 @@
 namespace TheCity
 {
+    [TestsInfo("AddressDataTests", 100)]
     public class AddressData
     {
         public StreetName StreetName { get; }

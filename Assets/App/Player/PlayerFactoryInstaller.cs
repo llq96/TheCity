@@ -4,6 +4,7 @@ using Zenject;
 
 namespace TheCity
 {
+    [TestsInfo(100)]
     public class PlayerFactoryInstaller : MonoInstaller
     {
         [SerializeField] private GameObject _playerPrefab;

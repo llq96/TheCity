@@ -6,6 +6,7 @@ using Zenject;
 namespace TheCity.CityGeneration
 {
     [UsedImplicitly]
+    [TestsInfo("CityAddressesDataGeneratorTests", 100)]
     public class CityAddressesDataGenerator
     {
         [Inject] private NamesGenerator NamesGenerator { get; }

@@ -9,6 +9,7 @@ namespace TheCity.Utils
     /// Позволяет перечислять уникальные составные объекты,
     /// Например все возможные комбинации Имя+Фамилия из двух соответствующих списков, преобразованные в объект TOut
     /// </summary>
+    [TestsInfo(78)]
     public class WrappedShuffledList<T1, T2, TOut> : ShuffledList<T1, T2>, IEnumerable<TOut>
     {
         private readonly Func<T1, T2, TOut> _selector;
@@ -35,6 +36,7 @@ namespace TheCity.Utils
         }
     }
 
+    [TestsInfo(72)]
     public class ShuffledList<T1, T2> : IEnumerable<Tuple<T1, T2>>
     {
         private readonly List<T1> _list1;
@@ -57,6 +59,7 @@ namespace TheCity.Utils
         }
     }
 
+    [TestsInfo(100)]
     public class ShuffledListEnumerator<T1, T2> : IEnumerator<Tuple<T1, T2>>
     {
         private readonly List<T1> _list1;

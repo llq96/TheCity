@@ -8,6 +8,7 @@ using Zenject;
 namespace TheCity
 {
     [UsedImplicitly]
+    [TestsInfo("CitizenNamesGeneratorTests", 86)]
     public class CitizenNamesGenerator
     {
         [Inject] private INamesGeneratorSettings Settings { get; }

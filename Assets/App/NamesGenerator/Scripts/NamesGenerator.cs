@@ -4,6 +4,7 @@ using Zenject;
 namespace TheCity
 {
     [UsedImplicitly]
+    [TestsInfo("NamesGeneratorTests", 70)]
     public class NamesGenerator
     {
         [Inject] private CitizenNamesGenerator CitizenNamesGenerator { get; }

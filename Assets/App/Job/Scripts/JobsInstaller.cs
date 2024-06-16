@@ -3,6 +3,7 @@ using Zenject;
 
 namespace TheCity
 {
+    [TestsInfo(100)]
     public class JobsInstaller : MonoInstaller
     {
         [SerializeField] private PossibleJobTitles _possibleJobTitles;

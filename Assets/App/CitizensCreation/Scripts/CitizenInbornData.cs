@@ -2,6 +2,7 @@ using System;
 
 namespace TheCity
 {
+    [TestsInfo("CitizenInbornDataTests", 100)]
     public class CitizenInbornData
     {
         public CitizenName Name { get; }
@@ -20,6 +21,7 @@ namespace TheCity
         public override string ToString() => Name.ToString();
     }
 
+    [TestsInfo("CitizenNameTests", 100)]
     public readonly struct CitizenName
     {
         public string FirstName { get; }

@@ -10,6 +10,7 @@ namespace TheCity
     }
 
     [CreateAssetMenu(fileName = "GameTimeInitialSettings", menuName = "TheCity/GameTimeInitialSettings", order = 1)]
+    [TestsInfo(100)]
     public class GameTimeInitialSettings : ScriptableObject, IGameTimeInitialSettings
     {
         [SerializeField] private SerializableDateTime _startDateTime;

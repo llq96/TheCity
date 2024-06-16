@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace TheCity.Utils
 {
+    [TestsInfo(70)]
     public class ShuffledList<T1> : IEnumerable<T1>
     {
         private readonly List<T1> _list;
@@ -24,7 +25,7 @@ namespace TheCity.Utils
         }
     }
 
-
+    [TestsInfo(81)]
     public class ShuffledListEnumerator<T> : IEnumerator<T>
     {
         private readonly List<T> _list;

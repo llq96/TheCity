@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 namespace TheCity.CityGeneration
 {
     [UsedImplicitly]
+    [TestsInfo("CityCompaniesDataGeneratorTests", 100)]
     public class CityCompaniesDataGenerator
     {
         [Inject] private NamesGenerator NamesGenerator { get; }
