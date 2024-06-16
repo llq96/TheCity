@@ -10,7 +10,14 @@ namespace TheCity
 
         public override void InstallBindings()
         {
+            ReBindFactoryParameters();
+
             BindComponentsFromHierarchy();
+        }
+
+        private void ReBindFactoryParameters()
+        {
+            Container.Bind<CityData>().FromInstance(CityData).AsSingle().NonLazy();
         }
 
         private void BindComponentsFromHierarchy()

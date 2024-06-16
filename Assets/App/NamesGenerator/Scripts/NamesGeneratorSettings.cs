@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.TestTools;
 
 namespace TheCity
 {
     [CreateAssetMenu(fileName = "NamesGeneratorSettings", menuName = "TheCity/NamesGeneratorSettings", order = 1)]
+    [ExcludeFromCoverage]
     public class NamesGeneratorSettings : ScriptableObject, INamesGeneratorSettings
     {
         [SerializeField] private CitizenPossibleNames _citizenPossibleNames;

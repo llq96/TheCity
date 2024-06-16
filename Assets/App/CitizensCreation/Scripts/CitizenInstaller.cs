@@ -17,12 +17,19 @@ namespace TheCity
 
         public override void InstallBindings()
         {
+            ReBindFactoryParameters();
             BindBaseCitizenData();
             BindFromCity();
             BindJobPost();
             BindComponentsFromHierarchy();
             BindMover();
             BindActivity();
+        }
+
+        private void ReBindFactoryParameters()
+        {
+            Container.Bind<City>().FromInstance(City).AsSingle().NonLazy();
+            Container.Bind<CitizenCreationData>().FromInstance(CreationData).AsSingle().NonLazy();
         }
 
         private void BindBaseCitizenData()

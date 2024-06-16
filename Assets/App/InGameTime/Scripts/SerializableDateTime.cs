@@ -18,16 +18,5 @@ namespace TheCity
         {
             return new DateTime(_year, _month, _day, _hour, _minute, _second, _millisecond);
         }
-
-        public void SetDateTime(DateTime dateTime)
-        {
-            _year = dateTime.Year;
-            _month = dateTime.Month;
-            _day = dateTime.Day;
-            _hour = dateTime.Hour;
-            _minute = dateTime.Minute;
-            _second = dateTime.Second;
-            _millisecond = dateTime.Millisecond;
-        }
     }
 }

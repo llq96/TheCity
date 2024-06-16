@@ -19,14 +19,7 @@ namespace TheCity
         {
             Container.BindFactory<City, CitizenCreationData, Citizen, CitizenFactory>()
                 .FromSubContainerResolve()
-                .ByNewPrefabMethod(_citizenPrefab, InstallCitizen);
-        }
-
-        private void InstallCitizen(DiContainer subContainer, City city, CitizenCreationData creationData)
-        {
-            subContainer.Bind<City>().FromInstance(city);
-            subContainer.Bind<CitizenCreationData>().FromInstance(creationData);
-            CitizenInstaller.Install(subContainer);
+                .ByNewPrefabInstaller<CitizenInstaller>(_citizenPrefab);
         }
     }
 

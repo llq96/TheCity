@@ -28,13 +28,7 @@ namespace TheCity.CityGeneration.Installer
         {
             Container.BindFactory<CityData, City, CityFactory>()
                 .FromSubContainerResolve()
-                .ByNewPrefabMethod(_cityPrefab, InstallCity);
-        }
-
-        private void InstallCity(DiContainer subContainer, CityData cityData)
-        {
-            subContainer.Bind<CityData>().FromInstance(cityData);
-            CityInstaller.Install(subContainer);
+                .ByNewPrefabInstaller<CityInstaller>(_cityPrefab);
         }
     }
 
