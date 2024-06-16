@@ -2,7 +2,6 @@ using System;
 using Zenject;
 using System.Collections.Generic;
 using System.Linq;
-using Moq;
 using NUnit.Framework;
 
 namespace TheCity.Tests
@@ -15,7 +14,8 @@ namespace TheCity.Tests
         {
             PreInstall();
 
-            var namesGeneratorSettings = GetINamesGeneratorSettings(firstNames, countTypes);
+            var namesGeneratorSettings =
+                CorrectThings.GetINamesGeneratorSettings_WithCompaniesOnly(firstNames, countTypes);
             Container.BindInterfacesAndSelfTo<INamesGeneratorSettings>().FromInstance(namesGeneratorSettings)
                 .AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<CompanyNamesGenerator>()
@@ -49,32 +49,6 @@ namespace TheCity.Tests
             var names = Enumerable.Repeat(0, count).Select(_ => CompanyNamesGenerator.GetNextCompanyName()).ToList();
 
             Assert.Catch(() => CompanyNamesGenerator.GetNextCompanyName());
-        }
-
-        private static INamesGeneratorSettings GetINamesGeneratorSettings(int countNames, int countTypes)
-        {
-            var mock = new Mock<INamesGeneratorSettings>();
-            var companyPossibleNamesMock = GetICompanyPossibleNames(countNames, countTypes);
-            mock.Setup(x => x.CompanyPossibleNames).Returns(companyPossibleNamesMock);
-            return mock.Object;
-        }
-
-        private static ICompanyPossibleNames GetICompanyPossibleNames(int countNames, int countTypes)
-        {
-            var mock = new Mock<ICompanyPossibleNames>();
-            mock.Setup(x => x.Names)
-                .Returns(
-                    Enumerable.Range(0, countNames)
-                        .Select(i => $"Company Name {i}")
-                        .ToList()
-                        .AsReadOnly());
-
-            mock.Setup(x => x.Types)
-                .Returns(Enumerable.Range(0, countTypes)
-                    .Select(i => $"Company Type {i}")
-                    .ToList()
-                    .AsReadOnly());
-            return mock.Object;
         }
 
         private static IEnumerable<Tuple<int, int>> CountPairs()

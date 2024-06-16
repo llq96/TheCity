@@ -2,7 +2,6 @@ using System;
 using Zenject;
 using System.Collections.Generic;
 using System.Linq;
-using Moq;
 using NUnit.Framework;
 
 namespace TheCity.Tests
@@ -15,7 +14,8 @@ namespace TheCity.Tests
         {
             PreInstall();
 
-            var namesGeneratorSettings = GetINamesGeneratorSettings(countFirstNames, countSecondNames);
+            var namesGeneratorSettings =
+                CorrectThings.GetINamesGeneratorSettings_WithCitizensOnly(countFirstNames, countSecondNames);
             Container.BindInterfacesAndSelfTo<INamesGeneratorSettings>().FromInstance(namesGeneratorSettings)
                 .AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<CitizenNamesGenerator>()
@@ -47,31 +47,6 @@ namespace TheCity.Tests
             Assert.Catch(() => CitizenNamesGenerator.GetNextCitizenName());
         }
 
-        private static INamesGeneratorSettings GetINamesGeneratorSettings(int countFirstNames, int countSecondNames)
-        {
-            var mock = new Mock<INamesGeneratorSettings>();
-            var citizenPossibleNamesMock = GetICitizenPossibleNames(countFirstNames, countSecondNames);
-            mock.Setup(x => x.CitizenPossibleNames).Returns(citizenPossibleNamesMock);
-            return mock.Object;
-        }
-
-        private static ICitizenPossibleNames GetICitizenPossibleNames(int countFirstNames, int countSecondNames)
-        {
-            var mock = new Mock<ICitizenPossibleNames>();
-            mock.Setup(x => x.FirstNames)
-                .Returns(
-                    Enumerable.Range(0, countFirstNames)
-                        .Select(i => $"FirstName{i}")
-                        .ToList()
-                        .AsReadOnly());
-
-            mock.Setup(x => x.SecondNames)
-                .Returns(Enumerable.Range(0, countSecondNames)
-                    .Select(i => $"SecondName{i}")
-                    .ToList()
-                    .AsReadOnly());
-            return mock.Object;
-        }
 
         private static IEnumerable<Tuple<int, int>> CountPairs()
         {

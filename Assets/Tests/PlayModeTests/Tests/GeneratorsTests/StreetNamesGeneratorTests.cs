@@ -1,7 +1,6 @@
 using Zenject;
 using System.Collections.Generic;
 using System.Linq;
-using Moq;
 using NUnit.Framework;
 
 namespace TheCity.Tests
@@ -14,7 +13,7 @@ namespace TheCity.Tests
         {
             PreInstall();
 
-            var namesGeneratorSettings = GetINamesGeneratorSettings(countStreets);
+            var namesGeneratorSettings = CorrectThings.GetINamesGeneratorSettings_WithStreetNamesOnly(countStreets);
             Container.BindInterfacesAndSelfTo<INamesGeneratorSettings>().FromInstance(namesGeneratorSettings)
                 .AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<StreetNamesGenerator>()
@@ -47,25 +46,6 @@ namespace TheCity.Tests
             Assert.Catch(() => StreetNamesGenerator.GetNextStreetName());
         }
 
-        private static INamesGeneratorSettings GetINamesGeneratorSettings(int countStreets)
-        {
-            var mock = new Mock<INamesGeneratorSettings>();
-            var streetPossibleNamesMock = GetIStreetPossibleNames(countStreets);
-            mock.Setup(x => x.StreetPossibleNames).Returns(streetPossibleNamesMock);
-            return mock.Object;
-        }
-
-        private static IStreetPossibleNames GetIStreetPossibleNames(int countStreets)
-        {
-            var mock = new Mock<IStreetPossibleNames>();
-            mock.Setup(x => x.Names)
-                .Returns(
-                    Enumerable.Range(0, countStreets)
-                        .Select(i => $"Street{i}")
-                        .ToList()
-                        .AsReadOnly());
-            return mock.Object;
-        }
 
         private static IEnumerable<int> Count_1_To_5()
         {

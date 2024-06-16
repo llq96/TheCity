@@ -12,16 +12,17 @@ namespace TheCity.CityGeneration
 
         [Inject] private NamesGenerator NamesGenerator { get; }
 
-        public void GenerateCitizens(CityGenerationSettings generationSettings, CityData cityData,
-            ref int addressIndex, List<JobPost> jobPostsList)
+        public List<CitizenData> GenerateCitizens(int countCitizens, ref int addressIndex, List<JobPost> jobPostsList)
         {
+            var citizensDataList = new List<CitizenData>();
+
             var citizensWithCurrentAddress = 0;
-            for (int i = 0; i < generationSettings.CountCitizens; i++)
+            for (int i = 0; i < countCitizens; i++)
             {
                 var jobPost = GetRandomJobPostAndRemoveFromList(jobPostsList);
                 var companyIndex = jobPost.CompanyData.CompanyIndex;
                 var newCitizenData = GenerateNewCitizenData(addressIndex, companyIndex, jobPost.JobPostIndexInCompany);
-                cityData.CitizensDataList.Add(newCitizenData);
+                citizensDataList.Add(newCitizenData);
 
                 citizensWithCurrentAddress++;
                 if (citizensWithCurrentAddress >= CitizenPerAddress)
@@ -29,6 +30,8 @@ namespace TheCity.CityGeneration
                     addressIndex++;
                 }
             }
+
+            return citizensDataList;
         }
 
         private JobPost GetRandomJobPostAndRemoveFromList(List<JobPost> jobPostsList)

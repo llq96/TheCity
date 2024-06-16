@@ -12,15 +12,18 @@ namespace TheCity.CityGeneration
         [Inject] private NamesGenerator NamesGenerator { get; }
         [Inject] private PossibleJobTitles PossibleJobTitles { get; }
 
-        public void GenerateCompanies(CityGenerationSettings generationSettings, CityData cityData,
-            ref int addressIndex)
+        public List<CompanyData> GenerateCompanies(int countCompanies, ref int addressIndex)
         {
-            for (int i = 0; i < generationSettings.CountCompanies; i++)
+            var companiesDataList = new List<CompanyData>();
+
+            for (int i = 0; i < countCompanies; i++)
             {
                 var newCompanyData = GenerateNewCompanyData(i, addressIndex);
-                cityData.CompaniesDataList.Add(newCompanyData);
                 addressIndex++;
+                companiesDataList.Add(newCompanyData);
             }
+
+            return companiesDataList;
         }
 
         private CompanyData GenerateNewCompanyData(int companyIndex, int addressIndex)
@@ -64,20 +67,6 @@ namespace TheCity.CityGeneration
             }
 
             return weeklySchedule;
-        }
-
-        public List<JobPost> GetJobPostsList(CityData cityData)
-        {
-            var _jobPosts = new List<JobPost>();
-            foreach (var companyData in cityData.CompaniesDataList)
-            {
-                foreach (var jobPost in companyData.JobPosts)
-                {
-                    _jobPosts.Add(jobPost);
-                }
-            }
-
-            return _jobPosts;
         }
     }
 }

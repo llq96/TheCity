@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
@@ -9,14 +10,18 @@ namespace TheCity.CityGeneration
     {
         [Inject] private NamesGenerator NamesGenerator { get; }
 
-        public void GenerateAddresses(CityGenerationSettings generationSettings, CityData cityData)
+        public List<AddressData> GenerateAddresses(int countAddresses)
         {
-            var randomStreetName = NamesGenerator.GenerateRandomStreetName();
-            for (int i = 0; i < generationSettings.CountAddresses; i++)
+            var addressesDataList = new List<AddressData>();
+
+            var randomStreetName = NamesGenerator.GenerateRandomStreetName(); //1 улица
+            for (int i = 0; i < countAddresses; i++)
             {
-                var newAddressData = new AddressData(randomStreetName, i, Random.Range(10, 50), i);
-                cityData.AddressesDataList.Add(newAddressData);
+                var newAddressData = new AddressData(randomStreetName, i, Random.Range(10, 50), i); //1 адрес на 1 дом
+                addressesDataList.Add(newAddressData);
             }
+
+            return addressesDataList;
         }
     }
 }

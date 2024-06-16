@@ -23,14 +23,14 @@ namespace TheCity
             return CitizenNamesGenerator.GetNextCitizenName();
         }
 
-        public CompanyName GenerateRandomCompanyName()
-        {
-            return CompanyNamesGenerator.GetNextCompanyName();
-        }
-
         public StreetName GenerateRandomStreetName()
         {
             return StreetNamesGenerator.GetNextStreetName();
+        }
+
+        public CompanyName GenerateRandomCompanyName()
+        {
+            return CompanyNamesGenerator.GetNextCompanyName();
         }
     }
 }

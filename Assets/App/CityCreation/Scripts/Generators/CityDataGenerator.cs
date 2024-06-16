@@ -1,3 +1,4 @@
+using System.Linq;
 using JetBrains.Annotations;
 using Zenject;
 
@@ -18,23 +19,30 @@ namespace TheCity.CityGeneration
 
             NamesGenerator.Reset();
 
-            CityAddressesDataGenerator.GenerateAddresses(generationSettings, cityData);
+            var addresses = CityAddressesDataGenerator.GenerateAddresses(generationSettings.CountAddresses);
+            cityData.AddressesDataList.AddRange(addresses);
+
             var _currentAddressIndex = 0;
 
-            CityCompaniesDataGenerator.GenerateCompanies(generationSettings, cityData, ref _currentAddressIndex);
-            var jobPostsList = CityCompaniesDataGenerator.GetJobPostsList(cityData);
+            var companies = CityCompaniesDataGenerator
+                .GenerateCompanies(generationSettings.CountCompanies, ref _currentAddressIndex);
+            cityData.CompaniesDataList.AddRange(companies);
 
-            CityCitizensDataGenerator.GenerateCitizens(generationSettings, cityData, ref _currentAddressIndex,
-                jobPostsList);
+            var jobPostsList = companies.SelectMany(companyData => companyData.JobPosts).ToList();
+
+            var citizens = CityCitizensDataGenerator
+                .GenerateCitizens(generationSettings.CountCitizens, ref _currentAddressIndex, jobPostsList);
+
+            cityData.CitizensDataList.AddRange(citizens);
 
             return cityData;
         }
     }
+}
 
-    public class CityGenerationSettings
-    {
-        public int CountCitizens = 6;
-        public int CountCompanies = 3;
-        public int CountAddresses = 9;
-    }
+public class CityGenerationSettings
+{
+    public readonly int CountCitizens = 6;
+    public readonly int CountCompanies = 3;
+    public readonly int CountAddresses = 9;
 }
