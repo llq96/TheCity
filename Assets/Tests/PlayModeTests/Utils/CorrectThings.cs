@@ -192,6 +192,8 @@ namespace TheCity.Tests
             return mock.Object;
         }
 
+        public static IJobTitle GetIJobTitle() => GetIJobTitle("JobTitle");
+
         public static IJobTitle GetIJobTitle(string name)
         {
             var mock = new Mock<IJobTitle>();
@@ -222,6 +224,17 @@ namespace TheCity.Tests
         public static WeeklySchedule GetWeeklySchedule()
         {
             return new WeeklySchedule();
+        }
+
+        public static JobPost GetJobPost()
+        {
+            var jobPostIndex = 1;
+            var jobTitle = GetIJobTitle();
+            var companyData = GetCompanyData();
+            var workSchedule = GetWeeklySchedule();
+
+            var jobPost = new JobPost(jobPostIndex, jobTitle, companyData, workSchedule);
+            return jobPost;
         }
     }
 }

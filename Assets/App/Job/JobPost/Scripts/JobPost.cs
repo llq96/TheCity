@@ -1,5 +1,6 @@
 namespace TheCity
 {
+    [TestsInfo("JobPostTests", 100)]
     public class JobPost
     {
         public IJobTitle JobTitle { get; }
@@ -14,6 +15,11 @@ namespace TheCity
             JobTitle = jobTitle;
             CompanyData = companyData;
             WorkSchedule = workSchedule;
+        }
+
+        public override string ToString()
+        {
+            return $"{JobTitle.JobName} in {CompanyData.CompanyName}";
         }
     }
 }
