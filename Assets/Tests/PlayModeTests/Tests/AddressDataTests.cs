@@ -5,7 +5,7 @@ namespace TheCity.Tests
     public class AddressDataTests
     {
         [Test]
-        public void Properties_WhenGetAfterConstructor_ReturnValuesSameAsWasArguments()
+        public void Constructor_WhenCalled_SetPropertiesCorrect()
         {
             var street = new StreetName("Wall Street");
             var houseNumber = 1;

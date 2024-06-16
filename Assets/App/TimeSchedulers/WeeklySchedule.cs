@@ -4,6 +4,7 @@ using System.Text;
 
 namespace TheCity
 {
+    [TestsInfo("WeeklyScheduleTests", 100)]
     public class WeeklySchedule
     {
         public DaySchedule SundaySchedule { get; } = new();
@@ -35,8 +36,9 @@ namespace TheCity
             foreach (DayOfWeek dayOfWeek in Enum.GetValues(typeof(DayOfWeek)))
             {
                 sb.AppendLine($"{dayOfWeek}:");
-                sb.AppendLineWithIndent(this[dayOfWeek],1);
+                sb.AppendLineWithIndent(this[dayOfWeek], 1);
             }
+
             return sb.ToString();
         }
     }

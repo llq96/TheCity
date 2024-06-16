@@ -5,7 +5,7 @@ namespace TheCity.Tests
     public class CitizenNameTests
     {
         [Test]
-        public void Properties_WhenGetAfterConstructor_ReturnValuesSameAsWasArguments()
+        public void Constructor_WhenCalled_SetPropertiesCorrect()
         {
             var firstName = "John";
             var secondName = "Smith";

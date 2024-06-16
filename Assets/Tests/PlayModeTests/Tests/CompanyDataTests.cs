@@ -7,7 +7,7 @@ namespace TheCity.Tests
     public class CompanyDataTests
     {
         [Test]
-        public void Properties_WhenGetAfterConstructor_ReturnValuesSameAsWasArguments()
+        public void Constructor_WhenCalled_SetPropertiesCorrect()
         {
             var companyIndex = 1;
             var companyName = CorrectThings.GetCompanyName();

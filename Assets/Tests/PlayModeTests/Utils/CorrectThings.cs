@@ -199,5 +199,29 @@ namespace TheCity.Tests
                 .Returns(name);
             return mock.Object;
         }
+
+        public static TimeOnly GetTimeOnly()
+        {
+            return new TimeOnly(12, 12);
+        }
+
+        public static Activity GetActivity()
+        {
+            return new Activity();
+        }
+
+        public static DayScheduleItem GetDayScheduleItem()
+        {
+            var timeOnly = GetTimeOnly();
+            var activity = GetActivity();
+
+            var dayScheduleItem = new DayScheduleItem(timeOnly, activity);
+            return dayScheduleItem;
+        }
+
+        public static WeeklySchedule GetWeeklySchedule()
+        {
+            return new WeeklySchedule();
+        }
     }
 }

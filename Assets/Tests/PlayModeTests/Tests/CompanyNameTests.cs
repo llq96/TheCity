@@ -6,7 +6,7 @@ namespace TheCity.Tests
     public class CompanyNameTests
     {
         [Test]
-        public void Properties_WhenGetAfterConstructor_ReturnValuesSameAsWasArguments()
+        public void Constructor_WhenCalled_SetPropertiesCorrect()
         {
             var companyNameStr = "Google";
             var companyType = "Inc";
