@@ -23,7 +23,7 @@ namespace TheCity.Tests
         }
 
         [Test, TestCaseSource(nameof(Count_1_To_5))]
-        public void AllNames_ShouldBe_Unique(int countStreets)
+        public void GetNextStreetName_AfterCorrectSetUp_ReturnsUniqueNames(int countStreets)
         {
             CorrectSetUp(countStreets);
 
@@ -36,7 +36,7 @@ namespace TheCity.Tests
         }
 
         [Test, TestCaseSource(nameof(Count_1_To_5))]
-        public void ThrowWhen_TryGet_MoreNames_ThanExist(int countStreets)
+        public void GetNextStreetName_AfterGetAllNames_Throw(int countStreets)
         {
             CorrectSetUp(countStreets);
 

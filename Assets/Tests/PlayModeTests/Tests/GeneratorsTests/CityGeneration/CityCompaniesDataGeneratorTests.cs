@@ -25,7 +25,7 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void CityCompaniesDataGenerator_ShouldExistAfterBind()
+        public void ResolvedCityCompaniesDataGenerator_AfterCorrectSetUp_NotNull()
         {
             CorrectSetUp(10);
 
@@ -33,7 +33,7 @@ namespace TheCity.Tests
         }
 
         [Test, TestCaseSource(nameof(CorrectCompaniesCount))]
-        public void AllCompanies_ShouldBe_UniqueByRef(int countCompaniesNames)
+        public void GenerateCompanies_AfterCorrectSetUp_ReturnsCompaniesUniqueByRef(int countCompaniesNames)
         {
             CorrectSetUp(countCompaniesNames);
 
@@ -46,7 +46,7 @@ namespace TheCity.Tests
         }
 
         [Test, TestCaseSource(nameof(CorrectCompaniesCount))]
-        public void AllCompanies_ShouldBe_UniqueByName(int countCompaniesNames)
+        public void GenerateCompanies_AfterCorrectSetUp_ReturnsCompaniesUniqueByName(int countCompaniesNames)
         {
             CorrectSetUp(countCompaniesNames);
 

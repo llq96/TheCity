@@ -25,7 +25,7 @@ namespace TheCity.Tests
         }
 
         [Test, TestCaseSource(nameof(CountPairs))]
-        public void AllNames_ShouldBe_Unique(Tuple<int, int> countsPair)
+        public void GetNextCompanyName_AfterCorrectSetUp_ReturnsUniqueNames(Tuple<int, int> countsPair)
         {
             CorrectSetUp(countsPair.Item1, countsPair.Item2);
 
@@ -41,7 +41,7 @@ namespace TheCity.Tests
         }
 
         [Test, TestCaseSource(nameof(CountPairs))]
-        public void ThrowWhen_TryGet_MoreNames_ThanExist(Tuple<int, int> countsPair)
+        public void GetNextCompanyName_AfterGetAllNames_Throw(Tuple<int, int> countsPair)
         {
             CorrectSetUp(countsPair.Item1, countsPair.Item2);
 

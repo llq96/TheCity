@@ -9,14 +9,15 @@ namespace TheCity.Tests.GameTimeTests
     public class DefaultGameTimeTests : BaseGameTimeTests
     {
         [Test]
-        public void GameTime_ShouldExistAfterBind()
+        public void ResolvedGameTime_AfterCorrectSetUp_NotNull()
         {
             CorrectSetUp();
+
             Assert.NotNull(GameTime);
         }
 
         [UnityTest]
-        public IEnumerator DateTime_ShouldIncreasingOverTime()
+        public IEnumerator GameDateTime_AfterDelay_ShouldIncreased()
         {
             CorrectSetUp();
             var startDateTime = GameTime.GameDateTime;

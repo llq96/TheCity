@@ -6,7 +6,7 @@ namespace TheCity.Tests
     public class CitizenDataTests
     {
         [Test]
-        public void ReturnSameValues_AsConstructorArguments()
+        public void Properties_WhenGetAfterConstructor_ReturnValuesSameAsWasArguments()
         {
             var inbornData = CorrectThings.GetCorrectInbornData();
 

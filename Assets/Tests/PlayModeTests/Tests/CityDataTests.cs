@@ -5,7 +5,7 @@ namespace TheCity.Tests
     public class CityDataTests
     {
         [Test]
-        public void DefaultValuesCheck()
+        public void Properties_WhenGetAfterConstructor_IsCorrect()
         {
             var cityData = new CityData();
 

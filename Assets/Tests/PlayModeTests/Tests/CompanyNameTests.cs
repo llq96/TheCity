@@ -6,7 +6,7 @@ namespace TheCity.Tests
     public class CompanyNameTests
     {
         [Test]
-        public void ReturnSameValues_AsConstructorArguments()
+        public void Properties_WhenGetAfterConstructor_ReturnValuesSameAsWasArguments()
         {
             var companyNameStr = "Google";
             var companyType = "Inc";
@@ -18,7 +18,7 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void ToString_NotEmpty()
+        public void ToString_AfterConstructor_ReturnsNotEmpty()
         {
             var companyName = CorrectThings.GetCorrectCompanyName();
 
@@ -26,7 +26,7 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void FullName_NotEmpty()
+        public void FullName_AfterConstructor_ReturnsNotEmpty()
         {
             var companyName = CorrectThings.GetCorrectCompanyName();
 

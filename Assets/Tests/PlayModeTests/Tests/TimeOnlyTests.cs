@@ -9,7 +9,7 @@ namespace TheCity.Tests
         private static readonly int[] WrongMinutes = { -1, 60, 61, 100 };
 
         [Test]
-        public void AllPossibleCorrectTimeCheck()
+        public void Properties_AfterAllCorrectSetUps_Correct()
         {
             for (int hour = 0; hour < 24; hour++)
             {
@@ -23,7 +23,7 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void Correct_ToString_1SymbolHour_1SymbolMinute()
+        public void ToString_1SymbolHourAnd1SymbolMinute_CorrectString()
         {
             var timeOnly = new TimeOnly(5, 5);
             var str = timeOnly.ToString();
@@ -31,7 +31,7 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void Correct_ToString_1SymbolHour_2SymbolMinute()
+        public void ToString_1SymbolHourAnd2SymbolMinute_CorrectString()
         {
             var timeOnly = new TimeOnly(5, 11);
             var str = timeOnly.ToString();
@@ -39,7 +39,7 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void Correct_ToString_2SymbolHour_1SymbolMinute()
+        public void ToString_2SymbolHourAnd1SymbolMinute_CorrectString()
         {
             var timeOnly = new TimeOnly(11, 5);
             var str = timeOnly.ToString();
@@ -47,7 +47,7 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void Correct_ToString_2SymbolHour_2SymbolMinute()
+        public void ToString_2SymbolHourAnd2SymbolMinute_CorrectString()
         {
             var timeOnly = new TimeOnly(11, 11);
             var str = timeOnly.ToString();
@@ -55,7 +55,7 @@ namespace TheCity.Tests
         }
 
         [Test, TestCaseSource(nameof(WrongHours))]
-        public void ThrowWhen_WrongInput_Hour(int hour)
+        public void Constructor_WhenWrongHour_Throw(int hour)
         {
             Assert.Catch(typeof(ArgumentException),
                 () =>
@@ -65,7 +65,7 @@ namespace TheCity.Tests
         }
 
         [Test, TestCaseSource(nameof(WrongMinutes))]
-        public void ThrowWhen_WrongInput_Minute(int minute)
+        public void Constructor_WhenWrongMinute_Throw(int minute)
         {
             Assert.Catch(typeof(ArgumentException),
                 () =>

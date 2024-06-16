@@ -18,7 +18,7 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void NamesGenerator_ShouldExistAfterBind()
+        public void ResolvedNamesGenerator_AfterCorrectSetUp_NotNull()
         {
             CorrectSetUp(1);
 
@@ -26,7 +26,7 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void ThrowWhen_TryGet_MoreNames_ThanExist()
+        public void GenerateRandomNames_AfterGetAllNames_Throw()
         {
             CorrectSetUp(10);
 

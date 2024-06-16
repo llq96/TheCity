@@ -22,7 +22,7 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void CityAddressesDataGenerator_ShouldExistAfterBind()
+        public void ResolvedCityAddressesDataGenerator_AfterCorrectSetUp_NotNull()
         {
             CorrectSetUp(10);
 
@@ -30,7 +30,7 @@ namespace TheCity.Tests
         }
 
         [Test, TestCaseSource(nameof(CorrectAddressesCount))]
-        public void AllAddresses_ShouldBe_UniqueByRef(int countAddressesNames)
+        public void GenerateAddresses_AfterCorrectSetUp_ReturnsAddressesUniqueByRef(int countAddressesNames)
         {
             CorrectSetUp(countAddressesNames);
 
@@ -42,7 +42,7 @@ namespace TheCity.Tests
         }
 
         [Test, TestCaseSource(nameof(CorrectAddressesCount))]
-        public void AllAddresses_ShouldBe_Unique(int countAddressesNames)
+        public void GenerateAddresses_AfterCorrectSetUp_ReturnsAddressesUniqueByGlobalRoomIndex(int countAddressesNames)
         {
             CorrectSetUp(countAddressesNames);
 

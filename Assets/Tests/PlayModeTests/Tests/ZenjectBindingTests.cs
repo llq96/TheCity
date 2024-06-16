@@ -9,7 +9,7 @@ namespace TheCity.Tests.Bindings
     public class ZenjectBindingTests : ZenjectIntegrationTestFixture
     {
         [UnityTest]
-        public IEnumerator ProjectContext_ShouldBeBinding_WithoutErrors()
+        public IEnumerator ProjectContext_AfterPostInstall_ShouldBeBindingWithoutErrors()
         {
             SkipInstall();
 

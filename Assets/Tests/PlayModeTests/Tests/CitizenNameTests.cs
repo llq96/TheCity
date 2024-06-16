@@ -5,7 +5,7 @@ namespace TheCity.Tests
     public class CitizenNameTests
     {
         [Test]
-        public void ReturnSameValues_AsConstructorArguments()
+        public void Properties_WhenGetAfterConstructor_ReturnValuesSameAsWasArguments()
         {
             var firstName = "John";
             var secondName = "Smith";
@@ -17,7 +17,7 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void FullName_NotEmpty()
+        public void FullName_AfterConstructor_ReturnsNotEmpty()
         {
             var firstName = "John";
             var secondName = "Smith";
@@ -28,7 +28,7 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void ThrowWhen_FirstName_IsNull()
+        public void Constructor_NullFirstName_Throw()
         {
             string firstName = null;
             var secondName = "Smith";
@@ -40,7 +40,7 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void ThrowWhen_FirstName_IsEmpty()
+        public void Constructor_EmptyFirstName_Throw()
         {
             var firstName = "";
             var secondName = "Smith";
@@ -52,7 +52,7 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void ThrowWhen_SecondName_IsNull()
+        public void Constructor_NullSecondName_Throw()
         {
             var firstName = "John";
             string secondName = null;
@@ -64,7 +64,7 @@ namespace TheCity.Tests
         }
 
         [Test]
-        public void ThrowWhen_SecondName_IsEmpty()
+        public void Constructor_EmptySecondName_Throw()
         {
             var firstName = "John";
             var secondName = "";
