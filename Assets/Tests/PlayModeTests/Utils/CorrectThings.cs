@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Moq;
+using TheCity.InGameTime;
 using Zenject;
 
 namespace TheCity.Tests
@@ -250,6 +251,26 @@ namespace TheCity.Tests
 
             var scheduleActivity = new ScheduleActivity(dateTime, activity);
             return scheduleActivity;
+        }
+
+        public static void BindGameTime(DiContainer container)
+        {
+            var gameTimeInitialSettings = GetIGameTimeInitialSettings();
+            container.Bind<IGameTimeInitialSettings>().FromInstance(gameTimeInitialSettings).AsSingle().NonLazy();
+            container.BindInterfacesAndSelfTo<GameTime>().AsSingle().NonLazy();
+        }
+
+        public static IGameTimeInitialSettings GetIGameTimeInitialSettings()
+        {
+            return GetIGameTimeInitialSettingsMock().Object;
+        }
+
+        public static Mock<IGameTimeInitialSettings> GetIGameTimeInitialSettingsMock()
+        {
+            var mock = new Mock<IGameTimeInitialSettings>();
+            mock.Setup(x => x.StartDateTime).Returns(GetDateTime);
+            mock.Setup(x => x.TimeSpeedMultiplier).Returns(60f);
+            return mock;
         }
     }
 }

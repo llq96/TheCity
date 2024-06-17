@@ -1,5 +1,3 @@
-using System;
-using Moq;
 using Zenject;
 using TheCity.InGameTime;
 
@@ -7,12 +5,11 @@ namespace TheCity.Tests.GameTimeTests
 {
     public abstract class BaseGameTimeTests : ZenjectEmptyContextsUnitTestFixture
     {
-        [Inject]
-        protected GameTime GameTime { get; }
+        [Inject] protected GameTime GameTime { get; }
 
         protected void CorrectSetUp()
         {
-            SetUp(GetCorrectInitialSettingsMock().Object);
+            SetUp(CorrectThings.GetIGameTimeInitialSettings());
         }
 
         protected void SetUp(IGameTimeInitialSettings gameTimeInitialSettings)
@@ -23,14 +20,6 @@ namespace TheCity.Tests.GameTimeTests
             Container.BindInterfacesAndSelfTo<GameTime>().AsSingle().NonLazy();
 
             PostInstall();
-        }
-
-        protected static Mock<IGameTimeInitialSettings> GetCorrectInitialSettingsMock()
-        {
-            var mock = new Mock<IGameTimeInitialSettings>();
-            mock.Setup(x => x.StartDateTime).Returns(CorrectThings.GetDateTime);
-            mock.Setup(x => x.TimeSpeedMultiplier).Returns(60f);
-            return mock;
         }
     }
 }

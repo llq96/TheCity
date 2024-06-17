@@ -12,7 +12,7 @@ namespace TheCity.Tests.GameTimeTests
         [Test, TestCaseSource(nameof(WrongYears))]
         public void BindGameTime_WhenWrongYear_Throw(int wrongYear)
         {
-            var initialSettingsMock = GetCorrectInitialSettingsMock();
+            var initialSettingsMock = CorrectThings.GetIGameTimeInitialSettingsMock();
             initialSettingsMock
                 .Setup(x => x.StartDateTime)
                 .Returns(() => new DateTime(wrongYear, 1, 1));
@@ -23,7 +23,7 @@ namespace TheCity.Tests.GameTimeTests
         [Test, TestCaseSource(nameof(WrongMonths))]
         public void BindGameTime_WhenWrongMonth_Throw(int wrongMonth)
         {
-            var initialSettingsMock = GetCorrectInitialSettingsMock();
+            var initialSettingsMock = CorrectThings.GetIGameTimeInitialSettingsMock();
             initialSettingsMock
                 .Setup(x => x.StartDateTime)
                 .Returns(() => new DateTime(2000, wrongMonth, 1));
