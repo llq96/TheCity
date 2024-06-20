@@ -19,6 +19,8 @@ namespace TheCity
 
         public IList<ScheduleActivity> ReadOnlyScheduleActivities => ScheduleActivities.AsReadOnlyList();
 
+        private ScheduleActivity _currentActivity;
+        
         public void Initialize()
         {
             FillScheduler();
@@ -70,13 +72,34 @@ namespace TheCity
 
         public void Tick()
         {
+            TryEndCurrentActivity();
+            if (_currentActivity == null)
+            {
+                TryDoNearestActivity();
+            }
+        }
+
+        private void TryEndCurrentActivity()
+        {
+            if (_currentActivity != null)
+            {
+                if (CitizenActivityRunner.TryEndActivity(_currentActivity.Activity))
+                {
+                    _currentActivity = null;
+                }
+            }
+        }
+
+        private void TryDoNearestActivity()
+        {
             var _nearestActivity = ScheduleActivities.FirstOrDefault();
 
             if (_nearestActivity == null) return;
 
             if (_nearestActivity.DateTime < GameTime.GameDateTime)
             {
-                CitizenActivityRunner.DoActivity(_nearestActivity.Activity);
+                _currentActivity = _nearestActivity;
+                CitizenActivityRunner.TryDoActivity(_nearestActivity.Activity);
                 ScheduleActivities.Remove(_nearestActivity);
             }
         }

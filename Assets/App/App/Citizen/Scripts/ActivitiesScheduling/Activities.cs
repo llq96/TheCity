@@ -18,7 +18,20 @@ namespace TheCity
     {
     }
 
+    public class Activity_GoToWork : Activity
+    {
+    }
+
     public class Activity_FillSchedule : Activity
     {
     }
+
+    public class Activity_Sleeping : Activity
+    {
+    }
+
+    public class Activity_Working : Activity
+    {
+    }
+
 }

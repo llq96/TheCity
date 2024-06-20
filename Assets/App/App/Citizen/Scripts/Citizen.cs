@@ -15,7 +15,7 @@ namespace TheCity
 
         [Inject] private CitizenActivityScheduler CitizenActivityScheduler { get; }
 
-        [Inject] private CitizenMover CitizenMover { get; }
+        [Inject] private CitizenStatesSwitcher StatesSwitcher { get; }
 
         private void Start()
         {

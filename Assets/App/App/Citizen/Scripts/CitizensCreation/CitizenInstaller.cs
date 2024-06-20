@@ -23,9 +23,10 @@ namespace TheCity
             BindFromCity();
             BindJobPost();
             BindComponentsFromHierarchy();
-            BindMover();
             BindActivity();
+            BindStatesSwitcher();
         }
+
 
         private void ReBindFactoryParameters()
         {
@@ -61,16 +62,31 @@ namespace TheCity
             Container.Bind<Animator>().FromComponentInHierarchy().AsSingle().NonLazy();
         }
 
-        private void BindMover()
-        {
-            Container.BindInterfacesAndSelfTo<CitizenMover>().AsSingle().NonLazy();
-        }
-
         private void BindActivity()
         {
             Container.BindInterfacesAndSelfTo<ScheduleCollection>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<CitizenActivityScheduler>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<CitizenActivityRunner>().AsSingle().NonLazy();
+        }
+
+        private void BindStatesSwitcher()
+        {
+            Container.BindInterfacesAndSelfTo<CitizenState_Moving>().FromSubContainerResolve().ByMethod(
+                subContainer =>
+                {
+                    //State Dependencies Here...
+                    subContainer.Bind<CitizenState_Moving>().AsSingle().NonLazy();
+                }).AsSingle().NonLazy();
+
+            Container.BindInterfacesAndSelfTo<CitizenState_Sleeping>().FromSubContainerResolve().ByMethod(
+                subContainer =>
+                {
+                    //State Dependencies Here...
+                    subContainer.Bind<CitizenState_Sleeping>().AsSingle().NonLazy();
+                }).AsSingle().NonLazy();
+
+
+            Container.BindInterfacesAndSelfTo<CitizenStatesSwitcher>().AsSingle().NonLazy();
         }
     }
 }
