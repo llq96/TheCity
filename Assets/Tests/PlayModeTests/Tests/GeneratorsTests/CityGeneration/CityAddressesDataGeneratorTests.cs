@@ -30,24 +30,24 @@ namespace TheCity.Tests
         }
 
         [Test, TestCaseSource(nameof(CorrectAddressesCount))]
-        public void GenerateAddresses_AfterCorrectSetUp_ReturnsAddressesUniqueByRef(int countAddressesNames)
+        public void GenerateAddresses_AfterCorrectSetUp_ReturnsAddressesUniqueByRef(int countPerType)
         {
-            CorrectSetUp(countAddressesNames);
+            CorrectSetUp(countPerType);
 
-            var generateCount = countAddressesNames;
-            var addresses = CityAddressesDataGenerator.GenerateAddresses(generateCount);
+            var generateCount = countPerType + countPerType;
+            var addresses = CityAddressesDataGenerator.GenerateAddresses(countPerType, countPerType);
             var countAfterDistinct = addresses.Distinct().Count();
 
             Assert.AreEqual(generateCount, countAfterDistinct, $"Addresses:\n{string.Join('\n', addresses)}");
         }
 
         [Test, TestCaseSource(nameof(CorrectAddressesCount))]
-        public void GenerateAddresses_AfterCorrectSetUp_ReturnsAddressesUniqueByGlobalRoomIndex(int countAddressesNames)
+        public void GenerateAddresses_AfterCorrectSetUp_ReturnsAddressesUniqueByGlobalRoomIndex(int countPerType)
         {
-            CorrectSetUp(countAddressesNames);
+            CorrectSetUp(countPerType);
 
-            var generateCount = countAddressesNames;
-            var addresses = CityAddressesDataGenerator.GenerateAddresses(generateCount);
+            var generateCount = countPerType + countPerType;
+            var addresses = CityAddressesDataGenerator.GenerateAddresses(countPerType, countPerType);
             var countDuplicates = addresses.Count(
                 address => addresses.Count(x => x.GlobalRoomIndex == address.GlobalRoomIndex) > 1);
 
