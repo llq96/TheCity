@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
@@ -12,23 +13,29 @@ namespace TheCity.CityGeneration
 
         [Inject] private NamesGenerator NamesGenerator { get; }
 
-        public List<CitizenData> GenerateCitizens(int countCitizens, ref int addressIndex, List<JobPost> jobPostsList)
+        public List<CitizenData> GenerateCitizens(int countCitizens, ref List<AddressData> addresses,
+            List<JobPost> jobPostsList)
         {
             var citizensDataList = new List<CitizenData>();
 
             var citizensWithCurrentAddress = 0;
+            AddressData currentAddress = null;
             for (int i = 0; i < countCitizens; i++)
             {
+                if (citizensWithCurrentAddress == 0 || citizensWithCurrentAddress >= CitizenPerAddress)
+                {
+                    citizensWithCurrentAddress = 0;
+                    currentAddress = addresses.First(x => x.AddressType == AddressType.Living);
+                    addresses.Remove(currentAddress);
+                }
+
                 var jobPost = GetRandomJobPostAndRemoveFromList(jobPostsList);
                 var companyIndex = jobPost.CompanyData.CompanyIndex;
-                var newCitizenData = GenerateNewCitizenData(addressIndex, companyIndex, jobPost.JobPostIndexInCompany);
+                var newCitizenData = GenerateNewCitizenData(currentAddress.GlobalRoomIndex, companyIndex,
+                    jobPost.JobPostIndexInCompany);
                 citizensDataList.Add(newCitizenData);
 
                 citizensWithCurrentAddress++;
-                if (citizensWithCurrentAddress >= CitizenPerAddress)
-                {
-                    addressIndex++;
-                }
             }
 
             return citizensDataList;

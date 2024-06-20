@@ -11,14 +11,14 @@ namespace TheCity
         [Inject] public Citizen Citizen { get; }
         [Inject] private CitizenActivityScheduler CitizenActivityScheduler { get; }
         [Inject] private CitizenStatesSwitcher CitizenStatesSwitcher { get; }
-        [Inject] private Room HomeRoom { get; }
+        [Inject] private LivingRoom HomeRoom { get; }
         [Inject] private Company Company { get; }
 
         private Vector3 CitizenPosition => Citizen.transform.position;
 
         #region Destinations
 
-        private Vector3 WorkDestination => Company.Room.transform.position;
+        private Vector3 WorkDestination => Company.Room.JobPostsPlaces[Citizen.InbornData.JobPostIndex].position;
         private float DistanceToWorkDestination => (WorkDestination - CitizenPosition).magnitude;
 
         private Vector3 HomeDestination => HomeRoom.transform.position;

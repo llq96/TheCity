@@ -15,8 +15,8 @@ namespace TheCity
         {
             ReBindFactoryParameters();
 
-            var room = City.Rooms[CompanyData.AddressIndex];
-            Container.Bind<Room>().FromInstance(room).AsSingle().NonLazy();
+            var room = City.GetWorkRoom(CompanyData.AddressIndex);
+            Container.Bind<WorkRoom>().FromInstance(room).AsSingle().NonLazy();
             Container.Bind<List<JobPost>>().FromInstance(CompanyData.JobPosts).AsSingle().NonLazy();
 
             Container.Bind<Company>().FromComponentInHierarchy().AsSingle().NonLazy();

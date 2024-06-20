@@ -19,19 +19,19 @@ namespace TheCity.CityGeneration
 
             NamesGenerator.Reset();
 
-            var addresses = CityAddressesDataGenerator.GenerateAddresses(generationSettings.CountAddresses);
+            var addresses = CityAddressesDataGenerator.GenerateAddresses(
+                generationSettings.CountLivingAddresses,
+                generationSettings.CountWorkingAddresses);
             cityData.AddressesDataList.AddRange(addresses);
 
-            var _currentAddressIndex = 0;
-
             var companies = CityCompaniesDataGenerator
-                .GenerateCompanies(generationSettings.CountCompanies, ref _currentAddressIndex);
+                .GenerateCompanies(generationSettings.CountCompanies, ref addresses);
             cityData.CompaniesDataList.AddRange(companies);
 
             var jobPostsList = companies.SelectMany(companyData => companyData.JobPosts).ToList();
 
             var citizens = CityCitizensDataGenerator
-                .GenerateCitizens(generationSettings.CountCitizens, ref _currentAddressIndex, jobPostsList);
+                .GenerateCitizens(generationSettings.CountCitizens, ref addresses, jobPostsList);
 
             cityData.CitizensDataList.AddRange(citizens);
 
@@ -44,5 +44,6 @@ public class CityGenerationSettings
 {
     public readonly int CountCitizens = 6;
     public readonly int CountCompanies = 3;
-    public readonly int CountAddresses = 9;
+    public readonly int CountLivingAddresses = 3;
+    public readonly int CountWorkingAddresses = 3;
 }

@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3748607171943614058
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3190287536458487896, guid: ff043cce3ef0fb34f94a89705f2be601, type: 3}
+      propertyPath: m_Name
+      value: LivingRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190287536458487897, guid: ff043cce3ef0fb34f94a89705f2be601, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190287536458487897, guid: ff043cce3ef0fb34f94a89705f2be601, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190287536458487897, guid: ff043cce3ef0fb34f94a89705f2be601, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190287536458487897, guid: ff043cce3ef0fb34f94a89705f2be601, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190287536458487897, guid: ff043cce3ef0fb34f94a89705f2be601, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190287536458487897, guid: ff043cce3ef0fb34f94a89705f2be601, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190287536458487897, guid: ff043cce3ef0fb34f94a89705f2be601, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190287536458487897, guid: ff043cce3ef0fb34f94a89705f2be601, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190287536458487897, guid: ff043cce3ef0fb34f94a89705f2be601, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190287536458487897, guid: ff043cce3ef0fb34f94a89705f2be601, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190287536458487897, guid: ff043cce3ef0fb34f94a89705f2be601, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ff043cce3ef0fb34f94a89705f2be601, type: 3}
+--- !u!1 &1748407931975015986 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3190287536458487896, guid: ff043cce3ef0fb34f94a89705f2be601, type: 3}
+  m_PrefabInstance: {fileID: 3748607171943614058}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8108952678932182624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748407931975015986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67aced44e01e6f247a0046cecaaf08ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &8610927152359443443 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4865456342703852953, guid: ff043cce3ef0fb34f94a89705f2be601, type: 3}
+  m_PrefabInstance: {fileID: 3748607171943614058}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3397420424070491235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8610927152359443443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}

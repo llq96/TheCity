@@ -16,13 +16,11 @@ namespace TheCity
         protected override void EnableStateAction()
         {
             base.EnableStateAction();
-            Debug.Log("Work Triggered");
             Animator.SetTrigger(AnimatorTrigger_Work);
         }
 
         public void WorkAtPoint(Vector3 workPoint)
         {
-            Debug.Log("WorkAtPoint");
             Citizen.transform.position = workPoint;
         }
     }

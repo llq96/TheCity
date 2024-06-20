@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -13,14 +14,16 @@ namespace TheCity.CityGeneration
         [Inject] private NamesGenerator NamesGenerator { get; }
         [Inject] private IPossibleJobTitles PossibleJobTitles { get; }
 
-        public List<CompanyData> GenerateCompanies(int countCompanies, ref int addressIndex)
+        public List<CompanyData> GenerateCompanies(int countCompanies, ref List<AddressData> addresses)
         {
             var companiesDataList = new List<CompanyData>();
 
             for (int i = 0; i < countCompanies; i++)
             {
-                var newCompanyData = GenerateNewCompanyData(i, addressIndex);
-                addressIndex++;
+                var addressData = addresses.First(x => x.AddressType == AddressType.Working);
+                addresses.Remove(addressData);
+
+                var newCompanyData = GenerateNewCompanyData(i, addressData.GlobalRoomIndex);
                 companiesDataList.Add(newCompanyData);
             }
 

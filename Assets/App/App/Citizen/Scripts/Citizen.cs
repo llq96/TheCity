@@ -8,7 +8,7 @@ namespace TheCity
         [Inject] public CitizenData CitizenData { get; }
         [Inject] public CitizenInbornData InbornData { get; }
 
-        [Inject] public Room HomeRoom { get; }
+        [Inject] public LivingRoom HomeRoom { get; }
 
         [Inject] public Company Company { get; }
         [Inject] public JobPost JobPost { get; }

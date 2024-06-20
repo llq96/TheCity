@@ -27,8 +27,9 @@ namespace TheCity.Tests
             var houseNumber = 1;
             var roomNumber = 2;
             var globalRoomIndex = 3;
+            var addressType = AddressType.Living;
 
-            var addressData = new AddressData(street, houseNumber, roomNumber, globalRoomIndex);
+            var addressData = new AddressData(street, houseNumber, roomNumber, globalRoomIndex, addressType);
 
             return addressData;
         }

@@ -42,8 +42,8 @@ namespace TheCity
 
         private void BindFromCity()
         {
-            var _homeRoom = City.Rooms[CitizenInbornData.AddressIndex];
-            Container.Bind<Room>().FromInstance(_homeRoom).AsSingle().NonLazy();
+            var _homeRoom = City.GetLivingRoom(CitizenInbornData.AddressIndex);
+            Container.Bind<LivingRoom>().FromInstance(_homeRoom).AsSingle().NonLazy();
 
             var _company = City.Companies[CitizenInbornData.CompanyIndex];
             Container.Bind<Company>().FromInstance(_company).AsSingle().NonLazy();
