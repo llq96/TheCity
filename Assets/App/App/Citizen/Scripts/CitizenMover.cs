@@ -6,9 +6,12 @@ using Zenject;
 namespace TheCity
 {
     [UsedImplicitly]
-    public class CitizenMover
+    public class CitizenMover : ITickable
     {
+        private static readonly int AnimatorProperty_Speed = Animator.StringToHash("Speed");
+
         [Inject] private NavMeshAgent NavMeshAgent { get; }
+        [Inject] private Animator Animator { get; }
 
         public void MoveTo(Vector3 destination)
         {
@@ -21,6 +24,12 @@ namespace TheCity
 
             NavMeshAgent.SetDestination(destination);
             NavMeshAgent.isStopped = false;
+        }
+
+        public void Tick()
+        {
+            var velocityMagnitude = NavMeshAgent.velocity.magnitude;
+            Animator.SetFloat(AnimatorProperty_Speed, velocityMagnitude);
         }
     }
 }

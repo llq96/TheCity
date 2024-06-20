@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
@@ -57,11 +58,12 @@ namespace TheCity
         {
             Container.Bind<Citizen>().FromComponentInHierarchy().AsSingle().NonLazy();
             Container.Bind<NavMeshAgent>().FromComponentInHierarchy().AsSingle().NonLazy();
+            Container.Bind<Animator>().FromComponentInHierarchy().AsSingle().NonLazy();
         }
 
         private void BindMover()
         {
-            Container.Bind<CitizenMover>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<CitizenMover>().AsSingle().NonLazy();
         }
 
         private void BindActivity()
