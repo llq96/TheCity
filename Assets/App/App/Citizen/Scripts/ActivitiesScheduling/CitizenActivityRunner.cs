@@ -1,3 +1,4 @@
+using System;
 using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
@@ -29,68 +30,75 @@ namespace TheCity
         {
             // Debug.Log($"{Citizen} Start Do Activity {activity}");
 
-            if (activity is Activity_StartWork)
+            if (activity is WorkActivity workActivity)
             {
-                CitizenStatesSwitcher.SetState_Moving(WorkDestination);
-            }
-            
-            if (activity is Activity_GoToWork)
-            {
-                CitizenActivityScheduler.AddActivityToHead(new Activity_GoToWork());
+                TryDoActivity(workActivity);
+                return;
             }
 
-            if (activity is Activity_Working)
+            switch (activity)
             {
-                CitizenStatesSwitcher.SetState_Sleeping(); //TODO
+                case Activity_FillSchedule activityFillSchedule:
+                    CitizenActivityScheduler.FillScheduler();
+                    break;
+                case Activity_GoToHome activityGoToHome:
+                    CitizenStatesSwitcher.SetState_Moving(HomeDestination);
+                    break;
+                case Activity_Sleeping activitySleeping:
+                    CitizenStatesSwitcher.SetState_Sleeping();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(activity.GetType().ToString());
             }
+        }
 
-            if (activity is Activity_EndWork)
+        public void TryDoActivity(WorkActivity activity)
+        {
+            switch (activity)
             {
-                CitizenActivityScheduler.AddActivityToHead(new Activity_GoToHome());
-            }
-
-            if (activity is Activity_GoToHome)
-            {
-                CitizenStatesSwitcher.SetState_Moving(HomeDestination);
-            }
-
-            if (activity is Activity_Sleeping)
-            {
-                CitizenStatesSwitcher.SetState_Sleeping();
-            }
-
-            if (activity is Activity_FillSchedule)
-            {
-                CitizenActivityScheduler.FillScheduler();
+                case Activity_EndWork activityEndWork:
+                    CitizenActivityScheduler.AddActivityToHead(new Activity_GoToHome());
+                    break;
+                case Activity_GoToWork activityGoToWork:
+                    CitizenStatesSwitcher.SetState_Moving(WorkDestination);
+                    break;
+                case Activity_StartWork activityStartWork:
+                    CitizenActivityScheduler.AddActivityToHead(new Activity_GoToWork());
+                    break;
+                case Activity_Working activityWorking:
+                    CitizenStatesSwitcher.SetState_Working(WorkDestination);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(activity.GetType().ToString());
             }
         }
 
 
         public bool TryEndActivity(Activity activity)
         {
-            if (activity is Activity_GoToWork)
+            switch (activity)
             {
-                if (DistanceToWorkDestination <= 1f)
-                {
-                    CitizenActivityScheduler.AddActivityToHead(new Activity_Working());
+                case Activity_GoToHome activityGoToHome:
+                    if (DistanceToHomeDestination <= 1f)
+                    {
+                        CitizenActivityScheduler.AddActivityToHead(new Activity_Sleeping());
+                        return true;
+                    }
+
+                    return false;
+
+                case Activity_GoToWork activityGoToWork:
+                    if (DistanceToWorkDestination <= 1f)
+                    {
+                        CitizenActivityScheduler.AddActivityToHead(new Activity_Working());
+                        return true;
+                    }
+
+                    return false;
+
+                default:
                     return true;
-                }
-
-                return false;
             }
-
-            if (activity is Activity_GoToHome)
-            {
-                if (DistanceToHomeDestination <= 1f)
-                {
-                    CitizenActivityScheduler.AddActivityToHead(new Activity_Sleeping());
-                    return true;
-                }
-
-                return false;
-            }
-
-            return true;
         }
     }
 }

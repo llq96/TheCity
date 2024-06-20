@@ -45,5 +45,6 @@ namespace TheCity
     {
         Moving,
         Sleeping,
+        Working
     }
 }

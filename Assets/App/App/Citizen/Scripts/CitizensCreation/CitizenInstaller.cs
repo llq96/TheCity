@@ -85,6 +85,13 @@ namespace TheCity
                     subContainer.Bind<CitizenState_Sleeping>().AsSingle().NonLazy();
                 }).AsSingle().NonLazy();
 
+            Container.BindInterfacesAndSelfTo<CitizenState_Working>().FromSubContainerResolve().ByMethod(
+                subContainer =>
+                {
+                    //State Dependencies Here...
+                    subContainer.Bind<CitizenState_Working>().AsSingle().NonLazy();
+                }).AsSingle().NonLazy();
+
 
             Container.BindInterfacesAndSelfTo<CitizenStatesSwitcher>().AsSingle().NonLazy();
         }

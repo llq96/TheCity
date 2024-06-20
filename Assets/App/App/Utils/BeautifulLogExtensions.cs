@@ -23,6 +23,7 @@ namespace TheCity
         {
             StringBuilder sb = new();
             sb.AppendLine($"{scheduler.Citizen} Activity Schedule:");
+            sb.AppendLine($"Current Activity : {scheduler.CurrentActivity}");
 
             int dateIndent = 1;
             int activityIndent = 2;

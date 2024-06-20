@@ -12,12 +12,14 @@ namespace TheCity
         [Inject] private Animator Animator { get; }
 
         private static readonly int AnimatorProperty_Speed = Animator.StringToHash("Speed");
+        private static readonly int AnimatorTrigger_Move = Animator.StringToHash("Move");
 
         public override CitizenStateEnum CitizenStateEnum => CitizenStateEnum.Moving;
 
         protected override void EnableStateAction()
         {
             base.EnableStateAction();
+            Animator.SetTrigger(AnimatorTrigger_Move);
             NavMeshAgent.enabled = true;
         }
 

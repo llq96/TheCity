@@ -16,8 +16,8 @@ MonoBehaviour:
     _year: 2000
     _month: 2
     _day: 1
-    _hour: 9
+    _hour: 5
     _minute: 0
     _second: 0
     _millisecond: 0
-  _timeSpeedMultiplier: 2500
+  _timeSpeedMultiplier: 2000

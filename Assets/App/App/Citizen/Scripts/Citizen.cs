@@ -17,9 +17,17 @@ namespace TheCity
 
         [Inject] private CitizenStatesSwitcher StatesSwitcher { get; }
 
-        private void Start()
+
+        [ContextMenu(nameof(PrintSelf))]
+        private void PrintSelf()
         {
-            // this.PrintFormattedInfo();
+            this.PrintFormattedInfo();
+        }
+
+        [ContextMenu(nameof(PrintScheduler))]
+        private void PrintScheduler()
+        {
+            CitizenActivityScheduler.PrintFormattedInfo();
         }
 
         public override string ToString() => InbornData.Name.ToString();

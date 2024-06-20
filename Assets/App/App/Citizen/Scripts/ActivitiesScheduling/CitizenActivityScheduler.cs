@@ -20,7 +20,9 @@ namespace TheCity
         public IList<ScheduleActivity> ReadOnlyScheduleActivities => ScheduleActivities.AsReadOnlyList();
 
         private ScheduleActivity _currentActivity;
-        
+
+        public ScheduleActivity CurrentActivity => _currentActivity;
+
         public void Initialize()
         {
             FillScheduler();

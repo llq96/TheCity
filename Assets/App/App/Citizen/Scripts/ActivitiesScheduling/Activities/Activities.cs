@@ -6,23 +6,7 @@ namespace TheCity
         public override string ToString() => GetType().Name;
     }
 
-    public class Activity_StartWork : Activity
-    {
-    }
-
-    public class Activity_EndWork : Activity
-    {
-    }
-
     public class Activity_GoToHome : Activity
-    {
-    }
-
-    public class Activity_GoToWork : Activity
-    {
-    }
-
-    public class Activity_FillSchedule : Activity
     {
     }
 
@@ -30,8 +14,7 @@ namespace TheCity
     {
     }
 
-    public class Activity_Working : Activity
+    public class Activity_FillSchedule : Activity
     {
     }
-
 }

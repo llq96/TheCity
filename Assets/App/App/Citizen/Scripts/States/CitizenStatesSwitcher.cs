@@ -9,11 +9,13 @@ namespace TheCity
     {
         [Inject] protected CitizenState_Moving State_Moving { get; }
         [Inject] protected CitizenState_Sleeping State_Sleeping { get; }
+        [Inject] protected CitizenState_Working State_Working { get; }
 
         public void Initialize()
         {
             States.Add(State_Moving);
             States.Add(State_Sleeping);
+            States.Add(State_Working);
         }
 
         public void SetState_Moving(Vector3 destination)
@@ -27,6 +29,14 @@ namespace TheCity
         public void SetState_Sleeping()
         {
             SetState(State_Sleeping);
+        }
+
+        public void SetState_Working(Vector3 workPoint)
+        {
+            if (SetState(State_Working))
+            {
+                State_Working.WorkAtPoint(workPoint);
+            }
         }
     }
 }
