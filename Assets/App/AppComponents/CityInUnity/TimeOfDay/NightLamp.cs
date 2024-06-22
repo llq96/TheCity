@@ -1,7 +1,6 @@
 using TheCity.InGameTime;
 using UnityEngine;
 using Zenject;
-using Random = UnityEngine.Random;
 
 namespace TheCity
 {
@@ -20,8 +19,8 @@ namespace TheCity
         {
             _isLightActive = _light.enabled;
 
-            _hourToEnableLight = Random.Range(18, 23);
-            _hourToDisableLight = Random.Range(4, 8);
+            _hourToEnableLight = UnityEngine.Random.Range(18, 23);
+            _hourToDisableLight = UnityEngine.Random.Range(4, 8);
         }
 
         private void Update()

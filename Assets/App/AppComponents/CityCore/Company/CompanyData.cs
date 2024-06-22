@@ -2,7 +2,6 @@ using System.Collections.Generic;
 
 namespace TheCity
 {
-    [TestsInfo("CompanyDataTests", 100)]
     public class CompanyData
     {
         public int CompanyIndex { get; }
@@ -21,7 +20,6 @@ namespace TheCity
         public override string ToString() => CompanyName.ToString();
     }
 
-    [TestsInfo("CompanyNameTests", 100)]
     public readonly struct CompanyName
     {
         public string Name { get; }

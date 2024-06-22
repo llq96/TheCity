@@ -1,6 +1,5 @@
 namespace TheCity
 {
-    [TestsInfo("DayScheduleItemTests", 100)]
     public class DayScheduleItem
     {
         public TimeOnly Time { get; }

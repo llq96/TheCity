@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TheCity.Core;
 
 namespace TheCity
 {
-    [TestsInfo("WeeklyScheduleTests", 100)]
     public class WeeklySchedule
     {
         public DaySchedule SundaySchedule { get; } = new();

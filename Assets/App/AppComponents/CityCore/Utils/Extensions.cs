@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TheCity
+namespace TheCity.Core
 {
     public static partial class Extensions
     {
-        private static Random Random { get; } = new();
-
         public static T GetRandomElement<T>(this IList<T> list)
         {
-            var randomIndex = Random.Next(0, list.Count);
+            var randomIndex = Random.Range(0, list.Count);
             return list[randomIndex];
         }
 

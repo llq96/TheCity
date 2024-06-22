@@ -1,6 +1,5 @@
 namespace TheCity
 {
-    [TestsInfo(85)]
     public readonly struct StreetName
     {
         public string Name { get; }

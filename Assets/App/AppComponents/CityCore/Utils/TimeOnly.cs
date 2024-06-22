@@ -2,7 +2,6 @@ using System;
 
 namespace TheCity
 {
-    [TestsInfo("TimeOnlyTests", 100)]
     public readonly struct TimeOnly
     {
         public readonly int Hour;

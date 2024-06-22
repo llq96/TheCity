@@ -2,7 +2,6 @@ using System.Collections.Generic;
 
 namespace TheCity
 {
-    [TestsInfo("CityDataTests", 100)]
     public class CityData
     {
         public readonly string CityName = "CityName";
