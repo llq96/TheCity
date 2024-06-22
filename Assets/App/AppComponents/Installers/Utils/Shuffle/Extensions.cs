@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TheCity.Installers
+namespace TheCity.Installers.Utils
 {
     public static partial class Extensions
     {

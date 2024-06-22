@@ -1,6 +1,7 @@
+using TheCity.Core;
 using UnityEngine;
 
-namespace TheCity
+namespace TheCity.Installers
 {
     [CreateAssetMenu(fileName = "JobTitle", menuName = "TheCity/Jobs/JobTitle", order = 1)]
     public class JobTitle : ScriptableObject, IJobTitle

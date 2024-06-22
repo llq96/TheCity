@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TheCity
+namespace TheCity.Core
 {
     public abstract class BaseCitizenStatesSwitcher
     {

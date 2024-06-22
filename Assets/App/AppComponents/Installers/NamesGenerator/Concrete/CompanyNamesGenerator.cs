@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using JetBrains.Annotations;
+using TheCity.CityDataGeneration;
 using TheCity.Core;
-using TheCity.Utils;
+using TheCity.Installers.Utils;
 using Zenject;
 
-namespace TheCity
+namespace TheCity.Installers
 {
     [UsedImplicitly]
     public class CompanyNamesGenerator : ICompanyNamesGenerator

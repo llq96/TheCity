@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using TheCity.CityDataGeneration;
 using UnityEngine;
 
-namespace TheCity
+namespace TheCity.Installers
 {
     [CreateAssetMenu(fileName = "CompanyPossibleNames", menuName = "TheCity/CompanyPossibleNames", order = 1)]
     public class CompanyPossibleNames : ScriptableObject, ICompanyPossibleNames

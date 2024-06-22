@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using TheCity.Installers;
+using NUnit.Framework;
 
 namespace TheCity.Tests
 {

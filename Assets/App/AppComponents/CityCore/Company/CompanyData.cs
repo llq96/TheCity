@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TheCity
+namespace TheCity.Core
 {
     public class CompanyData
     {

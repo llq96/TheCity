@@ -1,7 +1,8 @@
+using TheCity.Unity;
 using UnityEngine;
 using Zenject;
 
-namespace TheCity.InGameTime
+namespace TheCity.Installers
 {
     public class GameTimeInstaller : MonoInstaller
     {

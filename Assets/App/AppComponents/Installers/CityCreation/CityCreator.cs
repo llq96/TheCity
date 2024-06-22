@@ -1,9 +1,9 @@
 using JetBrains.Annotations;
-using TheCity.CityGeneration.Installer;
+using TheCity.Core;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace TheCity
+namespace TheCity.Installers
 {
     [UsedImplicitly]
     public class CityCreator

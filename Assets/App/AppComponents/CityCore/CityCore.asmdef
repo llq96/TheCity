@@ -1,6 +1,6 @@
 {
     "name": "CityCore",
-    "rootNamespace": "",
+    "rootNamespace": "TheCity.Core",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

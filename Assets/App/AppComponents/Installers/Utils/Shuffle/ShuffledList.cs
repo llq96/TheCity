@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TheCity.Installers;
 
-namespace TheCity.Utils
+namespace TheCity.Installers.Utils
 {
     public class ShuffledList<T1> : IEnumerable<T1>
     {

@@ -1,5 +1,5 @@
+using TheCity.Unity;
 using Zenject;
-using TheCity.InGameTime;
 
 namespace TheCity.Tests.GameTimeTests
 {

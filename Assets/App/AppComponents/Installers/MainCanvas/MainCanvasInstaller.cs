@@ -1,7 +1,8 @@
+using TheCity.Unity.UI;
 using UnityEngine;
 using Zenject;
 
-namespace TheCity.UI
+namespace TheCity.Installers
 {
     public class MainCanvasInstaller : MonoInstaller
     {

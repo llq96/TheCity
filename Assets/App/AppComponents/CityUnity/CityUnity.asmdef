@@ -1,0 +1,20 @@
+{
+    "name": "CityUnity",
+    "rootNamespace": "TheCity.Unity",
+    "references": [
+        "GUID:a4dacee27f9901b4ca51f20b0b00197c",
+        "GUID:8c4dd21966739024fbd72155091d199e",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Zenject-usage.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

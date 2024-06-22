@@ -1,6 +1,6 @@
 using System.Linq;
+using TheCity.CityDataGeneration;
 using NUnit.Framework;
-using TheCity.CityGeneration;
 using Zenject;
 
 namespace TheCity.Tests

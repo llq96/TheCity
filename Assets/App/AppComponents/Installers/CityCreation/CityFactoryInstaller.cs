@@ -1,8 +1,11 @@
 using JetBrains.Annotations;
+using TheCity.CityDataGeneration;
+using TheCity.Core;
+using TheCity.Unity;
 using UnityEngine;
 using Zenject;
 
-namespace TheCity.CityGeneration.Installer
+namespace TheCity.Installers
 {
     public class CityFactoryInstaller : MonoInstaller
     {

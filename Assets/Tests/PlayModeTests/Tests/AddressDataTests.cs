@@ -1,3 +1,4 @@
+using TheCity.Core;
 using NUnit.Framework;
 
 namespace TheCity.Tests
@@ -13,7 +14,7 @@ namespace TheCity.Tests
             var globalRoomIndex = 3;
             var addressType = AddressType.Living;
 
-            var addressData = new AddressData(street, houseNumber, roomNumber, globalRoomIndex,addressType);
+            var addressData = new AddressData(street, houseNumber, roomNumber, globalRoomIndex, addressType);
 
             Assert.AreEqual(street, addressData.StreetName);
             Assert.AreEqual(houseNumber, addressData.HouseNumber);

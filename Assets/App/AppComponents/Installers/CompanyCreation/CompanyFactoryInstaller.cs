@@ -1,8 +1,10 @@
 using JetBrains.Annotations;
+using TheCity.Core;
+using TheCity.Unity;
 using UnityEngine;
 using Zenject;
 
-namespace TheCity
+namespace TheCity.Installers
 {
     public class CompanyFactoryInstaller : MonoInstaller
     {

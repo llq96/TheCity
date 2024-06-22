@@ -1,8 +1,10 @@
 using JetBrains.Annotations;
+using TheCity.Core;
+using TheCity.Unity;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace TheCity
+namespace TheCity.Installers
 {
     [UsedImplicitly]
     public class CompaniesCreator

@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Moq;
-using TheCity.InGameTime;
+using TheCity.Unity;
+using TheCity.Core;
+using TheCity.Installers;
+using TheCity.CityDataGeneration;
 using Zenject;
 
 namespace TheCity.Tests

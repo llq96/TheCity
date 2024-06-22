@@ -1,6 +1,7 @@
+using TheCity.CityDataGeneration;
 using UnityEngine;
 
-namespace TheCity
+namespace TheCity.Installers
 {
     [CreateAssetMenu(fileName = "NamesGeneratorSettings", menuName = "TheCity/NamesGeneratorSettings", order = 1)]
     public class NamesGeneratorSettings : ScriptableObject, INamesGeneratorSettings

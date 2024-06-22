@@ -1,9 +1,11 @@
 using JetBrains.Annotations;
+using TheCity.Core;
+using TheCity.Unity;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-namespace TheCity
+namespace TheCity.Installers
 {
     [UsedImplicitly]
     public class CitizenInstaller : Installer<CitizenInstaller>

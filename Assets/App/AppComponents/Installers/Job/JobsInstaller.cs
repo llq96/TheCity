@@ -1,7 +1,8 @@
+using TheCity.CityDataGeneration;
 using UnityEngine;
 using Zenject;
 
-namespace TheCity
+namespace TheCity.Installers
 {
     public class JobsInstaller : MonoInstaller
     {

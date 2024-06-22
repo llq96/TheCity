@@ -1,4 +1,4 @@
-namespace TheCity
+namespace TheCity.Core
 {
     public readonly struct StreetName
     {

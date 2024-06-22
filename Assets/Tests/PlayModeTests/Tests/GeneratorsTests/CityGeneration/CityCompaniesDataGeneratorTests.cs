@@ -1,6 +1,5 @@
-﻿using System.Linq;
+﻿using TheCity.CityDataGeneration;
 using NUnit.Framework;
-using TheCity.CityGeneration;
 using Zenject;
 
 namespace TheCity.Tests
@@ -44,7 +43,7 @@ namespace TheCity.Tests
             //
             // Assert.AreEqual(generateCount, countAfterDistinct, $"Companies:\n{string.Join('\n', companies)}");
         }
-        
+
         [Test, TestCaseSource(nameof(CorrectCompaniesCount)), Ignore("Need Rewrite")]
         public void GenerateCompanies_AfterCorrectSetUp_ReturnsCompaniesUniqueByName(int countCompaniesNames)
         {

@@ -1,3 +1,4 @@
+using TheCity.Unity;
 using NUnit.Framework;
 
 namespace TheCity.Tests

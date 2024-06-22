@@ -1,4 +1,6 @@
-namespace TheCity
+using TheCity.Core;
+
+namespace TheCity.Installers
 {
     public class CitizenCreationData
     {

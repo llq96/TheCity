@@ -1,6 +1,6 @@
 public static class Random
 {
-    private static System.Random _random;
+    private static readonly System.Random _random;
 
     static Random()
     {

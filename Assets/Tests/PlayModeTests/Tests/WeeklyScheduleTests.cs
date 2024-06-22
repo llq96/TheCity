@@ -1,3 +1,4 @@
+using TheCity.Core;
 using NUnit.Framework;
 using System;
 

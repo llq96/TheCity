@@ -1,9 +1,10 @@
 using JetBrains.Annotations;
+using TheCity.Unity;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace TheCity
+namespace TheCity.Installers
 {
     [UsedImplicitly]
     public class PlayerCreator

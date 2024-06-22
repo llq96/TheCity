@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Text;
-using TheCity.Core;
 
-namespace TheCity
+
+namespace TheCity.Core
 {
     public class DaySchedule
     {

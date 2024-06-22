@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace TheCity
+namespace TheCity.Installers
 {
     [Serializable]
     public class SerializableDateTime
