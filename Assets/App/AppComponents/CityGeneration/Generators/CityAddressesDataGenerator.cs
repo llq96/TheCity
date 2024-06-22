@@ -5,14 +5,14 @@ namespace TheCity.CityGeneration
 {
     public class CityAddressesDataGenerator
     {
-        [Inject] private NamesGenerator NamesGenerator { get; }
+        [Inject] private IStreetNamesGenerator StreetNamesGenerator { get; }
 
         public List<AddressData> GenerateAddresses(int countLivingAddresses, int countWorkAddresses)
         {
             var addressesDataList = new List<AddressData>();
 
             var globalRoomIndex = 0;
-            var randomStreetName = NamesGenerator.GenerateRandomStreetName(); //1 улица
+            var randomStreetName = StreetNamesGenerator.GetNextStreetName(); //1 улица
             for (int i = 0; i < countLivingAddresses; i++)
             {
                 var newAddressData =

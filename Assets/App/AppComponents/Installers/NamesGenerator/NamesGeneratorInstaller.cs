@@ -10,26 +10,11 @@ namespace TheCity
 
         public override void InstallBindings()
         {
-            Container.BindFactory<NamesGenerator, NamesGeneratorFactory>()
-                .FromSubContainerResolve()
-                .ByMethod(InstallerMethod);
-        }
+            Container.Bind<INamesGeneratorSettings>().FromInstance(_namesGeneratorSettings).AsSingle().NonLazy();
 
-        private void InstallerMethod(DiContainer subContainer)
-        {
-            subContainer.Bind<INamesGeneratorSettings>().FromInstance(_namesGeneratorSettings).AsSingle().NonLazy();
-
-            subContainer.Bind<ICitizenNamesGenerator>().To<CitizenNamesGenerator>().AsSingle().NonLazy();
-            subContainer.Bind<IStreetNamesGenerator>().To<StreetNamesGenerator>().AsSingle().NonLazy();
-            subContainer.Bind<ICompanyNamesGenerator>().To<CompanyNamesGenerator>().AsSingle().NonLazy();
-
-            subContainer.BindInterfacesAndSelfTo<NamesGenerator>().AsSingle().NonLazy();
-        }
-
-
-        [UsedImplicitly]
-        public class NamesGeneratorFactory : PlaceholderFactory<NamesGenerator>
-        {
+            Container.Bind<ICitizenNamesGenerator>().To<CitizenNamesGenerator>().AsSingle().NonLazy();
+            Container.Bind<IStreetNamesGenerator>().To<StreetNamesGenerator>().AsSingle().NonLazy();
+            Container.Bind<ICompanyNamesGenerator>().To<CompanyNamesGenerator>().AsSingle().NonLazy();
         }
     }
 }

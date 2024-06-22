@@ -63,7 +63,7 @@ namespace TheCity.Tests
 
         #region NamesGenerator
 
-        public static void BindNamesGenerator(DiContainer container, int countEachNames)
+        public static void BindNamesGenerators(DiContainer container, int countEachNames)
         {
             var namesGeneratorSettings = GetINamesGeneratorSettings_WithCountEach(countEachNames);
             container.BindInterfacesAndSelfTo<INamesGeneratorSettings>().FromInstance(namesGeneratorSettings)
@@ -72,8 +72,6 @@ namespace TheCity.Tests
             container.BindInterfacesAndSelfTo<CitizenNamesGenerator>().AsSingle().NonLazy();
             container.BindInterfacesAndSelfTo<StreetNamesGenerator>().AsSingle().NonLazy();
             container.BindInterfacesAndSelfTo<CompanyNamesGenerator>().AsSingle().NonLazy();
-
-            container.BindInterfacesAndSelfTo<NamesGenerator>().AsSingle().NonLazy();
         }
 
         #endregion

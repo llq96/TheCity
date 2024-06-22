@@ -8,14 +8,20 @@ namespace TheCity.CityGeneration
         [Inject] private CityAddressesDataGenerator CityAddressesDataGenerator { get; }
         [Inject] private CityCompaniesDataGenerator CityCompaniesDataGenerator { get; }
         [Inject] private CityCitizensDataGenerator CityCitizensDataGenerator { get; }
-        [Inject] private NamesGenerator NamesGenerator { get; }
+
+        [Inject] private ICitizenNamesGenerator CitizenNamesGenerator { get; }
+        [Inject] private IStreetNamesGenerator StreetNamesGenerator { get; }
+        [Inject] private ICompanyNamesGenerator CompanyNamesGenerator { get; }
+
 
         public CityData GenerateCityData(CityGenerationSettings generationSettings = null)
         {
             generationSettings ??= new();
             CityData cityData = new();
 
-            NamesGenerator.Reset();
+            CitizenNamesGenerator.Reset();
+            StreetNamesGenerator.Reset();
+            CompanyNamesGenerator.Reset();
 
             var addresses = CityAddressesDataGenerator.GenerateAddresses(
                 generationSettings.CountLivingAddresses,

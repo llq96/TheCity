@@ -15,7 +15,7 @@ namespace TheCity.Tests
         {
             PreInstall();
 
-            CorrectThings.BindNamesGenerator(Container, countEachNames);
+            CorrectThings.BindNamesGenerators(Container, countEachNames);
 
             var possibleJobTitles = CorrectThings.GetIPossibleJobTitles(countEachNames);
             Container.Bind<IPossibleJobTitles>().FromInstance(possibleJobTitles).AsSingle().NonLazy();

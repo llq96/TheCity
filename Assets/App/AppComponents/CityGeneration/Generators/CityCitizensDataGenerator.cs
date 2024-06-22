@@ -8,7 +8,7 @@ namespace TheCity.CityGeneration
     {
         private const int CitizenPerAddress = 2;
 
-        [Inject] private NamesGenerator NamesGenerator { get; }
+        [Inject] private ICitizenNamesGenerator CitizenNamesGenerator { get; }
 
         public List<CitizenData> GenerateCitizens(int countCitizens, ref List<AddressData> addresses,
             List<JobPost> jobPostsList)
@@ -48,7 +48,7 @@ namespace TheCity.CityGeneration
 
         private CitizenData GenerateNewCitizenData(int addressIndex, int companyIndex, int jobPostIndex)
         {
-            var randomCitizenName = NamesGenerator.GenerateRandomCitizenName();
+            var randomCitizenName = CitizenNamesGenerator.GetNextCitizenName();
             var inbornData = new CitizenInbornData(randomCitizenName, addressIndex, companyIndex, jobPostIndex);
             var citizenData = new CitizenData(inbornData);
             return citizenData;

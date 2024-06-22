@@ -8,7 +8,7 @@ namespace TheCity.CityGeneration
 {
     public class CityCompaniesDataGenerator
     {
-        [Inject] private NamesGenerator NamesGenerator { get; }
+        [Inject] private ICompanyNamesGenerator CompanyNamesGenerator { get; }
         [Inject] private IPossibleJobTitles PossibleJobTitles { get; }
 
         public List<CompanyData> GenerateCompanies(int countCompanies, ref List<AddressData> addresses)
@@ -29,7 +29,7 @@ namespace TheCity.CityGeneration
 
         private CompanyData GenerateNewCompanyData(int companyIndex, int addressIndex)
         {
-            var randomCompanyName = NamesGenerator.GenerateRandomCompanyName();
+            var randomCompanyName = CompanyNamesGenerator.GetNextCompanyName();
             var countJobPosts = Random.Range(2, 4); //TODO
             var jobPosts = new List<JobPost>();
             var companyData = new CompanyData(companyIndex, randomCompanyName, addressIndex, jobPosts);

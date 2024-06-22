@@ -18,8 +18,6 @@ namespace TheCity.CityGeneration.Installer
 
             Container.Bind<CityDataGenerator>().AsSingle().NonLazy();
 
-            var namesGenerator = Container.Resolve<NamesGeneratorInstaller.NamesGeneratorFactory>().Create();
-            Container.Bind<NamesGenerator>().FromInstance(namesGenerator).AsSingle().NonLazy();
 
             Container.BindInterfacesAndSelfTo<CityCreator>().AsSingle().NonLazy();
         }
