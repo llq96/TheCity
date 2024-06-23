@@ -1,18 +1,32 @@
 using System.Linq;
 using TheCity.Core;
-using Zenject;
 
 namespace TheCity.CityDataGeneration
 {
     public class CityDataGenerator
     {
-        [Inject] private CityAddressesDataGenerator CityAddressesDataGenerator { get; }
-        [Inject] private CityCompaniesDataGenerator CityCompaniesDataGenerator { get; }
-        [Inject] private CityCitizensDataGenerator CityCitizensDataGenerator { get; }
+        private readonly CityAddressesDataGenerator _cityAddressesDataGenerator;
+        private readonly CityCompaniesDataGenerator _cityCompaniesDataGenerator;
+        private readonly CityCitizensDataGenerator _cityCitizensDataGenerator;
+        private readonly ICitizenNamesGenerator _citizenNamesGenerator;
+        private readonly IStreetNamesGenerator _streetNamesGenerator;
+        private readonly ICompanyNamesGenerator _companyNamesGenerator;
 
-        [Inject] private ICitizenNamesGenerator CitizenNamesGenerator { get; }
-        [Inject] private IStreetNamesGenerator StreetNamesGenerator { get; }
-        [Inject] private ICompanyNamesGenerator CompanyNamesGenerator { get; }
+        public CityDataGenerator(
+            CityAddressesDataGenerator cityAddressesDataGenerator,
+            CityCompaniesDataGenerator cityCompaniesDataGenerator,
+            CityCitizensDataGenerator cityCitizensDataGenerator,
+            ICitizenNamesGenerator citizenNamesGenerator,
+            IStreetNamesGenerator streetNamesGenerator,
+            ICompanyNamesGenerator companyNamesGenerator)
+        {
+            _cityAddressesDataGenerator = cityAddressesDataGenerator;
+            _cityCompaniesDataGenerator = cityCompaniesDataGenerator;
+            _cityCitizensDataGenerator = cityCitizensDataGenerator;
+            _citizenNamesGenerator = citizenNamesGenerator;
+            _streetNamesGenerator = streetNamesGenerator;
+            _companyNamesGenerator = companyNamesGenerator;
+        }
 
 
         public CityData GenerateCityData(CityGenerationSettings generationSettings = null)
@@ -20,22 +34,22 @@ namespace TheCity.CityDataGeneration
             generationSettings ??= new();
             CityData cityData = new();
 
-            CitizenNamesGenerator.Reset();
-            StreetNamesGenerator.Reset();
-            CompanyNamesGenerator.Reset();
+            _citizenNamesGenerator.Reset();
+            _streetNamesGenerator.Reset();
+            _companyNamesGenerator.Reset();
 
-            var addresses = CityAddressesDataGenerator.GenerateAddresses(
+            var addresses = _cityAddressesDataGenerator.GenerateAddresses(
                 generationSettings.CountLivingAddresses,
                 generationSettings.CountWorkingAddresses);
             cityData.AddressesDataList.AddRange(addresses);
 
-            var companies = CityCompaniesDataGenerator
+            var companies = _cityCompaniesDataGenerator
                 .GenerateCompanies(generationSettings.CountCompanies, ref addresses);
             cityData.CompaniesDataList.AddRange(companies);
 
             var jobPostsList = companies.SelectMany(companyData => companyData.JobPosts).ToList();
 
-            var citizens = CityCitizensDataGenerator
+            var citizens = _cityCitizensDataGenerator
                 .GenerateCitizens(generationSettings.CountCitizens, ref addresses, jobPostsList);
 
             cityData.CitizensDataList.AddRange(citizens);

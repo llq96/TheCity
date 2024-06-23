@@ -1,19 +1,23 @@
 using System.Collections.Generic;
 using TheCity.Core;
-using Zenject;
 
 namespace TheCity.CityDataGeneration
 {
     public class CityAddressesDataGenerator
     {
-        [Inject] private IStreetNamesGenerator StreetNamesGenerator { get; }
+        private readonly IStreetNamesGenerator _streetNamesGenerator;
+
+        public CityAddressesDataGenerator(IStreetNamesGenerator streetNamesGenerator)
+        {
+            _streetNamesGenerator = streetNamesGenerator;
+        }
 
         public List<AddressData> GenerateAddresses(int countLivingAddresses, int countWorkAddresses)
         {
             var addressesDataList = new List<AddressData>();
 
             var globalRoomIndex = 0;
-            var randomStreetName = StreetNamesGenerator.GetNextStreetName(); //1 улица
+            var randomStreetName = _streetNamesGenerator.GetNextStreetName(); //1 улица
             for (int i = 0; i < countLivingAddresses; i++)
             {
                 var newAddressData =

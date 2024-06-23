@@ -1,15 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using TheCity.Core;
-using Zenject;
 
 namespace TheCity.CityDataGeneration
 {
     public class CityCitizensDataGenerator
     {
+        private readonly ICitizenNamesGenerator _citizenNamesGenerator;
+
         private const int CitizenPerAddress = 2;
 
-        [Inject] private ICitizenNamesGenerator CitizenNamesGenerator { get; }
+        public CityCitizensDataGenerator(ICitizenNamesGenerator citizenNamesGenerator)
+        {
+            _citizenNamesGenerator = citizenNamesGenerator;
+        }
 
         public List<CitizenData> GenerateCitizens(int countCitizens, ref List<AddressData> addresses,
             List<JobPost> jobPostsList)
@@ -53,7 +57,7 @@ namespace TheCity.CityDataGeneration
         private CitizenData GenerateNewCitizenData(int addressIndex, int homeRoomStuffIndex, int companyIndex,
             int jobPostIndex)
         {
-            var randomCitizenName = CitizenNamesGenerator.GetNextCitizenName();
+            var randomCitizenName = _citizenNamesGenerator.GetNextCitizenName();
             var inbornData = new CitizenInbornData(
                 randomCitizenName,
                 addressIndex,

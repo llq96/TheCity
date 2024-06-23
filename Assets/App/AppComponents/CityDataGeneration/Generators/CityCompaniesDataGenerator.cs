@@ -2,14 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TheCity.Core;
-using Zenject;
 
 namespace TheCity.CityDataGeneration
 {
     public class CityCompaniesDataGenerator
     {
-        [Inject] private ICompanyNamesGenerator CompanyNamesGenerator { get; }
-        [Inject] private IPossibleJobTitles PossibleJobTitles { get; }
+        private readonly ICompanyNamesGenerator _companyNamesGenerator;
+        private readonly IPossibleJobTitles _possibleJobTitles;
+
+        public CityCompaniesDataGenerator(
+            ICompanyNamesGenerator companyNamesGenerator,
+            IPossibleJobTitles possibleJobTitles)
+        {
+            _companyNamesGenerator = companyNamesGenerator;
+            _possibleJobTitles = possibleJobTitles;
+        }
 
         public List<CompanyData> GenerateCompanies(int countCompanies, ref List<AddressData> addresses)
         {
@@ -29,14 +36,14 @@ namespace TheCity.CityDataGeneration
 
         private CompanyData GenerateNewCompanyData(int companyIndex, int addressIndex)
         {
-            var randomCompanyName = CompanyNamesGenerator.GetNextCompanyName();
+            var randomCompanyName = _companyNamesGenerator.GetNextCompanyName();
             var countJobPosts = Random.Range(2, 4); //TODO
             var jobPosts = new List<JobPost>();
             var companyData = new CompanyData(companyIndex, randomCompanyName, addressIndex, jobPosts);
 
             for (int i = 0; i < countJobPosts; i++)
             {
-                var jobTitle = PossibleJobTitles.JobTitles.GetRandomElement();
+                var jobTitle = _possibleJobTitles.JobTitles.GetRandomElement();
                 var workSchedule = GenerateWorkSchedule();
                 var jobPost = new JobPost(i, jobTitle, companyData, workSchedule);
                 jobPosts.Add(jobPost);
