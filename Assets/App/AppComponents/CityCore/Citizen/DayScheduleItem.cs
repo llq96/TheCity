@@ -1,16 +1,7 @@
 namespace TheCity.Core
 {
-    public class DayScheduleItem
-    {
-        public TimeOnly Time { get; }
-        public Activity Activity { get; }
-
-        public DayScheduleItem(TimeOnly time, Activity activity)
-        {
-            Time = time;
-            Activity = activity;
-        }
-
-        public override string ToString() => $"{Time} - {Activity}";
-    }
+    public record DayScheduleItem(
+        TimeOnly Time,
+        Activity Activity
+    );
 }
