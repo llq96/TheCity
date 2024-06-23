@@ -43,7 +43,7 @@ namespace TheCity.Installers
                 var subContainer = Container.CreateSubContainer();
                 subContainer.Bind<AddressData>().FromInstance(addressData);
                 var room = GetRoom(addressData);
-                subContainer.Inject(room);
+                subContainer.InjectGameObject(room.gameObject);
             }
 
             return;

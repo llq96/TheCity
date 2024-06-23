@@ -21,7 +21,7 @@ namespace TheCity.CityDataGeneration
             for (int i = 0; i < countLivingAddresses; i++)
             {
                 var newAddressData =
-                    new AddressData(randomStreetName, i, Random.Range(10, 50), globalRoomIndex++,
+                    new AddressData(randomStreetName, i + 1, Random.Range(10, 50), globalRoomIndex++,
                         AddressType.Living); //1 адрес на 1 дом
                 addressesDataList.Add(newAddressData);
             }
@@ -29,7 +29,7 @@ namespace TheCity.CityDataGeneration
             for (int i = 0; i < countWorkAddresses; i++)
             {
                 var newAddressData =
-                    new AddressData(randomStreetName, i, Random.Range(10, 50), globalRoomIndex++,
+                    new AddressData(randomStreetName, i + 1, Random.Range(10, 50), globalRoomIndex++,
                         AddressType.Working); //1 адрес на 1 дом
                 addressesDataList.Add(newAddressData);
             }
