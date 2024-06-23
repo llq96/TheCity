@@ -15,20 +15,19 @@ namespace TheCity.Unity
         [Inject] private CitizenStatesSwitcher CitizenStatesSwitcher { get; }
         [Inject] private LivingRoom HomeRoom { get; }
         [Inject] private Company Company { get; }
+        [Inject] private JobPlace JobPlace { get; }
+        [Inject] private HomeRoomCitizenStuff CitizenStuff { get; }
 
         private Vector3 CitizenPosition => Citizen.transform.position;
 
         #region Destinations
 
-        private JobPlace JobPlace => Company.Room.JobPlaces[CitizenInbornData.JobPostIndex];
         private Transform JobSeatPlace => JobPlace.SeatPlace;
         private Vector3 JobPlaceDestination => JobPlace.transform.position;
         private float DistanceToWorkDestination => (JobPlaceDestination - CitizenPosition).magnitude;
 
         private Vector3 HomeDestination => HomeRoom.transform.position;
         private float DistanceToHomeDestination => (HomeDestination - CitizenPosition).magnitude;
-
-        private LivingRoomCitizenStuff CitizenStuff => HomeRoom.CitizenStuffs[CitizenInbornData.HomeRoomStuffIndex];
 
         #endregion
 

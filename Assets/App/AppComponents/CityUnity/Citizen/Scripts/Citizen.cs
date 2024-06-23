@@ -8,15 +8,10 @@ namespace TheCity.Unity
     {
         [Inject] public CitizenData CitizenData { get; }
         [Inject] public CitizenInbornData InbornData { get; }
-
         [Inject] public LivingRoom HomeRoom { get; }
-
         [Inject] public Company Company { get; }
         [Inject] public JobPost JobPost { get; }
-
         [Inject] private CitizenActivityScheduler CitizenActivityScheduler { get; }
-
-        [Inject] private CitizenStatesSwitcher StatesSwitcher { get; }
 
 
         [ContextMenu(nameof(PrintSelf))]

@@ -6,8 +6,8 @@ namespace TheCity.Unity
 {
     public class LivingRoom : Room
     {
-        [SerializeField] private List<LivingRoomCitizenStuff> _citizenStuffs;
+        [SerializeField] private List<HomeRoomCitizenStuff> _citizenStuffs;
 
-        public ReadOnlyCollection<LivingRoomCitizenStuff> CitizenStuffs => _citizenStuffs.AsReadOnly();
+        public ReadOnlyCollection<HomeRoomCitizenStuff> CitizenStuffs => _citizenStuffs.AsReadOnly();
     }
 }

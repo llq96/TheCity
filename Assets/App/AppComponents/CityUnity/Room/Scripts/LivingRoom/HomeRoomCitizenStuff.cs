@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace TheCity.Unity
 {
-    public class LivingRoomCitizenStuff : MonoBehaviour
+    public class HomeRoomCitizenStuff : MonoBehaviour
     {
         [SerializeField] private Transform _sleepingPlace;
 
