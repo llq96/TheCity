@@ -21,9 +21,10 @@ namespace TheCity.Unity
             Animator.SetTrigger(AnimatorTrigger_Work);
         }
 
-        public void WorkAtPoint(Vector3 workPoint)
+        public void WorkAtPoint(Transform workPoint)
         {
-            Citizen.transform.position = workPoint;
+            Citizen.transform.position = workPoint.position;
+            Citizen.transform.rotation = workPoint.rotation;
         }
     }
 }

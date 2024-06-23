@@ -32,7 +32,7 @@ namespace TheCity.Unity
             SetState(State_Sleeping);
         }
 
-        public void SetState_Working(Vector3 workPoint)
+        public void SetState_Working(Transform workPoint)
         {
             if (SetState(State_Working))
             {

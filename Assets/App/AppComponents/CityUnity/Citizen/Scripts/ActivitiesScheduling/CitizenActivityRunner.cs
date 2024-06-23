@@ -19,8 +19,10 @@ namespace TheCity.Unity
 
         #region Destinations
 
-        private Vector3 WorkDestination => Company.Room.JobPostsPlaces[Citizen.InbornData.JobPostIndex].position;
-        private float DistanceToWorkDestination => (WorkDestination - CitizenPosition).magnitude;
+        private JobPlace JobPlace => Company.Room.JobPlaces[Citizen.InbornData.JobPostIndex];
+        private Transform JobSeatPlace => JobPlace.SeatPlace;
+        private Vector3 JobPlaceDestination => JobPlace.transform.position;
+        private float DistanceToWorkDestination => (JobPlaceDestination - CitizenPosition).magnitude;
 
         private Vector3 HomeDestination => HomeRoom.transform.position;
         private float DistanceToHomeDestination => (HomeDestination - CitizenPosition).magnitude;
@@ -61,13 +63,13 @@ namespace TheCity.Unity
                     CitizenActivityScheduler.AddActivityToHead(new Activity_GoToHome());
                     break;
                 case Activity_GoToWork activityGoToWork:
-                    CitizenStatesSwitcher.SetState_Moving(WorkDestination);
+                    CitizenStatesSwitcher.SetState_Moving(JobPlaceDestination);
                     break;
                 case Activity_StartWork activityStartWork:
                     CitizenActivityScheduler.AddActivityToHead(new Activity_GoToWork());
                     break;
                 case Activity_Working activityWorking:
-                    CitizenStatesSwitcher.SetState_Working(WorkDestination);
+                    CitizenStatesSwitcher.SetState_Working(JobSeatPlace);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(activity.GetType().ToString());

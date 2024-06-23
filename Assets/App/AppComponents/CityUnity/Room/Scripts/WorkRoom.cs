@@ -5,8 +5,8 @@ namespace TheCity.Unity
 {
     public class WorkRoom : Room
     {
-        [SerializeField] private List<Transform> _jobPostsPlaces;
+        [SerializeField] private List<JobPlace> _jobPlaces;
 
-        public List<Transform> JobPostsPlaces => _jobPostsPlaces;
+        public List<JobPlace> JobPlaces => _jobPlaces;
     }
 }
