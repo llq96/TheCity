@@ -10,10 +10,12 @@ namespace TheCity.Tests
         {
             var citizenName = new CitizenName("John", "Smith");
             var addressIndex = 1;
+            var homeRoomStuffIndex = 0;
             var companyIndex = 2;
             var jobPostIndex = 3;
 
-            var citizenInbornData = new CitizenInbornData(citizenName, addressIndex, companyIndex, jobPostIndex);
+            var citizenInbornData = new CitizenInbornData(citizenName, addressIndex, homeRoomStuffIndex, companyIndex,
+                jobPostIndex);
 
             Assert.AreEqual(citizenName, citizenInbornData.Name);
             Assert.AreEqual(addressIndex, citizenInbornData.AddressIndex);

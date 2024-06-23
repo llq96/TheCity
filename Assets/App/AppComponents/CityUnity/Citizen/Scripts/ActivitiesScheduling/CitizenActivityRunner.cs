@@ -10,6 +10,7 @@ namespace TheCity.Unity
     public class CitizenActivityRunner
     {
         [Inject] public Citizen Citizen { get; }
+        [Inject] public CitizenInbornData CitizenInbornData { get; }
         [Inject] private CitizenActivityScheduler CitizenActivityScheduler { get; }
         [Inject] private CitizenStatesSwitcher CitizenStatesSwitcher { get; }
         [Inject] private LivingRoom HomeRoom { get; }
@@ -19,13 +20,15 @@ namespace TheCity.Unity
 
         #region Destinations
 
-        private JobPlace JobPlace => Company.Room.JobPlaces[Citizen.InbornData.JobPostIndex];
+        private JobPlace JobPlace => Company.Room.JobPlaces[CitizenInbornData.JobPostIndex];
         private Transform JobSeatPlace => JobPlace.SeatPlace;
         private Vector3 JobPlaceDestination => JobPlace.transform.position;
         private float DistanceToWorkDestination => (JobPlaceDestination - CitizenPosition).magnitude;
 
         private Vector3 HomeDestination => HomeRoom.transform.position;
         private float DistanceToHomeDestination => (HomeDestination - CitizenPosition).magnitude;
+
+        private LivingRoomCitizenStuff CitizenStuff => HomeRoom.CitizenStuffs[CitizenInbornData.HomeRoomStuffIndex];
 
         #endregion
 
@@ -48,7 +51,7 @@ namespace TheCity.Unity
                     CitizenStatesSwitcher.SetState_Moving(HomeDestination);
                     break;
                 case Activity_Sleeping activitySleeping:
-                    CitizenStatesSwitcher.SetState_Sleeping();
+                    CitizenStatesSwitcher.SetState_Sleeping(CitizenStuff.SleepingPlace);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(activity.GetType().ToString());

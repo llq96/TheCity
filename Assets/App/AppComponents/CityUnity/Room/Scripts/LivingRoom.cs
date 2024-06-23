@@ -1,11 +1,13 @@
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 namespace TheCity.Unity
 {
     public class LivingRoom : Room
     {
-        [SerializeField] private Transform _sleepingPlace;
+        [SerializeField] private List<LivingRoomCitizenStuff> _citizenStuffs;
 
-        public Transform SleepingPlace => _sleepingPlace;
+        public ReadOnlyCollection<LivingRoomCitizenStuff> CitizenStuffs => _citizenStuffs.AsReadOnly();
     }
 }

@@ -9,19 +9,22 @@ namespace TheCity.Unity
     public class CitizenState_Sleeping : CitizenState
     {
         [Inject] public Citizen Citizen { get; }
+        [Inject] private Animator Animator { get; }
+
+        private static readonly int AnimatorTrigger_Sleep = Animator.StringToHash("Sleep");
 
         public override CitizenStateEnum CitizenStateEnum => CitizenStateEnum.Sleeping;
 
         protected override void EnableStateAction()
         {
             base.EnableStateAction();
-            Citizen.transform.localScale = Vector3.one * 0.5f; //TODO
+            Animator.SetTrigger(AnimatorTrigger_Sleep);
         }
 
-        protected override void DisableStateAction()
+        public void SleepAtPoint(Transform sleepPoint)
         {
-            base.DisableStateAction();
-            Citizen.transform.localScale = Vector3.one; //TODO
+            Citizen.transform.position = sleepPoint.position;
+            Citizen.transform.rotation = sleepPoint.rotation;
         }
     }
 }

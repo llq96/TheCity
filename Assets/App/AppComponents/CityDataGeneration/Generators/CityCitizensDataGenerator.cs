@@ -29,7 +29,10 @@ namespace TheCity.CityDataGeneration
 
                 var jobPost = GetRandomJobPostAndRemoveFromList(jobPostsList);
                 var companyIndex = jobPost.CompanyData.CompanyIndex;
-                var newCitizenData = GenerateNewCitizenData(currentAddress.GlobalRoomIndex, companyIndex,
+                var newCitizenData = GenerateNewCitizenData(
+                    currentAddress.GlobalRoomIndex,
+                    citizensWithCurrentAddress,
+                    companyIndex,
                     jobPost.JobPostIndexInCompany);
                 citizensDataList.Add(newCitizenData);
 
@@ -47,10 +50,16 @@ namespace TheCity.CityDataGeneration
             return jobPost;
         }
 
-        private CitizenData GenerateNewCitizenData(int addressIndex, int companyIndex, int jobPostIndex)
+        private CitizenData GenerateNewCitizenData(int addressIndex, int homeRoomStuffIndex, int companyIndex,
+            int jobPostIndex)
         {
             var randomCitizenName = CitizenNamesGenerator.GetNextCitizenName();
-            var inbornData = new CitizenInbornData(randomCitizenName, addressIndex, companyIndex, jobPostIndex);
+            var inbornData = new CitizenInbornData(
+                randomCitizenName,
+                addressIndex,
+                homeRoomStuffIndex,
+                companyIndex,
+                jobPostIndex);
             var citizenData = new CitizenData(inbornData);
             return citizenData;
         }

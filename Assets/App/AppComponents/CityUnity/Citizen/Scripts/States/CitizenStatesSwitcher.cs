@@ -27,9 +27,12 @@ namespace TheCity.Unity
             }
         }
 
-        public void SetState_Sleeping()
+        public void SetState_Sleeping(Transform sleepPoint)
         {
-            SetState(State_Sleeping);
+            if (SetState(State_Sleeping))
+            {
+                State_Sleeping.SleepAtPoint(sleepPoint);
+            }
         }
 
         public void SetState_Working(Transform workPoint)
