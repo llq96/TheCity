@@ -9,16 +9,14 @@ namespace TheCity.Unity
     public class CitizenState_Working : CitizenState
     {
         [Inject] public Citizen Citizen { get; }
-        [Inject] private Animator Animator { get; }
+        [Inject] public CitizenAnimator CitizenAnimator { get; }
 
         public override CitizenStateEnum CitizenStateEnum => CitizenStateEnum.Working;
-
-        private static readonly int AnimatorTrigger_Work = Animator.StringToHash("Work");
 
         protected override void EnableStateAction()
         {
             base.EnableStateAction();
-            Animator.SetTrigger(AnimatorTrigger_Work);
+            CitizenAnimator.PlayAnimation_Work();
         }
 
         public void WorkAtPoint(Transform workPoint)

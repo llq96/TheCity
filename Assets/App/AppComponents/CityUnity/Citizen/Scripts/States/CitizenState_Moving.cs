@@ -10,17 +10,14 @@ namespace TheCity.Unity
     public class CitizenState_Moving : CitizenState, ITickable
     {
         [Inject] private NavMeshAgent NavMeshAgent { get; }
-        [Inject] private Animator Animator { get; }
-
-        private static readonly int AnimatorProperty_Speed = Animator.StringToHash("Speed");
-        private static readonly int AnimatorTrigger_Move = Animator.StringToHash("Move");
+        [Inject] private CitizenAnimator CitizenAnimator { get; }
 
         public override CitizenStateEnum CitizenStateEnum => CitizenStateEnum.Moving;
 
         protected override void EnableStateAction()
         {
             base.EnableStateAction();
-            Animator.SetTrigger(AnimatorTrigger_Move);
+            CitizenAnimator.PlayAnimation_Move();
             NavMeshAgent.enabled = true;
         }
 
@@ -28,7 +25,7 @@ namespace TheCity.Unity
         {
             base.DisableStateAction();
             NavMeshAgent.enabled = false;
-            Animator.SetFloat(AnimatorProperty_Speed, 0f);
+            CitizenAnimator.SetMoveSpeed(0);
         }
 
         public void MoveTo(Vector3 destination)
@@ -42,7 +39,7 @@ namespace TheCity.Unity
             if (!IsActive) return;
 
             var velocityMagnitude = NavMeshAgent.velocity.magnitude;
-            Animator.SetFloat(AnimatorProperty_Speed, velocityMagnitude);
+            CitizenAnimator.SetMoveSpeed(velocityMagnitude);
         }
     }
 }
