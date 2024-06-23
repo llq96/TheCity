@@ -1,16 +1,12 @@
 using TheCity.Core;
 using UnityEngine;
+using Zenject;
 
 namespace TheCity.Unity
 {
     public class Room : MonoBehaviour
     {
-        public AddressData AddressData { get; private set; }
-
-        public void Construct(AddressData addressData) //TODO via Inject
-        {
-            AddressData = addressData;
-        }
+        [InjectOptional] public AddressData AddressData { get; private set; }
 
         public override string ToString() => AddressData.ToString();
     }
