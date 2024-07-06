@@ -8,9 +8,25 @@ namespace TheCity.Installers
     public class GameTimeInitialSettings : ScriptableObject, IGameTimeInitialSettings
     {
         [SerializeField] private SerializableDateTime _startDateTime;
-        [SerializeField] private float _timeSpeedMultiplier = 60; //1 minute per 1 second
+
+        [Header("Multipliers By Type")]
+        [SerializeField] private float _multiplier_pause = 0;
+        [SerializeField] private float _multiplier_play = 1;
+        [SerializeField] private float _multiplier_fastPlay = 10;
+        [SerializeField] private float _multiplier_veryFastPlay = 100;
 
         public DateTime StartDateTime => _startDateTime.GetDateTime();
-        public float TimeSpeedMultiplier => _timeSpeedMultiplier;
+
+        public float GetTimeSpeedMultiplier(GameTimeType gameTimeType)
+        {
+            return gameTimeType switch
+            {
+                GameTimeType.Pause => _multiplier_pause,
+                GameTimeType.Play => _multiplier_play,
+                GameTimeType.FastPlay => _multiplier_fastPlay,
+                GameTimeType.VeryFastPlay => _multiplier_veryFastPlay,
+                _ => throw new ArgumentOutOfRangeException(nameof(gameTimeType), gameTimeType, null)
+            };
+        }
     }
 }

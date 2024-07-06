@@ -273,7 +273,7 @@ namespace TheCity.Tests
         {
             var mock = new Mock<IGameTimeInitialSettings>();
             mock.Setup(x => x.StartDateTime).Returns(GetDateTime);
-            mock.Setup(x => x.TimeSpeedMultiplier).Returns(60f);
+            mock.Setup(x => x.GetTimeSpeedMultiplier(GameTimeType.Pause)).Returns(60f);
             return mock;
         }
     }

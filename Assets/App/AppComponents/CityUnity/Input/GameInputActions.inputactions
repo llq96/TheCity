@@ -1,0 +1,94 @@
+{
+    "name": "GameInputActions",
+    "maps": [
+        {
+            "name": "Time",
+            "id": "82fe529f-134c-4b0b-9b3b-7aa1757804b3",
+            "actions": [
+                {
+                    "name": "Time_Pause",
+                    "type": "Button",
+                    "id": "0fcf315e-1ffe-42b2-a50e-de44b36b22ec",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Time_Play",
+                    "type": "Button",
+                    "id": "3edd5294-bf13-4ba5-a7ee-2e44647a8139",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Time_FastPlay",
+                    "type": "Button",
+                    "id": "fb3533a1-2eee-471f-b492-85785517e545",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Time_VeryFastPlay",
+                    "type": "Button",
+                    "id": "8bf68eba-6a75-4471-b7b6-9337e18c23c3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "bf793947-b7dd-4109-a112-88ddbd1b906f",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Time_Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d0a1f07e-caec-4bf8-b272-cdc3506eb067",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Time_Play",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9cae1dc-5de1-43f6-b596-60c248511d3e",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Time_FastPlay",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aa096387-2423-4e6e-9f81-2a3a8236b3e6",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Time_VeryFastPlay",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -20,4 +20,7 @@ MonoBehaviour:
     _minute: 0
     _second: 0
     _millisecond: 0
-  _timeSpeedMultiplier: 2000
+  _multiplier_pause: 0
+  _multiplier_play: 60
+  _multiplier_fastPlay: 600
+  _multiplier_veryFastPlay: 6000

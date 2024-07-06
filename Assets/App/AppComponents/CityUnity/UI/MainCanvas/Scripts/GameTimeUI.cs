@@ -10,6 +10,7 @@ namespace TheCity.Unity.UI
 
         [SerializeField] private TextMeshProUGUI _tmp_date;
         [SerializeField] private TextMeshProUGUI _tmp_time;
+        [SerializeField] private TextMeshProUGUI _tmp_timeSpeedMultiplier;
 
         private void Update()
         {
@@ -21,6 +22,9 @@ namespace TheCity.Unity.UI
         {
             _tmp_date.text = GameTime.GameDateTime.ToString("dd.MM.yyyy ddd");
             _tmp_time.text = GameTime.GameDateTime.ToString("HH:mm");
+
+            var multiplier = GameTime.GetTimeSpeedMultiplier();
+            _tmp_timeSpeedMultiplier.text = $"x{multiplier}";
         }
 
         private void UpdateTexts_AsLongDateAndTime()

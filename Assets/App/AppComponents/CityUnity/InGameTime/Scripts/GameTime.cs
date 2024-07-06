@@ -12,6 +12,8 @@ namespace TheCity.Unity
 
         private readonly IGameTimeInitialSettings _initialSettings;
 
+        public GameTimeType GameTimeType { get; set; } = GameTimeType.Play;
+
         [Inject]
         public GameTime(IGameTimeInitialSettings gameTimeInitialSettings)
         {
@@ -23,8 +25,21 @@ namespace TheCity.Unity
         public void Tick()
         {
             var realDeltaTime = Time.deltaTime;
-            var convertedDeltaTime = realDeltaTime * _initialSettings.TimeSpeedMultiplier;
+            var convertedDeltaTime = realDeltaTime * GetTimeSpeedMultiplier();
             GameDateTime = GameDateTime.AddSeconds(convertedDeltaTime);
         }
+
+        public float GetTimeSpeedMultiplier()
+        {
+            return _initialSettings.GetTimeSpeedMultiplier(GameTimeType);
+        }
+    }
+
+    public enum GameTimeType
+    {
+        Pause,
+        Play,
+        FastPlay,
+        VeryFastPlay
     }
 }

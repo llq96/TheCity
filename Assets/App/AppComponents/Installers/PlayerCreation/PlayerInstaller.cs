@@ -9,6 +9,9 @@ namespace TheCity.Installers
     {
         public override void InstallBindings()
         {
+            Container.Bind<GameInputActions>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<PlayerInput>().AsSingle().NonLazy();
+
             Container.Bind<Player>().FromComponentInHierarchy().AsSingle().NonLazy();
         }
     }
