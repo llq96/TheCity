@@ -52,7 +52,7 @@ namespace TheCity.Unity
 
             for (int i = 0; i < 7; i++)
             {
-                var gameTime = GameTime.GameDateTime.AddDays(i);
+                var gameTime = GameTime.GameDateTime.Value.AddDays(i);
                 var dayOfWeek = gameTime.DayOfWeek;
                 var workDaySchedule = workSchedule[dayOfWeek];
                 foreach (var scheduleItem in workDaySchedule.ScheduleItems)

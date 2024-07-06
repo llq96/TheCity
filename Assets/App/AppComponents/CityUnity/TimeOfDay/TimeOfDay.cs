@@ -31,7 +31,7 @@ namespace TheCity.Unity
 
         private float CalculateProgress()
         {
-            var dateTime = GameTime.GameDateTime;
+            var dateTime = GameTime.GameDateTime.Value;
 
             var minutesFromMidNight = dateTime.Hour * 60 + dateTime.Minute;
             var progress = minutesFromMidNight / (float)(24 * 60);

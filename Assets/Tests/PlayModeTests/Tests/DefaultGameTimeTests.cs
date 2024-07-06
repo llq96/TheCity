@@ -20,11 +20,11 @@ namespace TheCity.Tests.GameTimeTests
         public IEnumerator GameDateTime_AfterDelay_ShouldIncreased()
         {
             CorrectSetUp();
-            var startDateTime = GameTime.GameDateTime;
+            var startDateTime = GameTime.GameDateTime.Value;
 
             yield return new WaitForSeconds(0.1f);
 
-            Assert.GreaterOrEqual(GameTime.GameDateTime, startDateTime, "DateTime was not increased after delay.");
+            Assert.GreaterOrEqual(GameTime.GameDateTime.Value, startDateTime, "DateTime was not increased after delay.");
         }
     }
 }

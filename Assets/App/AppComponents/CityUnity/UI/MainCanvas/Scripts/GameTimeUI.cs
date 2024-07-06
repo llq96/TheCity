@@ -1,4 +1,6 @@
+using System;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -12,25 +14,43 @@ namespace TheCity.Unity.UI
         [SerializeField] private TextMeshProUGUI _tmp_time;
         [SerializeField] private TextMeshProUGUI _tmp_timeSpeedMultiplier;
 
-        private void Update()
+        private void Awake()
         {
-            // UpdateTexts_AsLongDateAndTime();
-            UpdateTexts_Custom();
+            GameTime.GameTimeType.Subscribe(UpdateTimeMultiplier);
+            GameTime.GameDateTime.Subscribe(UpdateTexts_Custom);
         }
 
-        private void UpdateTexts_Custom()
+        private void UpdateTimeMultiplier(GameTimeType type)
         {
-            _tmp_date.text = GameTime.GameDateTime.ToString("dd.MM.yyyy ddd");
-            _tmp_time.text = GameTime.GameDateTime.ToString("HH:mm");
+            var text = GetTextByType();
 
-            var multiplier = GameTime.GetTimeSpeedMultiplier();
-            _tmp_timeSpeedMultiplier.text = $"x{multiplier}";
+            _tmp_timeSpeedMultiplier.text = $"{text}";
+
+            return;
+
+            string GetTextByType()
+            {
+                return type switch
+                {
+                    GameTimeType.Pause => "||",
+                    GameTimeType.Play => ">",
+                    GameTimeType.FastPlay => ">>",
+                    GameTimeType.VeryFastPlay => ">>>",
+                    _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+                };
+            }
         }
 
-        private void UpdateTexts_AsLongDateAndTime()
+        private void UpdateTexts_Custom(DateTime dateTime)
         {
-            _tmp_date.text = GameTime.GameDateTime.ToLongDateString();
-            _tmp_time.text = GameTime.GameDateTime.ToLongTimeString();
+            _tmp_date.text = dateTime.ToString("dd.MM.yyyy ddd");
+            _tmp_time.text = dateTime.ToString("HH:mm");
+        }
+
+        private void UpdateTexts_AsLongDateAndTime(DateTime dateTime)
+        {
+            _tmp_date.text = dateTime.ToLongDateString();
+            _tmp_time.text = dateTime.ToLongTimeString();
         }
     }
 }

@@ -24,7 +24,7 @@ namespace TheCity.Unity
 
         private void Update()
         {
-            var dateTime = GameTime.GameDateTime;
+            var dateTime = GameTime.GameDateTime.Value;
             var hour = dateTime.Hour;
 
 
