@@ -38,7 +38,8 @@ namespace TheCity.Tests
         public static HouseData GetHouseData()
         {
             var street = GetStreetData();
-            return new HouseData(street);
+            var houseNumber = 10;
+            return new HouseData(street, houseNumber);
         }
 
         public static LivingAddressData GetLivingAddressData()

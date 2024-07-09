@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using TheCity.Core;
 using TheCity.Unity;
@@ -11,18 +12,21 @@ namespace TheCity.Installers
     public class CityInstaller : Installer<CityInstaller>
     {
         [Inject] private CityData CityData { get; }
-        [Inject] private CityCreationSettings CityCreationSettings { get; }
-
-        private readonly List<LivingRoom> _livingRooms = new();
-        private readonly List<WorkRoom> _workRooms = new();
+        [Inject] private HouseFactory HouseFactory { get; }
 
         public override void InstallBindings()
         {
+            ReBindFactoryParameters();
             BindComponentsFromHierarchy();
 
             GenerateHouses();
         }
 
+        private void ReBindFactoryParameters()
+        {
+            Container.Bind<CityData>().FromInstance(CityData).AsSingle().NonLazy();
+        }
+        
         private void BindComponentsFromHierarchy()
         {
             Container.Bind<City>().FromComponentInHierarchy().AsSingle().NonLazy();
@@ -32,45 +36,22 @@ namespace TheCity.Installers
         {
             var city = Container.Resolve<City>();
 
+            List<House> houses = new();
+
             for (var houseIndex = 0; houseIndex < CityData.HouseDataList.Count; houseIndex++)
             {
                 var houseData = CityData.HouseDataList[houseIndex];
-                var houseSpawnPoint = city.HousesSpawnPoints[houseIndex];
+                var house = HouseFactory.Create(houseData);
 
-                var house = Object.Instantiate(CityCreationSettings.HousePrefab, city.HousesParent);
+                var houseSpawnPoint = city.HousesSpawnPoints[houseIndex];
                 house.transform.SetPositionAndRotation(houseSpawnPoint);
                 Object.Destroy(houseSpawnPoint.gameObject);
 
-                for (var i = 0; i < houseData.LivingAddressesData.Count; i++) //TODO Вынести частично
-                {
-                    var livingAddressData = houseData.LivingAddressesData[i];
-                    var subContainer = Container.CreateSubContainer();
-                    subContainer.Bind<AddressData>().FromInstance(livingAddressData);
-                    subContainer.Bind<LivingAddressData>().FromInstance(livingAddressData);
-
-                    var room = Object.Instantiate(CityCreationSettings.LivingRoomPrefab, house.transform);
-                    var spawnPoint = house.LivingRoomSpawnPoints[i];
-                    room.transform.SetPositionAndRotation(spawnPoint);
-                    subContainer.InjectGameObject(room.gameObject);
-
-                    _livingRooms.Add(room);
-                }
-
-                for (var i = 0; i < houseData.WorkAddressesData.Count; i++)
-                {
-                    var workAddressData = houseData.WorkAddressesData[i];
-                    var subContainer = Container.CreateSubContainer();
-                    subContainer.Bind<AddressData>().FromInstance(workAddressData);
-                    subContainer.Bind<WorkAddressData>().FromInstance(workAddressData);
-
-                    var room = Object.Instantiate(CityCreationSettings.WorkRoomPrefab, house.transform);
-                    var spawnPoint = house.WorkRoomSpawnPoints[i];
-                    room.transform.SetPositionAndRotation(spawnPoint);
-                    subContainer.InjectGameObject(room.gameObject);
-
-                    _workRooms.Add(room);
-                }
+                houses.Add(house);
             }
+
+            List<LivingRoom> _livingRooms = houses.SelectMany(x => x.LivingRooms).ToList();
+            List<WorkRoom> _workRooms = houses.SelectMany(x => x.WorkRooms).ToList();
 
             Container.Bind<List<LivingRoom>>().FromInstance(_livingRooms).AsSingle().NonLazy();
             Container.Bind<List<WorkRoom>>().FromInstance(_workRooms).AsSingle().NonLazy();

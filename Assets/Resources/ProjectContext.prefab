@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5728970333185080735}
   - component: {fileID: -6621801423156775938}
   - component: {fileID: 2945950476819795475}
+  - component: {fileID: 5963701133064508589}
   - component: {fileID: -6215558172662428301}
   - component: {fileID: 1844038265256292824}
   - component: {fileID: -3876153577681271320}
@@ -57,6 +58,7 @@ MonoBehaviour:
   - {fileID: 5728970333185080735}
   - {fileID: -6621801423156775938}
   - {fileID: 2945950476819795475}
+  - {fileID: 5963701133064508589}
   - {fileID: -6215558172662428301}
   - {fileID: 1844038265256292824}
   - {fileID: -3876153577681271320}
@@ -115,6 +117,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _citizenPrefab: {fileID: 7859387244603991377, guid: 6e3032b4b7180c84b815ede4865693e4, type: 3}
+--- !u!114 &5963701133064508589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7938602325448398457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a41409db6b8f84da093dc972a65f5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cityCreationSettings:
+    <LivingRoomPrefab>k__BackingField: {fileID: 8108952678932182624, guid: 7971fc7c0c73a5e499c77857c5d0fe21, type: 3}
+    <WorkRoomPrefab>k__BackingField: {fileID: 7508307955362130939, guid: 6fe06ea29b41cd840b3c2996df53fca4, type: 3}
+    <HousePrefab>k__BackingField: {fileID: 2661566183170426901, guid: 74d290daeee75b640a853ae57f65c79e, type: 3}
 --- !u!114 &-6215558172662428301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,11 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382a9eaffe31fae49951e72be10d6285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cityCreationSettings:
-    <CityPrefab>k__BackingField: {fileID: 8375921833967992393, guid: dd7a87cebe043e644b6292a831caeee6, type: 3}
-    <LivingRoomPrefab>k__BackingField: {fileID: 8108952678932182624, guid: 7971fc7c0c73a5e499c77857c5d0fe21, type: 3}
-    <WorkRoomPrefab>k__BackingField: {fileID: 7508307955362130939, guid: 6fe06ea29b41cd840b3c2996df53fca4, type: 3}
-    <HousePrefab>k__BackingField: {fileID: 2661566183170426901, guid: 74d290daeee75b640a853ae57f65c79e, type: 3}
+  _cityPrefab: {fileID: 1876958504047494446, guid: dd7a87cebe043e644b6292a831caeee6, type: 3}
 --- !u!114 &1844038265256292824
 MonoBehaviour:
   m_ObjectHideFlags: 0

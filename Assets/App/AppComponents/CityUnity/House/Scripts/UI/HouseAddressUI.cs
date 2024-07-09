@@ -5,9 +5,9 @@ using Zenject;
 
 namespace TheCity.Unity
 {
-    public class RoomAddressUI : MonoBehaviour
+    public class HouseAddressUI : MonoBehaviour
     {
-        [InjectOptional] public AddressData AddressData { get; private set; }
+        [Inject] public HouseData HouseData { get; private set; }
 
         [SerializeField] private TextMeshProUGUI _tmp_address;
 
@@ -18,7 +18,7 @@ namespace TheCity.Unity
 
         private void UpdateUI()
         {
-            var text = $"Room {AddressData.RoomNumber}";
+            var text = $"{HouseData.StreetData.StreetName} {HouseData.HouseNumber}";
             _tmp_address.text = text;
         }
     }

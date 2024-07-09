@@ -7,7 +7,7 @@ namespace TheCity.CityDataGeneration
     public class CityHousesDataGenerator
     {
         private const int HousesPerStreet = 100;
-        
+
         private const int LivingAddressesPerHouse = 2;
         private const int WorkAddressesPerHouse = 2;
 
@@ -24,7 +24,8 @@ namespace TheCity.CityDataGeneration
             {
                 var streetIndex = i / HousesPerStreet;
                 var street = streets[streetIndex];
-                var houseData = new HouseData(street);
+                var houseNumber = i + 1;
+                var houseData = new HouseData(street, houseNumber);
 
                 FillHouseDataAddresses(houseData);
 
@@ -36,15 +37,16 @@ namespace TheCity.CityDataGeneration
 
         private void FillHouseDataAddresses(HouseData houseData)
         {
+            var roomNumber = 1;
             for (int i = 0; i < LivingAddressesPerHouse; i++)
             {
-                var livingAddressData = new LivingAddressData(houseData, i + 1);
+                var livingAddressData = new LivingAddressData(houseData, roomNumber++);
                 houseData.LivingAddressesData.Add(livingAddressData);
             }
 
             for (int i = 0; i < WorkAddressesPerHouse; i++)
             {
-                var workAddressData = new WorkAddressData(houseData, i + 1);
+                var workAddressData = new WorkAddressData(houseData, roomNumber++);
                 houseData.WorkAddressesData.Add(workAddressData);
             }
         }

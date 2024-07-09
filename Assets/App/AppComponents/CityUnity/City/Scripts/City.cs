@@ -12,6 +12,8 @@ namespace TheCity.Unity
         [Inject] private CityData CityData { get; }
         [Inject] private List<LivingRoom> LivingRooms { get; }
         [Inject] private List<WorkRoom> WorkRooms { get; }
+        [Inject] public List<Citizen> Citizens { get; }
+        [Inject] public List<Company> Companies { get; }
 
         [SerializeField] private Transform _citizensParent;
         [SerializeField] private Transform _housesParent;
@@ -21,15 +23,11 @@ namespace TheCity.Unity
 
         [SerializeField] private List<Transform> _housesSpawnPoints;
 
-
         public Transform CitizensParent => _citizensParent;
         public Transform HousesParent => _housesParent;
         public Transform CompaniesParent => _companiesParent;
         public List<Transform> HousesSpawnPoints => _housesSpawnPoints;
 
-
-        public readonly List<Citizen> Citizens = new(); //TODO Inject
-        public readonly List<Company> Companies = new(); //TODO Inject
 
         private void Start()
         {
