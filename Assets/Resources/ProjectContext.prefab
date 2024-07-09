@@ -131,6 +131,7 @@ MonoBehaviour:
     <CityPrefab>k__BackingField: {fileID: 8375921833967992393, guid: dd7a87cebe043e644b6292a831caeee6, type: 3}
     <LivingRoomPrefab>k__BackingField: {fileID: 8108952678932182624, guid: 7971fc7c0c73a5e499c77857c5d0fe21, type: 3}
     <WorkRoomPrefab>k__BackingField: {fileID: 7508307955362130939, guid: 6fe06ea29b41cd840b3c2996df53fca4, type: 3}
+    <HousePrefab>k__BackingField: {fileID: 2661566183170426901, guid: 74d290daeee75b640a853ae57f65c79e, type: 3}
 --- !u!114 &1844038265256292824
 MonoBehaviour:
   m_ObjectHideFlags: 0

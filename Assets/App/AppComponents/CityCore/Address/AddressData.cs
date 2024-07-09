@@ -2,7 +2,7 @@ namespace TheCity.Core
 {
     public record AddressData(
         StreetName StreetName,
-        int HouseNumber,
+        int HouseIndex,
         int RoomNumber,
         int GlobalRoomIndex,
         AddressType AddressType

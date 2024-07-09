@@ -11,5 +11,6 @@ namespace TheCity.Installers
 
         [field: SerializeField] public LivingRoom LivingRoomPrefab { get; private set; }
         [field: SerializeField] public WorkRoom WorkRoomPrefab { get; private set; }
+        [field: SerializeField] public House HousePrefab { get; private set; }
     }
 }

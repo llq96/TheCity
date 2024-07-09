@@ -18,7 +18,7 @@ namespace TheCity.Unity
 
         private void UpdateUI()
         {
-            var text = $"{AddressData.StreetName} {AddressData.HouseNumber} {AddressData.RoomNumber}";
+            var text = $"{AddressData.StreetName} {AddressData.RoomNumber}";
             _tmp_address.text = text;
         }
     }

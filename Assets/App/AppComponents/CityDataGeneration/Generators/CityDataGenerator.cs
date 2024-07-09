@@ -5,6 +5,7 @@ namespace TheCity.CityDataGeneration
 {
     public class CityDataGenerator
     {
+        private readonly CityHousesDataGenerator _cityHousesDataGenerator;
         private readonly CityAddressesDataGenerator _cityAddressesDataGenerator;
         private readonly CityCompaniesDataGenerator _cityCompaniesDataGenerator;
         private readonly CityCitizensDataGenerator _cityCitizensDataGenerator;
@@ -13,6 +14,7 @@ namespace TheCity.CityDataGeneration
         private readonly ICompanyNamesGenerator _companyNamesGenerator;
 
         public CityDataGenerator(
+            CityHousesDataGenerator cityHousesDataGenerator,
             CityAddressesDataGenerator cityAddressesDataGenerator,
             CityCompaniesDataGenerator cityCompaniesDataGenerator,
             CityCitizensDataGenerator cityCitizensDataGenerator,
@@ -20,6 +22,7 @@ namespace TheCity.CityDataGeneration
             IStreetNamesGenerator streetNamesGenerator,
             ICompanyNamesGenerator companyNamesGenerator)
         {
+            _cityHousesDataGenerator = cityHousesDataGenerator;
             _cityAddressesDataGenerator = cityAddressesDataGenerator;
             _cityCompaniesDataGenerator = cityCompaniesDataGenerator;
             _cityCitizensDataGenerator = cityCitizensDataGenerator;
@@ -38,6 +41,9 @@ namespace TheCity.CityDataGeneration
             _streetNamesGenerator.Reset();
             _companyNamesGenerator.Reset();
 
+            var houses = _cityHousesDataGenerator.GenerateHouses(1);
+            cityData.HouseDataList.AddRange(houses);
+            
             var addresses = _cityAddressesDataGenerator.GenerateAddresses(
                 generationSettings.CountLivingAddresses,
                 generationSettings.CountWorkingAddresses);
