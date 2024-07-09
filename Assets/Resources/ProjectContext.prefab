@@ -32,13 +32,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7938602325448398457}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &654272136398728335
 MonoBehaviour:
@@ -127,7 +127,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382a9eaffe31fae49951e72be10d6285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cityPrefab: {fileID: 8375921833967992393, guid: dd7a87cebe043e644b6292a831caeee6, type: 3}
+  _cityCreationSettings:
+    <CityPrefab>k__BackingField: {fileID: 8375921833967992393, guid: dd7a87cebe043e644b6292a831caeee6, type: 3}
+    <LivingRoomPrefab>k__BackingField: {fileID: 8108952678932182624, guid: 7971fc7c0c73a5e499c77857c5d0fe21, type: 3}
+    <WorkRoomPrefab>k__BackingField: {fileID: 7508307955362130939, guid: 6fe06ea29b41cd840b3c2996df53fca4, type: 3}
 --- !u!114 &1844038265256292824
 MonoBehaviour:
   m_ObjectHideFlags: 0

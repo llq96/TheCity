@@ -9,7 +9,7 @@ namespace TheCity.Installers
 {
     public class CityFactoryInstaller : MonoInstaller
     {
-        [SerializeField] private GameObject _cityPrefab;
+        [SerializeField] private CityCreationSettings _cityCreationSettings;
 
         public override void InstallBindings()
         {
@@ -29,7 +29,14 @@ namespace TheCity.Installers
         {
             Container.BindFactory<CityData, City, CityFactory>()
                 .FromSubContainerResolve()
-                .ByNewPrefabInstaller<CityInstaller>(_cityPrefab);
+                .ByNewPrefabMethod(_cityCreationSettings.CityPrefab, CityFactoryInstallerMethod);
+        }
+
+        private void CityFactoryInstallerMethod(DiContainer subContainer, CityData cityData)
+        {
+            subContainer.Bind<CityData>().FromInstance(cityData);
+            subContainer.Bind<CityCreationSettings>().FromInstance(_cityCreationSettings);
+            CityInstaller.Install(subContainer);
         }
     }
 

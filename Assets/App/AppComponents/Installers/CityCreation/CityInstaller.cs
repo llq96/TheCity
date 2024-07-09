@@ -11,18 +11,13 @@ namespace TheCity.Installers
     public class CityInstaller : Installer<CityInstaller>
     {
         [Inject] private CityData CityData { get; }
+        [Inject] private CityCreationSettings CityCreationSettings { get; }
 
         public override void InstallBindings()
         {
-            ReBindFactoryParameters();
             BindComponentsFromHierarchy();
 
             BindRooms();
-        }
-
-        private void ReBindFactoryParameters()
-        {
-            Container.Bind<CityData>().FromInstance(CityData).AsSingle().NonLazy();
         }
 
         private void BindComponentsFromHierarchy()
