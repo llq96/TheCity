@@ -1,13 +1,39 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TheCity.Core
 {
-    public class CityData //TODO Rework
+    public class CityData
     {
-        public readonly string CityName = "CityName";
-        public readonly List<HouseData> HouseDataList = new();
-        // public readonly List<AddressData> AddressesDataList = new();
-        public readonly List<CitizenData> CitizensDataList = new();
-        public readonly List<CompanyData> CompaniesDataList = new();
+        public readonly string CityName;
+        public readonly List<HouseData> HousesData;
+
+        public readonly List<LivingAddressData> LivingAddressesData;
+        public readonly List<WorkAddressData> WorkAddressesData;
+        public readonly List<CitizenData> CitizensData;
+        public readonly List<CompanyData> CompaniesData;
+
+        public CityData(List<HouseData> houseDataList) : this("CityName", houseDataList)
+        {
+        }
+
+        public CityData(string cityName, List<HouseData> housesData)
+        {
+            CityName = cityName;
+            HousesData = housesData;
+
+            LivingAddressesData = HousesData.SelectMany(x => x.LivingAddressesData).ToList();
+            WorkAddressesData = HousesData.SelectMany(x => x.WorkAddressesData).ToList();
+
+            CitizensData = HousesData
+                .SelectMany(x => x.LivingAddressesData)
+                .SelectMany(x => x.Citizens)
+                .ToList();
+
+            CompaniesData = HousesData
+                .SelectMany(x => x.WorkAddressesData)
+                .SelectMany(x => x.Companies)
+                .ToList();
+        }
     }
 }

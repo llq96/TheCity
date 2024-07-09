@@ -35,7 +35,6 @@ namespace TheCity.CityDataGeneration
         public CityData GenerateCityData(CityGenerationSettings generationSettings = null)
         {
             generationSettings ??= new();
-            CityData cityData = new();
 
             _citizenNamesGenerator.Reset();
             _streetNamesGenerator.Reset();
@@ -47,23 +46,19 @@ namespace TheCity.CityDataGeneration
                 streets,
                 generationSettings.CountLivingAddresses,
                 generationSettings.CountWorkingAddresses);
-            cityData.HouseDataList.AddRange(houses);
-
 
             var workAddresses = houses.SelectMany(x => x.WorkAddressesData).ToList();
             var livingAddresses = houses.SelectMany(x => x.LivingAddressesData).ToList();
 
             var companies = _cityCompaniesDataGenerator
                 .GenerateCompanies(generationSettings.CountCompanies, workAddresses);
-            cityData.CompaniesDataList.AddRange(companies);
 
             var jobPostsList = companies.SelectMany(companyData => companyData.JobPosts).ToList();
 
             var citizens = _cityCitizensDataGenerator
                 .GenerateCitizens(generationSettings.CountCitizens, livingAddresses, jobPostsList);
 
-            cityData.CitizensDataList.AddRange(citizens);
-
+            CityData cityData = new(houses);
             return cityData;
         }
     }

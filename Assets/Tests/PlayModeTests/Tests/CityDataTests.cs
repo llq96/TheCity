@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TheCity.Core;
 using NUnit.Framework;
 
@@ -8,12 +9,17 @@ namespace TheCity.Tests
         [Test]
         public void Properties_WhenGetAfterConstructor_IsCorrect()
         {
-            var cityData = new CityData();
+            var houseData = CorrectThings.GetHouseData();
+            var cityData = new CityData(new List<HouseData> { houseData });
 
             Assert.IsNotEmpty(cityData.CityName);
-            Assert.IsEmpty(cityData.HouseDataList);
-            Assert.IsEmpty(cityData.CitizensDataList);
-            Assert.IsEmpty(cityData.CompaniesDataList);
+            Assert.IsNotEmpty(cityData.HousesData);
+
+            //Empty if creation without full generation city
+            Assert.IsEmpty(cityData.LivingAddressesData);
+            Assert.IsEmpty(cityData.WorkAddressesData);
+            Assert.IsEmpty(cityData.CitizensData);
+            Assert.IsEmpty(cityData.CompaniesData);
         }
     }
 }

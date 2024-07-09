@@ -38,9 +38,9 @@ namespace TheCity.Installers
 
             List<House> houses = new();
 
-            for (var houseIndex = 0; houseIndex < CityData.HouseDataList.Count; houseIndex++)
+            for (var houseIndex = 0; houseIndex < CityData.HousesData.Count; houseIndex++)
             {
-                var houseData = CityData.HouseDataList[houseIndex];
+                var houseData = CityData.HousesData[houseIndex];
                 var house = HouseFactory.Create(houseData);
 
                 var houseSpawnPoint = city.HousesSpawnPoints[houseIndex];

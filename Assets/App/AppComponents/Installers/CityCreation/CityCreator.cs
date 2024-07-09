@@ -20,14 +20,14 @@ namespace TheCity.Installers
             city.transform.SetParent(null);
             SceneManager.MoveGameObjectToScene(city.gameObject, SceneManager.GetActiveScene());
 
-            foreach (var companyData in cityData.CompaniesDataList)
+            foreach (var companyData in cityData.CompaniesData)
             {
                 var company = CompaniesCreator.Create(city, companyData);
                 company.transform.parent = city.CompaniesParent;
                 city.Companies.Add(company);
             }
 
-            foreach (var citizenData in cityData.CitizensDataList)
+            foreach (var citizenData in cityData.CitizensData)
             {
                 var companyData = citizenData.CitizenInbornData.JobPost.CompanyData;
                 var citizen = CitizensCreator.Create(city, new CitizenCreationData(citizenData, companyData));
