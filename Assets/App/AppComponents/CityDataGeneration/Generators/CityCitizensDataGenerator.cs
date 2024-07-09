@@ -15,32 +15,24 @@ namespace TheCity.CityDataGeneration
             _citizenNamesGenerator = citizenNamesGenerator;
         }
 
-        public List<CitizenData> GenerateCitizens(int countCitizens, ref List<AddressData> addresses,
+        public List<CitizenData> GenerateCitizens(int countCitizens, List<LivingAddressData> addresses,
             List<JobPost> jobPostsList)
         {
             var citizensDataList = new List<CitizenData>();
 
-            var citizensWithCurrentAddress = 0;
-            AddressData currentAddress = null;
             for (int i = 0; i < countCitizens; i++)
             {
-                if (citizensWithCurrentAddress == 0 || citizensWithCurrentAddress >= CitizenPerAddress)
-                {
-                    citizensWithCurrentAddress = 0;
-                    currentAddress = addresses.First(x => x.AddressType == AddressType.Living);
-                    addresses.Remove(currentAddress);
-                }
+                var addressData = addresses.First(x => x.Citizens.Count < CitizenPerAddress);
 
                 var jobPost = GetRandomJobPostAndRemoveFromList(jobPostsList);
-                var companyIndex = jobPost.CompanyData.CompanyIndex;
+                var homeRoomStuffIndex = addressData.Citizens.Count;
                 var newCitizenData = GenerateNewCitizenData(
-                    currentAddress.GlobalRoomIndex,
-                    citizensWithCurrentAddress,
-                    companyIndex,
-                    jobPost.JobPostIndexInCompany);
+                    addressData,
+                    homeRoomStuffIndex,
+                    jobPost);
                 citizensDataList.Add(newCitizenData);
 
-                citizensWithCurrentAddress++;
+                addressData.Citizens.Add(newCitizenData);
             }
 
             return citizensDataList;
@@ -54,16 +46,17 @@ namespace TheCity.CityDataGeneration
             return jobPost;
         }
 
-        private CitizenData GenerateNewCitizenData(int addressIndex, int homeRoomStuffIndex, int companyIndex,
-            int jobPostIndex)
+        private CitizenData GenerateNewCitizenData(
+            LivingAddressData addressData,
+            int homeRoomStuffIndex,
+            JobPost jobPost)
         {
             var randomCitizenName = _citizenNamesGenerator.GetNextCitizenName();
             var inbornData = new CitizenInbornData(
                 randomCitizenName,
-                addressIndex,
+                addressData,
                 homeRoomStuffIndex,
-                companyIndex,
-                jobPostIndex);
+                jobPost);
             var citizenData = new CitizenData(inbornData);
             return citizenData;
         }

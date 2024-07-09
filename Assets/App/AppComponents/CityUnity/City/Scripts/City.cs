@@ -14,19 +14,22 @@ namespace TheCity.Unity
         [Inject] private List<WorkRoom> WorkRooms { get; }
 
         [SerializeField] private Transform _citizensParent;
-        [SerializeField] private Transform _addressesParent;
+        [SerializeField] private Transform _housesParent;
         [SerializeField] private Transform _companiesParent;
 
         [SerializeField] private NavMeshSurface _navMeshSurface;
 
+        [SerializeField] private List<Transform> _housesSpawnPoints;
+
 
         public Transform CitizensParent => _citizensParent;
-        public Transform AddressesParent => _addressesParent;
+        public Transform HousesParent => _housesParent;
         public Transform CompaniesParent => _companiesParent;
+        public List<Transform> HousesSpawnPoints => _housesSpawnPoints;
 
 
-        public readonly List<Citizen> Citizens = new();
-        public readonly List<Company> Companies = new();
+        public readonly List<Citizen> Citizens = new(); //TODO Inject
+        public readonly List<Company> Companies = new(); //TODO Inject
 
         private void Start()
         {
@@ -34,14 +37,19 @@ namespace TheCity.Unity
             _navMeshSurface.UpdateNavMesh(_navMeshSurface.navMeshData);
         }
 
-        public LivingRoom GetLivingRoom(int addressIndex)
+        public LivingRoom GetLivingRoom(LivingAddressData livingAddressData)
         {
-            return LivingRooms.First(x => x.AddressData.GlobalRoomIndex == addressIndex);
+            return LivingRooms.First(x => x.AddressData == livingAddressData);
         }
 
-        public WorkRoom GetWorkRoom(int addressIndex)
+        public WorkRoom GetWorkRoom(WorkAddressData workAddressData)
         {
-            return WorkRooms.First(x => x.AddressData.GlobalRoomIndex == addressIndex);
+            return WorkRooms.First(x => x.AddressData == workAddressData);
+        }
+
+        public Company GetCompany(CompanyData companyData)
+        {
+            return Companies.First(x => x.CompanyData == companyData);
         }
     }
 }

@@ -2093,9 +2093,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2f216ca461cc564ea7fa37027d38776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <SpawnPoints>k__BackingField:
+  <LivingRoomSpawnPoints>k__BackingField:
   - {fileID: 4277478681800380204}
   - {fileID: 7534918462477166522}
+  <WorkRoomSpawnPoints>k__BackingField:
   - {fileID: 7114080035880581059}
   - {fileID: 725443912848672715}
 --- !u!1 &5817375124223419192

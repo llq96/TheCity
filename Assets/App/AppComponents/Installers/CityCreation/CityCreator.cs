@@ -29,7 +29,7 @@ namespace TheCity.Installers
 
             foreach (var citizenData in cityData.CitizensDataList)
             {
-                var companyData = cityData.CompaniesDataList[citizenData.CitizenInbornData.CompanyIndex];
+                var companyData = citizenData.CitizenInbornData.JobPost.CompanyData;
                 var citizen = CitizensCreator.Create(city, new CitizenCreationData(citizenData, companyData));
                 citizen.transform.parent = city.CitizensParent;
                 city.Citizens.Add(citizen);

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 namespace TheCity.Core
 {
     public record CompanyData(
-        int CompanyIndex,
-        CompanyName CompanyName, 
-        int AddressIndex,
+        CompanyName CompanyName,
+        WorkAddressData AddressData,
         List<JobPost> JobPosts
     );
 

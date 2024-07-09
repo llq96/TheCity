@@ -15,28 +15,46 @@ namespace TheCity.Tests
         public static CitizenInbornData GetInbornData()
         {
             var citizenName = new CitizenName("John", "Smith");
-            var addressIndex = 1;
+            var addressData = GetLivingAddressData();
             var homeRoomStuffIndex = 0;
-            var companyIndex = 2;
-            var jobPostIndex = 3;
+            var jobPost = GetJobPost();
 
-            var citizenInbornData = new CitizenInbornData(citizenName, addressIndex, homeRoomStuffIndex, companyIndex,
-                jobPostIndex);
+            var citizenInbornData = new CitizenInbornData(citizenName, addressData, homeRoomStuffIndex, jobPost);
 
             return citizenInbornData;
         }
 
-        public static AddressData GetAddressData()
+        public static StreetName GetStreetName()
         {
-            var street = new StreetName("Wall Street");
-            var houseNumber = 1;
-            var roomNumber = 2;
-            var globalRoomIndex = 3;
-            var addressType = AddressType.Living;
+            return new StreetName("Wall Street");
+        }
 
-            var addressData = new AddressData(street, houseNumber, roomNumber, globalRoomIndex, addressType);
+        public static StreetData GetStreetData()
+        {
+            var streetName = GetStreetName();
+            return new StreetData(streetName);
+        }
 
-            return addressData;
+        public static HouseData GetHouseData()
+        {
+            var street = GetStreetData();
+            return new HouseData(street);
+        }
+
+        public static LivingAddressData GetLivingAddressData()
+        {
+            var house = GetHouseData();
+            var roomNumber = 77;
+
+            return new LivingAddressData(house, roomNumber);
+        }
+
+        public static WorkAddressData GetWorkAddressData()
+        {
+            var house = GetHouseData();
+            var roomNumber = 77;
+
+            return new WorkAddressData(house, roomNumber);
         }
 
         public static CitizenData GetCitizenData()
@@ -57,12 +75,11 @@ namespace TheCity.Tests
 
         public static CompanyData GetCompanyData()
         {
-            var companyIndex = 1;
             var companyName = GetCompanyName();
-            var addressIndex = 2;
+            var addressData = GetWorkAddressData();
             var jobPosts = new List<JobPost>();
 
-            var companyData = new CompanyData(companyIndex, companyName, addressIndex, jobPosts);
+            var companyData = new CompanyData(companyName, addressData, jobPosts);
             return companyData;
         }
 
@@ -234,12 +251,11 @@ namespace TheCity.Tests
 
         public static JobPost GetJobPost()
         {
-            var jobPostIndex = 1;
             var jobTitle = GetIJobTitle();
             var companyData = GetCompanyData();
             var workSchedule = GetWeeklySchedule();
 
-            var jobPost = new JobPost(jobPostIndex, jobTitle, companyData, workSchedule);
+            var jobPost = new JobPost(jobTitle, companyData, workSchedule);
             return jobPost;
         }
 

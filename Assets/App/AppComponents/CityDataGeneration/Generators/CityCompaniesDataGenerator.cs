@@ -18,34 +18,35 @@ namespace TheCity.CityDataGeneration
             _possibleJobTitles = possibleJobTitles;
         }
 
-        public List<CompanyData> GenerateCompanies(int countCompanies, ref List<AddressData> addresses)
+        public List<CompanyData> GenerateCompanies(int countCompanies, List<WorkAddressData> addresses)
         {
             var companiesDataList = new List<CompanyData>();
 
             for (int i = 0; i < countCompanies; i++)
             {
-                var addressData = addresses.First(x => x.AddressType == AddressType.Working);
-                addresses.Remove(addressData);
+                var addressData = addresses.First(x => x.Companies.Count < 1);
 
-                var newCompanyData = GenerateNewCompanyData(i, addressData.GlobalRoomIndex);
+                var newCompanyData = GenerateNewCompanyData(addressData);
+                addressData.Companies.Add(newCompanyData);
+
                 companiesDataList.Add(newCompanyData);
             }
 
             return companiesDataList;
         }
 
-        private CompanyData GenerateNewCompanyData(int companyIndex, int addressIndex)
+        private CompanyData GenerateNewCompanyData(WorkAddressData addressData)
         {
             var randomCompanyName = _companyNamesGenerator.GetNextCompanyName();
             var countJobPosts = Random.Range(2, 4); //TODO
             var jobPosts = new List<JobPost>();
-            var companyData = new CompanyData(companyIndex, randomCompanyName, addressIndex, jobPosts);
+            var companyData = new CompanyData(randomCompanyName, addressData, jobPosts);
 
             for (int i = 0; i < countJobPosts; i++)
             {
                 var jobTitle = _possibleJobTitles.JobTitles.GetRandomElement();
                 var workSchedule = GenerateWorkSchedule();
-                var jobPost = new JobPost(i, jobTitle, companyData, workSchedule);
+                var jobPost = new JobPost(jobTitle, companyData, workSchedule);
                 jobPosts.Add(jobPost);
             }
 

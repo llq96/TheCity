@@ -15,8 +15,8 @@ namespace TheCity.Installers
         {
             InstallFactory();
 
+            Container.Bind<CityStreetsDataGenerator>().AsSingle().NonLazy();
             Container.Bind<CityHousesDataGenerator>().AsSingle().NonLazy();
-            Container.Bind<CityAddressesDataGenerator>().AsSingle().NonLazy();
             Container.Bind<CityCompaniesDataGenerator>().AsSingle().NonLazy();
             Container.Bind<CityCitizensDataGenerator>().AsSingle().NonLazy();
 

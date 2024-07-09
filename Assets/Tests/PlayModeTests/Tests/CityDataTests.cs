@@ -11,7 +11,7 @@ namespace TheCity.Tests
             var cityData = new CityData();
 
             Assert.IsNotEmpty(cityData.CityName);
-            Assert.IsEmpty(cityData.AddressesDataList);
+            Assert.IsEmpty(cityData.HouseDataList);
             Assert.IsEmpty(cityData.CitizensDataList);
             Assert.IsEmpty(cityData.CompaniesDataList);
         }

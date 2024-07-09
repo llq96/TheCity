@@ -45,22 +45,22 @@ namespace TheCity.Installers
 
         private void BindFromCity()
         {
-            var _homeRoom = City.GetLivingRoom(CitizenInbornData.AddressIndex);
+            var _homeRoom = City.GetLivingRoom(CitizenInbornData.AddressData);
             Container.Bind<LivingRoom>().FromInstance(_homeRoom).AsSingle().NonLazy();
 
             var _homeRoomCitizenStuff = _homeRoom.CitizenStuffs[CitizenInbornData.HomeRoomStuffIndex];
             Container.Bind<HomeRoomCitizenStuff>().FromInstance(_homeRoomCitizenStuff).AsSingle().NonLazy();
 
-            var _company = City.Companies[CitizenInbornData.CompanyIndex];
+            var _company = City.GetCompany(CompanyData);
             Container.Bind<Company>().FromInstance(_company).AsSingle().NonLazy();
 
-            var _jobPlace = _company.Room.JobPlaces[CitizenInbornData.JobPostIndex];
+            var _jobPlace = _company.Room.GetJobPlace(CitizenInbornData.JobPost);
             Container.Bind<JobPlace>().FromInstance(_jobPlace).AsSingle().NonLazy();
         }
 
         private void BindJobPost()
         {
-            var jobPost = CompanyData.JobPosts[CitizenInbornData.JobPostIndex];
+            var jobPost = CitizenInbornData.JobPost;
             Container.Bind<JobPost>().FromInstance(jobPost).AsSingle().NonLazy();
         }
 

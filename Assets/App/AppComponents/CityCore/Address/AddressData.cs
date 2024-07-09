@@ -1,17 +1,21 @@
+using System.Collections.Generic;
+
 namespace TheCity.Core
 {
-    public record AddressData(
-        StreetName StreetName,
-        int HouseIndex,
-        int RoomNumber,
-        int GlobalRoomIndex,
-        AddressType AddressType
+    public abstract record AddressData(
+        HouseData HouseData,
+        int RoomNumber
     );
 
-
-    public enum AddressType
+    public record LivingAddressData(HouseData HouseData, int RoomNumber)
+        : AddressData(HouseData, RoomNumber)
     {
-        Living,
-        Working
+        public List<CitizenData> Citizens { get; } = new();
+    };
+
+    public record WorkAddressData(HouseData HouseData, int RoomNumber)
+        : AddressData(HouseData, RoomNumber)
+    {
+        public List<CompanyData> Companies { get; } = new();
     }
 }

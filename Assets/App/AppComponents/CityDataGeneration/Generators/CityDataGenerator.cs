@@ -5,8 +5,8 @@ namespace TheCity.CityDataGeneration
 {
     public class CityDataGenerator
     {
+        private readonly CityStreetsDataGenerator _cityStreetsDataGenerator;
         private readonly CityHousesDataGenerator _cityHousesDataGenerator;
-        private readonly CityAddressesDataGenerator _cityAddressesDataGenerator;
         private readonly CityCompaniesDataGenerator _cityCompaniesDataGenerator;
         private readonly CityCitizensDataGenerator _cityCitizensDataGenerator;
         private readonly ICitizenNamesGenerator _citizenNamesGenerator;
@@ -14,16 +14,16 @@ namespace TheCity.CityDataGeneration
         private readonly ICompanyNamesGenerator _companyNamesGenerator;
 
         public CityDataGenerator(
+            CityStreetsDataGenerator cityStreetsDataGenerator,
             CityHousesDataGenerator cityHousesDataGenerator,
-            CityAddressesDataGenerator cityAddressesDataGenerator,
             CityCompaniesDataGenerator cityCompaniesDataGenerator,
             CityCitizensDataGenerator cityCitizensDataGenerator,
             ICitizenNamesGenerator citizenNamesGenerator,
             IStreetNamesGenerator streetNamesGenerator,
             ICompanyNamesGenerator companyNamesGenerator)
         {
+            _cityStreetsDataGenerator = cityStreetsDataGenerator;
             _cityHousesDataGenerator = cityHousesDataGenerator;
-            _cityAddressesDataGenerator = cityAddressesDataGenerator;
             _cityCompaniesDataGenerator = cityCompaniesDataGenerator;
             _cityCitizensDataGenerator = cityCitizensDataGenerator;
             _citizenNamesGenerator = citizenNamesGenerator;
@@ -41,22 +41,26 @@ namespace TheCity.CityDataGeneration
             _streetNamesGenerator.Reset();
             _companyNamesGenerator.Reset();
 
-            var houses = _cityHousesDataGenerator.GenerateHouses(1);
-            cityData.HouseDataList.AddRange(houses);
-            
-            var addresses = _cityAddressesDataGenerator.GenerateAddresses(
+            var streets = _cityStreetsDataGenerator.GenerateStreetsData(1); //TODO
+
+            var houses = _cityHousesDataGenerator.GenerateHousesByCountAddresses(
+                streets,
                 generationSettings.CountLivingAddresses,
                 generationSettings.CountWorkingAddresses);
-            cityData.AddressesDataList.AddRange(addresses);
+            cityData.HouseDataList.AddRange(houses);
+
+
+            var workAddresses = houses.SelectMany(x => x.WorkAddressesData).ToList();
+            var livingAddresses = houses.SelectMany(x => x.LivingAddressesData).ToList();
 
             var companies = _cityCompaniesDataGenerator
-                .GenerateCompanies(generationSettings.CountCompanies, ref addresses);
+                .GenerateCompanies(generationSettings.CountCompanies, workAddresses);
             cityData.CompaniesDataList.AddRange(companies);
 
             var jobPostsList = companies.SelectMany(companyData => companyData.JobPosts).ToList();
 
             var citizens = _cityCitizensDataGenerator
-                .GenerateCitizens(generationSettings.CountCitizens, ref addresses, jobPostsList);
+                .GenerateCitizens(generationSettings.CountCitizens, livingAddresses, jobPostsList);
 
             cityData.CitizensDataList.AddRange(citizens);
 

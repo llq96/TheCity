@@ -2,9 +2,8 @@ namespace TheCity.Core
 {
     public record CitizenInbornData(
         CitizenName Name,
-        int AddressIndex,
+        LivingAddressData AddressData,
         int HomeRoomStuffIndex,
-        int CompanyIndex,
-        int JobPostIndex
+        JobPost JobPost
     );
 }
