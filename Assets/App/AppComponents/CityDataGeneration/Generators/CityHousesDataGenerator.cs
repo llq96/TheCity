@@ -27,6 +27,7 @@ namespace TheCity.CityDataGeneration
                 var houseNumber = i + 1;
                 var houseData = new HouseData(street, houseNumber);
 
+                street.HousesData.Add(houseData);
                 FillHouseDataAddresses(houseData);
 
                 houses.Add(houseData);

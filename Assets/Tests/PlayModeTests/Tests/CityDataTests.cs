@@ -9,13 +9,14 @@ namespace TheCity.Tests
         [Test]
         public void Properties_WhenGetAfterConstructor_IsCorrect()
         {
-            var houseData = CorrectThings.GetHouseData();
-            var cityData = new CityData(new List<HouseData> { houseData });
+            var streetData = CorrectThings.GetStreetData();
+            var cityData = new CityData(new List<StreetData> { streetData });
 
             Assert.IsNotEmpty(cityData.CityName);
-            Assert.IsNotEmpty(cityData.HousesData);
+            Assert.IsNotEmpty(cityData.StreetsData);
 
             //Empty if creation without full generation city
+            Assert.IsEmpty(cityData.HousesData);
             Assert.IsEmpty(cityData.LivingAddressesData);
             Assert.IsEmpty(cityData.WorkAddressesData);
             Assert.IsEmpty(cityData.CitizensData);

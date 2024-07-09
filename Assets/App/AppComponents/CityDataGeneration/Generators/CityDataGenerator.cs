@@ -46,7 +46,7 @@ namespace TheCity.CityDataGeneration
                 streets,
                 generationSettings.CountLivingAddresses,
                 generationSettings.CountWorkingAddresses);
-
+            
             var workAddresses = houses.SelectMany(x => x.WorkAddressesData).ToList();
             var livingAddresses = houses.SelectMany(x => x.LivingAddressesData).ToList();
 
@@ -58,7 +58,7 @@ namespace TheCity.CityDataGeneration
             var citizens = _cityCitizensDataGenerator
                 .GenerateCitizens(generationSettings.CountCitizens, livingAddresses, jobPostsList);
 
-            CityData cityData = new(houses);
+            CityData cityData = new(streets);
             return cityData;
         }
     }
