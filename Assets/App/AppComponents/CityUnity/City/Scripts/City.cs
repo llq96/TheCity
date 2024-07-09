@@ -10,21 +10,20 @@ namespace TheCity.Unity
     public class City : MonoBehaviour
     {
         [Inject] private CityData CityData { get; }
+        [Inject] private List<LivingRoom> LivingRooms { get; }
+        [Inject] private List<WorkRoom> WorkRooms { get; }
 
         [SerializeField] private Transform _citizensParent;
         [SerializeField] private Transform _addressesParent;
         [SerializeField] private Transform _companiesParent;
 
         [SerializeField] private NavMeshSurface _navMeshSurface;
-        [SerializeField] private List<LivingRoom> _livingRooms;
-        [SerializeField] private List<WorkRoom> _workRooms;
+
 
         public Transform CitizensParent => _citizensParent;
         public Transform AddressesParent => _addressesParent;
         public Transform CompaniesParent => _companiesParent;
 
-        public List<LivingRoom> LivingRooms => _livingRooms;
-        public List<WorkRoom> WorkRooms => _workRooms;
 
         public readonly List<Citizen> Citizens = new();
         public readonly List<Company> Companies = new();
@@ -37,12 +36,12 @@ namespace TheCity.Unity
 
         public LivingRoom GetLivingRoom(int addressIndex)
         {
-            return _livingRooms.First(x => x.AddressData.GlobalRoomIndex == addressIndex);
+            return LivingRooms.First(x => x.AddressData.GlobalRoomIndex == addressIndex);
         }
 
         public WorkRoom GetWorkRoom(int addressIndex)
         {
-            return _workRooms.First(x => x.AddressData.GlobalRoomIndex == addressIndex);
+            return WorkRooms.First(x => x.AddressData.GlobalRoomIndex == addressIndex);
         }
     }
 }

@@ -61,8 +61,8 @@ namespace TheCity.CityDataGeneration
 
 public class CityGenerationSettings
 {
-    public readonly int CountCitizens = 6;
-    public readonly int CountCompanies = 3;
-    public readonly int CountLivingAddresses = 3;
-    public readonly int CountWorkingAddresses = 3;
+    public readonly int CountCitizens = 12;
+    public readonly int CountCompanies = 6;
+    public readonly int CountLivingAddresses = 6;
+    public readonly int CountWorkingAddresses = 6;
 }

@@ -97,7 +97,7 @@ namespace TheCity.Unity
 
             if (_nearestActivity == null) return;
 
-            if (_nearestActivity.DateTime < GameTime.GameDateTime)
+            if (_nearestActivity.DateTime <= GameTime.GameDateTime)
             {
                 _currentActivity = _nearestActivity;
                 CitizenActivityRunner.TryDoActivity(_nearestActivity.Activity);
