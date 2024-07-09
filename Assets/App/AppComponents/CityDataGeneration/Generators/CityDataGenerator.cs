@@ -40,13 +40,13 @@ namespace TheCity.CityDataGeneration
             _streetNamesGenerator.Reset();
             _companyNamesGenerator.Reset();
 
-            var streets = _cityStreetsDataGenerator.GenerateStreetsData(1); //TODO
+            var streets = _cityStreetsDataGenerator.GenerateStreetsData(generationSettings.CountStreets);
 
             var houses = _cityHousesDataGenerator.GenerateHousesByCountAddresses(
                 streets,
                 generationSettings.CountLivingAddresses,
                 generationSettings.CountWorkingAddresses);
-            
+
             var workAddresses = houses.SelectMany(x => x.WorkAddressesData).ToList();
             var livingAddresses = houses.SelectMany(x => x.LivingAddressesData).ToList();
 
@@ -66,6 +66,7 @@ namespace TheCity.CityDataGeneration
 
 public class CityGenerationSettings
 {
+    public readonly int CountStreets = 1;
     public readonly int CountCitizens = 12;
     public readonly int CountCompanies = 6;
     public readonly int CountLivingAddresses = 6;

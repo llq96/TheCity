@@ -38,7 +38,9 @@ namespace TheCity.CityDataGeneration
         private CompanyData GenerateNewCompanyData(WorkAddressData addressData)
         {
             var randomCompanyName = _companyNamesGenerator.GetNextCompanyName();
-            var countJobPosts = Random.Range(2, 4); //TODO
+            var countJobPosts = Random.Range(
+                GenerationSettings.MinCountJobPosts,
+                GenerationSettings.MaxCountJobPosts + 1);
             var jobPosts = new List<JobPost>();
             var companyData = new CompanyData(randomCompanyName, addressData, jobPosts);
 
@@ -55,20 +57,24 @@ namespace TheCity.CityDataGeneration
 
         private WeeklySchedule GenerateWorkSchedule()
         {
-            //TODO после выноса в отдельный класс сделать менее хардкодно
             var weeklySchedule = new WeeklySchedule();
             for (int i = (int)DayOfWeek.Monday; i <= (int)DayOfWeek.Friday; i++)
             {
                 var dayOfWeek = (DayOfWeek)i;
                 var daySchedule = weeklySchedule[dayOfWeek];
 
-                var startTimeHour = Random.Range(6, 13);
+                var startTimeHour = Random.Range(
+                    GenerationSettings.MinStartWorkHour,
+                    GenerationSettings.MaxStartWorkHour + 1);
                 var startTimeMinute = Random.Range(0, 4) * 15; //0, 15, 30, 45 
                 var startTime = new TimeOnly(startTimeHour, startTimeMinute);
                 var startWorkScheduleItem = new DayScheduleItem(startTime, new Activity_StartWork());
                 daySchedule.ScheduleItems.Add(startWorkScheduleItem);
 
-                var endWorkTimeHour = startTimeHour + Random.Range(6, 11);
+                var workTime = Random.Range(
+                    GenerationSettings.MinWorkTimeInHours,
+                    GenerationSettings.MaxWorkTimeInHours + 1);
+                var endWorkTimeHour = startTimeHour + workTime;
                 var endWorkTimeMinute = Random.Range(0, 4) * 15; //0, 15, 30, 45 
                 var endWorkTime = new TimeOnly(endWorkTimeHour, endWorkTimeMinute);
                 var endWorkScheduleItem = new DayScheduleItem(endWorkTime, new Activity_EndWork());
@@ -76,6 +82,19 @@ namespace TheCity.CityDataGeneration
             }
 
             return weeklySchedule;
+        }
+
+        //При необходимости выделить интерфейс и сделать сериализованные настройки
+        private static class GenerationSettings
+        {
+            public const int MinCountJobPosts = 2;
+            public const int MaxCountJobPosts = 3;
+
+            public const int MinStartWorkHour = 6;
+            public const int MaxStartWorkHour = 12;
+
+            public const int MinWorkTimeInHours = 6;
+            public const int MaxWorkTimeInHours = 9;
         }
     }
 }

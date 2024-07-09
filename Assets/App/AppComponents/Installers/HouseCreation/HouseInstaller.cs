@@ -15,48 +15,61 @@ namespace TheCity.Installers
         {
             BindComponentsFromHierarchy();
 
-            var house = Container.Resolve<House>();
-
-            List<LivingRoom> _livingRooms = new();
-            List<WorkRoom> _workRooms = new();
-
-            for (var i = 0; i < HouseData.LivingAddressesData.Count; i++) //TODO Вынести частично
-            {
-                var livingAddressData = HouseData.LivingAddressesData[i];
-                var subContainer = Container.CreateSubContainer();
-                subContainer.Bind<AddressData>().FromInstance(livingAddressData);
-                subContainer.Bind<LivingAddressData>().FromInstance(livingAddressData);
-
-                var room = Object.Instantiate(CityCreationSettings.LivingRoomPrefab, house.transform);
-                var spawnPoint = house.LivingRoomSpawnPoints[i];
-                room.transform.SetPositionAndRotation(spawnPoint);
-                subContainer.InjectGameObject(room.gameObject);
-
-                _livingRooms.Add(room);
-            }
-
-            for (var i = 0; i < HouseData.WorkAddressesData.Count; i++)
-            {
-                var workAddressData = HouseData.WorkAddressesData[i];
-                var subContainer = Container.CreateSubContainer();
-                subContainer.Bind<AddressData>().FromInstance(workAddressData);
-                subContainer.Bind<WorkAddressData>().FromInstance(workAddressData);
-
-                var room = Object.Instantiate(CityCreationSettings.WorkRoomPrefab, house.transform);
-                var spawnPoint = house.WorkRoomSpawnPoints[i];
-                room.transform.SetPositionAndRotation(spawnPoint);
-                subContainer.InjectGameObject(room.gameObject);
-
-                _workRooms.Add(room);
-            }
-
-            Container.Bind<List<LivingRoom>>().FromInstance(_livingRooms).AsSingle().NonLazy();
-            Container.Bind<List<WorkRoom>>().FromInstance(_workRooms).AsSingle().NonLazy();
+            CreateRooms();
         }
 
         private void BindComponentsFromHierarchy()
         {
             Container.Bind<House>().FromComponentInHierarchy().AsSingle().NonLazy();
+        }
+
+        private void CreateRooms()
+        {
+            var house = Container.Resolve<House>();
+
+            List<LivingRoom> _livingRooms = CreateRooms(
+                HouseData.LivingAddressesData,
+                CityCreationSettings.LivingRoomPrefab,
+                house.LivingRoomSpawnPoints,
+                house.transform);
+            List<WorkRoom> _workRooms = CreateRooms(
+                HouseData.WorkAddressesData,
+                CityCreationSettings.WorkRoomPrefab,
+                house.WorkRoomSpawnPoints,
+                house.transform);
+
+            Container.Bind<List<LivingRoom>>().FromInstance(_livingRooms).AsSingle().NonLazy();
+            Container.Bind<List<WorkRoom>>().FromInstance(_workRooms).AsSingle().NonLazy();
+        }
+
+        private List<TRoom> CreateRooms<TAddressData, TRoom>(
+            List<TAddressData> addressesData,
+            TRoom prefab,
+            List<Transform> spawnPoints,
+            Transform parent)
+            where TAddressData : AddressData
+            where TRoom : Room
+        {
+            List<TRoom> rooms = new();
+
+            for (var i = 0; i < addressesData.Count; i++)
+            {
+                var addressData = addressesData[i];
+                var spawnPoint = spawnPoints[i];
+
+                var subContainer = Container.CreateSubContainer();
+                subContainer.Bind<AddressData>().FromInstance(addressData);
+                subContainer.Bind<TAddressData>().FromInstance(addressData);
+
+                var room = Object.Instantiate(prefab, parent);
+
+                room.transform.SetPositionAndRotation(spawnPoint);
+                subContainer.InjectGameObject(room.gameObject);
+                
+                rooms.Add(room);
+            }
+
+            return rooms;
         }
     }
 }
