@@ -1,13 +1,18 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace DeskCore
 {
-    public class Graph<TElem>
+    public class Graph<TElem> : IEnumerable<TElem>
     {
-        private List<TElem> _elements;
-        private List<Edge<TElem>> _edges;
+        private readonly List<TElem> _elements = new();
+        private readonly List<Edge<TElem>> _edges = new();
 
+        public ReadOnlyCollection<TElem> Elements => _elements.AsReadOnly();
+        public ReadOnlyCollection<Edge<TElem>> Edges => _edges.AsReadOnly();
+        
         public void AddElement(TElem elem)
         {
             _elements.Add(elem);
@@ -46,5 +51,8 @@ namespace DeskCore
         {
             return _elements.Contains(elem);
         }
+
+        public IEnumerator<TElem> GetEnumerator() => _elements.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

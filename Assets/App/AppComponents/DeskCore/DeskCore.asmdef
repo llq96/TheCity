@@ -1,7 +1,9 @@
 {
     "name": "DeskCore",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:a4dacee27f9901b4ca51f20b0b00197c"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
