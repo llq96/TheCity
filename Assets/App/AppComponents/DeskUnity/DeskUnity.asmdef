@@ -1,0 +1,16 @@
+{
+    "name": "DeskUnity",
+    "rootNamespace": "DeskUnity",
+    "references": [
+        "GUID:f6a8e47cfbb961c4fbec6b7962e2de32"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
