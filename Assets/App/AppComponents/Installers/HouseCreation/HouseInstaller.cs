@@ -30,13 +30,11 @@ namespace TheCity.Installers
             List<LivingRoom> _livingRooms = CreateRooms(
                 HouseData.LivingAddressesData,
                 CityCreationSettings.LivingRoomPrefab,
-                house.LivingRoomSpawnPoints,
-                house.transform);
+                house.LivingRoomSpawnPoints);
             List<WorkRoom> _workRooms = CreateRooms(
                 HouseData.WorkAddressesData,
                 CityCreationSettings.WorkRoomPrefab,
-                house.WorkRoomSpawnPoints,
-                house.transform);
+                house.WorkRoomSpawnPoints);
 
             Container.Bind<List<LivingRoom>>().FromInstance(_livingRooms).AsSingle().NonLazy();
             Container.Bind<List<WorkRoom>>().FromInstance(_workRooms).AsSingle().NonLazy();
@@ -45,8 +43,7 @@ namespace TheCity.Installers
         private List<TRoom> CreateRooms<TAddressData, TRoom>(
             List<TAddressData> addressesData,
             TRoom prefab,
-            List<Transform> spawnPoints,
-            Transform parent)
+            List<Transform> spawnPoints)
             where TAddressData : AddressData
             where TRoom : Room
         {
@@ -61,11 +58,11 @@ namespace TheCity.Installers
                 subContainer.Bind<AddressData>().FromInstance(addressData);
                 subContainer.Bind<TAddressData>().FromInstance(addressData);
 
-                var room = Object.Instantiate(prefab, parent);
+                var room = Object.Instantiate(prefab, spawnPoint);
 
                 room.transform.SetPositionAndRotation(spawnPoint);
-                subContainer.InjectGameObject(room.gameObject);
-                
+                subContainer.InjectGameObject(spawnPoint.gameObject);
+
                 rooms.Add(room);
             }
 
