@@ -5,6 +5,7 @@ using Zenject;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using UnityEngine;
 
 namespace TheCity.Tests
 {
@@ -47,6 +48,29 @@ namespace TheCity.Tests
             var names = Enumerable.Repeat(0, count).Select(_ => CitizenNamesGenerator.GetNextCitizenName()).ToList();
 
             Assert.Catch(() => CitizenNamesGenerator.GetNextCitizenName());
+        }
+
+
+        [Test, TestCaseSource(nameof(CountPairs))]
+        public void GetNextCitizenName_GoodUnique(Tuple<int, int> countsPair) //TODO Хорошая уникальность, придумать имя
+        {
+            CorrectSetUp(countsPair.Item1, countsPair.Item2);
+            var maxSize = Math.Max(countsPair.Item1, countsPair.Item2);
+
+            // var count = countsPair.Item1 * countsPair.Item2;
+            var names = Enumerable.Repeat(0, maxSize).Select(_ => CitizenNamesGenerator.GetNextCitizenName()).ToList();
+            var countAfterDistinct = names.Distinct().Count();
+            var repeatFirstNames = names.Select(x => x.FirstName).GroupBy(x => x).Count(g => g.Count() > 1);
+            var repeatSecondNames = names.Select(x => x.SecondName).GroupBy(x => x).Count(g => g.Count() > 1);
+            var repeats = repeatFirstNames + repeatSecondNames;
+
+            Debug.Log($"Size ({countsPair.Item1}x{countsPair.Item2}), " +
+                      $"Repeats {repeatFirstNames}+{repeatSecondNames} = {repeats} \n" +
+                      $"{maxSize} {countAfterDistinct} {names.Count} \n");
+
+
+            var isCorrect = repeatFirstNames == 0 || repeatSecondNames == 0;
+            Assert.True(isCorrect);
         }
 
 

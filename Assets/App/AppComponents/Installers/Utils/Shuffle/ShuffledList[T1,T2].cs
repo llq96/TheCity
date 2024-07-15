@@ -63,7 +63,6 @@ namespace TheCity.Installers.Utils
         private readonly List<T2> _list2;
 
         private readonly int _maxCombinations;
-        private readonly bool _isSameParity;
 
         private readonly int _list1_count;
         private readonly int _list2_count;
@@ -78,8 +77,6 @@ namespace TheCity.Installers.Utils
 
             _list1_count = _list1.Count;
             _list2_count = _list2.Count;
-
-            _isSameParity = (_list1_count % 2) == (_list2_count % 2);
         }
 
         public bool MoveNext()
@@ -87,9 +84,43 @@ namespace TheCity.Installers.Utils
             _index++;
             if (_index >= _maxCombinations) return false;
 
-            var index1 = _index % _list1_count;
+            var circleX = _index / _list1_count;
+            var circleY = _index / _list2_count;
 
-            var index2 = ((_index % _list1_count) + (_index / _list1_count)) % _list2_count;
+            var modX = _index % _list1_count;
+            var modY = _index % _list2_count;
+
+            int index1;
+            int index2;
+
+            if (_list1_count > _list2_count)
+            {
+                var dif = modX + circleX - _list1_count;
+                if (dif >= 0)
+                {
+                    index1 = (circleX + _index) % _list1_count;
+                    index2 = (_list2_count + dif - circleX) % _list2_count;
+                }
+                else
+                {
+                    index1 = (circleX + modX) % _list1_count;
+                    index2 = modX % _list2_count;
+                }
+            }
+            else
+            {
+                var dif = modY + circleY - _list2_count;
+                if (dif >= 0)
+                {
+                    index1 = (_list1_count + dif - circleY) % _list1_count;
+                    index2 = (circleY + _index) % _list2_count;
+                }
+                else
+                {
+                    index1 = modY % _list1_count;
+                    index2 = (circleY + modY) % _list2_count;
+                }
+            }
 
             var element1 = _list1[index1];
             var element2 = _list2[index2];
