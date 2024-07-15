@@ -93,35 +93,28 @@ namespace TheCity.Installers.Utils
             int index1;
             int index2;
 
+            //TODO Сделать визуализацию алгоритма
             if (_list1_count > _list2_count)
             {
+                index1 = _index + circleX;
+
                 var dif = modX + circleX - _list1_count;
-                if (dif >= 0)
-                {
-                    index1 = (circleX + _index) % _list1_count;
-                    index2 = (_list2_count + dif - circleX) % _list2_count;
-                }
-                else
-                {
-                    index1 = (circleX + modX) % _list1_count;
-                    index2 = modX % _list2_count;
-                }
+                index2 = dif >= 0
+                    ? _list2_count + dif - circleX
+                    : modX;
             }
             else
             {
+                index2 = _index + circleY;
+
                 var dif = modY + circleY - _list2_count;
-                if (dif >= 0)
-                {
-                    index1 = (_list1_count + dif - circleY) % _list1_count;
-                    index2 = (circleY + _index) % _list2_count;
-                }
-                else
-                {
-                    index1 = modY % _list1_count;
-                    index2 = (circleY + modY) % _list2_count;
-                }
+                index1 = dif >= 0
+                    ? _list1_count + dif - circleY
+                    : modY;
             }
 
+            index1 %= _list1_count;
+            index2 %= _list2_count;
             var element1 = _list1[index1];
             var element2 = _list2[index2];
             Current = new Tuple<T1, T2>(element1, element2);

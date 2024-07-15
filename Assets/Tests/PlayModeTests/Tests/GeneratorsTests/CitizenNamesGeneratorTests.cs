@@ -51,38 +51,52 @@ namespace TheCity.Tests
         }
 
 
-        [Test, TestCaseSource(nameof(CountPairs))]
-        public void GetNextCitizenName_GoodUnique(Tuple<int, int> countsPair) //TODO Хорошая уникальность, придумать имя
+        [Test]
+        [TestCaseSource(nameof(CountPairs_Horizontal))]
+        [TestCaseSource(nameof(CountPairs_Square))]
+        public void GetNextCitizenName_WhenFirstCircleOfGeneration_ReturnUniqueFirstNames(Tuple<int, int> countsPair)
         {
             CorrectSetUp(countsPair.Item1, countsPair.Item2);
-            var maxSize = Math.Max(countsPair.Item1, countsPair.Item2);
 
-            // var count = countsPair.Item1 * countsPair.Item2;
-            var names = Enumerable.Repeat(0, maxSize).Select(_ => CitizenNamesGenerator.GetNextCitizenName()).ToList();
-            var countAfterDistinct = names.Distinct().Count();
+            var count = countsPair.Item1;
+            var names = Enumerable.Repeat(0, count).Select(_ => CitizenNamesGenerator.GetNextCitizenName()).ToList();
             var repeatFirstNames = names.Select(x => x.FirstName).GroupBy(x => x).Count(g => g.Count() > 1);
-            var repeatSecondNames = names.Select(x => x.SecondName).GroupBy(x => x).Count(g => g.Count() > 1);
-            var repeats = repeatFirstNames + repeatSecondNames;
 
-            Debug.Log($"Size ({countsPair.Item1}x{countsPair.Item2}), " +
-                      $"Repeats {repeatFirstNames}+{repeatSecondNames} = {repeats} \n" +
-                      $"{maxSize} {countAfterDistinct} {names.Count} \n");
-
-
-            var isCorrect = repeatFirstNames == 0 || repeatSecondNames == 0;
-            Assert.True(isCorrect);
+            Assert.AreEqual(0, repeatFirstNames);
         }
 
+        [Test]
+        [TestCaseSource(nameof(CountPairs_Vertical))]
+        [TestCaseSource(nameof(CountPairs_Square))]
+        public void GetNextCitizenName_WhenFirstCircleOfGeneration_ReturnUniqueSecondsNames(Tuple<int, int> countsPair)
+        {
+            CorrectSetUp(countsPair.Item1, countsPair.Item2);
+
+            var count = countsPair.Item2;
+            var names = Enumerable.Repeat(0, count).Select(_ => CitizenNamesGenerator.GetNextCitizenName()).ToList();
+            var repeatFirstNames = names.Select(x => x.SecondName).GroupBy(x => x).Count(g => g.Count() > 1);
+
+            Assert.AreEqual(0, repeatFirstNames);
+        }
 
         private static IEnumerable<Tuple<int, int>> CountPairs()
         {
-            for (int i = 1; i <= 10; i++)
+            for (int i = 1; i <= 20; i++)
             {
-                for (int k = 1; k <= 10; k++)
+                for (int k = 1; k <= 20; k++)
                 {
                     yield return new Tuple<int, int>(i, k);
                 }
             }
         }
+
+        private static IEnumerable<Tuple<int, int>> CountPairs_Horizontal() =>
+            CountPairs().Where(pair => pair.Item1 > pair.Item2);
+
+        private static IEnumerable<Tuple<int, int>> CountPairs_Vertical() =>
+            CountPairs().Where(pair => pair.Item1 > pair.Item2);
+
+        private static IEnumerable<Tuple<int, int>> CountPairs_Square() =>
+            CountPairs().Where(pair => pair.Item1 == pair.Item2);
     }
 }
