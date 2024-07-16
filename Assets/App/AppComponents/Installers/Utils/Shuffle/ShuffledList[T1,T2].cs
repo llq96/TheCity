@@ -94,14 +94,14 @@ namespace TheCity.Installers.Utils
                 var modX = _index % _list1_count;
 
                 index1 = _index;
-                index2 = _list2_count + modX - 1 - circlesX;
+                index2 = _list1_count - modX + circlesX;
             }
             else
             {
                 var circlesY = _index / _list2_count;
                 var modY = _index % _list2_count;
-              
-                index1 = _list1_count + modY - 1 - circlesY;
+
+                index1 = _list2_count - modY + circlesY;
                 index2 = _index;
             }
 
