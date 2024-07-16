@@ -84,33 +84,25 @@ namespace TheCity.Installers.Utils
             _index++;
             if (_index >= _maxCombinations) return false;
 
-            var circleX = _index / _list1_count;
-            var circleY = _index / _list2_count;
-
-            var modX = _index % _list1_count;
-            var modY = _index % _list2_count;
-
             int index1;
             int index2;
 
             //TODO Сделать визуализацию алгоритма
             if (_list1_count > _list2_count)
             {
-                index1 = _index + circleX;
+                var circlesX = _index / _list1_count;
+                var modX = _index % _list1_count;
 
-                var dif = modX + circleX - _list1_count;
-                index2 = dif >= 0
-                    ? _list2_count + dif - circleX
-                    : modX;
+                index1 = _index;
+                index2 = _list2_count + modX - 1 - circlesX;
             }
             else
             {
-                index2 = _index + circleY;
-
-                var dif = modY + circleY - _list2_count;
-                index1 = dif >= 0
-                    ? _list1_count + dif - circleY
-                    : modY;
+                var circlesY = _index / _list2_count;
+                var modY = _index % _list2_count;
+              
+                index1 = _list1_count + modY - 1 - circlesY;
+                index2 = _index;
             }
 
             index1 %= _list1_count;
