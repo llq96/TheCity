@@ -10,7 +10,7 @@ namespace TheCity.AI
 {
     public static class AIChat
     {
-        private const string QuestionTemplate = @"{
+        private const string DefaultTemplate = @"{
         ""model"": ""gpt-4o-mini"",
         ""messages"": [
             {
@@ -26,7 +26,13 @@ namespace TheCity.AI
 
         public static async Task<string> GetAnswer(string question)
         {
-            string jsonContent = QuestionTemplate.Replace("{0}", question);
+            return await GetAnswer(DefaultTemplate, question);
+        }
+
+        public static async Task<string> GetAnswer(string template, string question)
+        {
+            question = new string(question.Where(c => char.IsLetterOrDigit(c) || c == ' ').ToArray());
+            string jsonContent = template.Replace("{0}", question);
 
             var httpClient = new HttpClient();
             var request = new HttpRequestMessage

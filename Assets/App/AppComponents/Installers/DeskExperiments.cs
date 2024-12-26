@@ -12,12 +12,12 @@ namespace TheCity.Installers
 
         private void Start()
         {
-            var card = new CitizenCard(City.Citizens[0].CitizenData);
-            var card2 = new CitizenCard(City.Citizens[1].CitizenData);
-
-            Desk.Graph.AddElement(card);
-            Desk.Graph.AddElement(card2);
-            Desk.Graph.AddEdge(card, card2);
+            // var card = new CitizenCard(City.Citizens[0].CitizenData);
+            // var card2 = new CitizenCard(City.Citizens[1].CitizenData);
+            //
+            // Desk.Graph.AddElement(card);
+            // Desk.Graph.AddElement(card2);
+            // Desk.Graph.AddEdge(card, card2);
         }
     }
 }

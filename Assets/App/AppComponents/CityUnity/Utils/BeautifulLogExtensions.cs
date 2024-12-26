@@ -9,6 +9,11 @@ namespace TheCity.Unity
     {
         public static void PrintFormattedInfo(this Citizen citizen)
         {
+            Debug.Log(citizen.GetFormattedInfo());
+        }
+
+        public static string GetFormattedInfo(this Citizen citizen)
+        {
             StringBuilder sb = new();
             sb.AppendLine($"I am {citizen.InbornData.Name}");
             sb.AppendLine($"I live in {citizen.HomeRoom}");
@@ -17,7 +22,7 @@ namespace TheCity.Unity
             sb.AppendLine("Work Schedule:");
             sb.AppendWithIndent($"{citizen.JobPost.WorkSchedule}", 1);
 
-            Debug.Log(sb.ToString());
+            return sb.ToString();
         }
 
         public static void PrintFormattedInfo(this CitizenActivityScheduler scheduler)
