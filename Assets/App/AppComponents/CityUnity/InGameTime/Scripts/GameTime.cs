@@ -12,7 +12,7 @@ namespace TheCity.Unity
         private readonly IGameTimeInitialSettings _initialSettings;
 
         public ReactiveProperty<DateTime> GameDateTime { get; } = new();
-        public ReactiveProperty<GameTimeType> GameTimeType { get; } = new(Unity.GameTimeType.VeryFastPlay);
+        public ReactiveProperty<GameTimeType> GameTimeType { get; } = new(Unity.GameTimeType.FastPlay);
 
         [Inject]
         public GameTime(IGameTimeInitialSettings gameTimeInitialSettings)

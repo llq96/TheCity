@@ -28,6 +28,7 @@ namespace TheCity.Installers
             BindActivity();
             BindStatesSwitcher();
             BindCitizenAnimator();
+            BindCitizenThinker();
         }
 
 
@@ -108,6 +109,11 @@ namespace TheCity.Installers
         private void BindCitizenAnimator()
         {
             Container.BindInterfacesAndSelfTo<CitizenAnimator>().AsSingle().NonLazy();
+        }
+
+        private void BindCitizenThinker()
+        {
+            Container.Bind<CitizenThinker>().AsSingle().NonLazy();
         }
     }
 }
