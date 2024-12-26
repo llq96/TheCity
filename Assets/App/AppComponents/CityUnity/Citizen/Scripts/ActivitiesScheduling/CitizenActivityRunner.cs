@@ -17,6 +17,7 @@ namespace TheCity.Unity
         [Inject] private Company Company { get; }
         [Inject] private JobPlace JobPlace { get; }
         [Inject] private HomeRoomCitizenStuff CitizenStuff { get; }
+        [Inject] private CitizenThinker CitizenThinker { get; }
 
         private Vector3 CitizenPosition => Citizen.transform.position;
 
@@ -49,6 +50,9 @@ namespace TheCity.Unity
                 case Activity_GoToHome activityGoToHome:
                     CitizenStatesSwitcher.SetState_Moving(HomeDestination);
                     break;
+                case Activity_SkipWork activitySkipWork:
+                    CitizenStatesSwitcher.SetState_Moving(HomeDestination);
+                    break;
                 case Activity_Sleeping activitySleeping:
                     CitizenStatesSwitcher.SetState_Sleeping(CitizenStuff.SleepingPlace);
                     break;
@@ -66,6 +70,7 @@ namespace TheCity.Unity
                     break;
                 case Activity_GoToWork activityGoToWork:
                     CitizenStatesSwitcher.SetState_Moving(JobPlaceDestination);
+                    DropWorkMaybe();
                     break;
                 case Activity_StartWork activityStartWork:
                     CitizenActivityScheduler.AddActivityToHead(new Activity_GoToWork());
@@ -92,6 +97,9 @@ namespace TheCity.Unity
 
                     return false;
 
+                case Activity_SkipWork activitySkipWork:
+                    return DistanceToHomeDestination <= 1f;
+
                 case Activity_GoToWork activityGoToWork:
                     if (DistanceToWorkDestination <= 1f)
                     {
@@ -103,6 +111,16 @@ namespace TheCity.Unity
 
                 default:
                     return true;
+            }
+        }
+
+        private async void DropWorkMaybe()
+        {
+            var result = await CitizenThinker.SkipWorkMaybe();
+            if (result)
+            {
+                CitizenActivityScheduler.AddActivityToHead(new Activity_SkipWork());
+                CitizenActivityScheduler.ForceEndCurrentActivity();
             }
         }
     }

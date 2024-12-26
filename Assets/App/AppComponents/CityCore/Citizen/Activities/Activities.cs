@@ -9,6 +9,10 @@ namespace TheCity.Core
     {
     }
 
+    public class Activity_SkipWork : Activity
+    {
+    }
+    
     public class Activity_Sleeping : Activity
     {
     }

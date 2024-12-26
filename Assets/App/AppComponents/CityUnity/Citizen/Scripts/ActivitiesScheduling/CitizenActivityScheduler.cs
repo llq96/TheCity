@@ -91,6 +91,11 @@ namespace TheCity.Unity
             }
         }
 
+        public void ForceEndCurrentActivity()
+        {
+            _currentActivity = null;
+        }
+
         private void TryDoNearestActivity()
         {
             var _nearestActivity = ScheduleActivities.FirstOrDefault();
