@@ -34,12 +34,18 @@ namespace TheCity.AI
 
         public async Task<string> GenerateThink(string context)
         {
+#if EXIST_AI
             return await AIChat.GetAnswer(QuestionTemplate, context);
+#endif
+            return "Скучно...";
         }
 
         public async Task<string> GenerateThinkAboutSkipWork(string context)
         {
+#if EXIST_AI
             return await AIChat.GetAnswer(SkipWorkTemplate, context);
+#endif
+            return "Нет, нельзя отдыхать, надо работать...";
         }
     }
 }

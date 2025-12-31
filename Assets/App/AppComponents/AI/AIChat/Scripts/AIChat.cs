@@ -1,3 +1,4 @@
+#if EXIST_AI
 using System;
 using System.Linq;
 using Newtonsoft.Json.Linq;
@@ -77,3 +78,4 @@ namespace TheCity.AI
         }
     }
 }
+#endif
